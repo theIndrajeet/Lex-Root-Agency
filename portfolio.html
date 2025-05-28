@@ -1,0 +1,1801 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio - Lex Root Agency</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --secondary: #5e60ce;
+            --accent: #00f5ff;
+            --accent-alt: #ff006e;
+            --text-light: #ffffff;
+            --text-muted: #b4b4b4;
+            --bg-dark: #030616;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --neon-glow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 9998;
+            transition: all 0.3s ease;
+            transform: translate(-50%, -50%);
+        }
+
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.2);
+            border-color: var(--accent-alt);
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation - Same as index */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '™';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+
+        /* Portfolio Hero */
+        .portfolio-hero {
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.2) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
+            margin-top: 80px;
+        }
+
+        .hero-bg-animation {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            opacity: 0.3;
+        }
+
+        .grid-lines {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 245, 255, 0.1) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 245, 255, 0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: grid-move 10s linear infinite;
+        }
+
+        @keyframes grid-move {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .portfolio-hero-content {
+            text-align: center;
+            max-width: 800px;
+            padding: 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 2rem;
+            animation: fadeInDown 0.8s ease-out;
+            backdrop-filter: blur(10px);
+        }
+
+        .portfolio-hero h1 {
+            font-size: clamp(3rem, 6vw, 5rem);
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .gradient-text {
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            animation: gradient-shift 3s ease-in-out infinite;
+        }
+
+        @keyframes gradient-shift {
+            0%, 100% { filter: hue-rotate(0deg); }
+            50% { filter: hue-rotate(30deg); }
+        }
+
+        .portfolio-hero p {
+            font-size: 1.3rem;
+            color: var(--text-muted);
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+            font-weight: 300;
+        }
+
+        /* Filter Tabs */
+        .filter-section {
+            padding: 4rem 2rem 2rem;
+            position: relative;
+        }
+
+        .filter-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .filter-tabs {
+            display: inline-flex;
+            gap: 1rem;
+            padding: 0.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            backdrop-filter: blur(10px);
+        }
+
+        .filter-tab {
+            padding: 0.8rem 2rem;
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .filter-tab::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .filter-tab:hover {
+            color: var(--text-light);
+        }
+
+        .filter-tab.active {
+            color: var(--bg-dark);
+            font-weight: 600;
+        }
+
+        .filter-tab.active::before {
+            opacity: 1;
+        }
+
+        /* Portfolio Grid */
+        .portfolio-section {
+            padding: 4rem 2rem 8rem;
+            position: relative;
+        }
+
+        .portfolio-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .portfolio-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+
+        .project-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .project-card:nth-child(1) { animation-delay: 0.1s; }
+        .project-card:nth-child(2) { animation-delay: 0.2s; }
+        .project-card:nth-child(3) { animation-delay: 0.3s; }
+        .project-card:nth-child(4) { animation-delay: 0.4s; }
+        .project-card:nth-child(5) { animation-delay: 0.5s; }
+        .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+        }
+
+        .project-image {
+            height: 250px;
+            background: var(--gradient-2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-image::before {
+            opacity: 1;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+
+        .view-project {
+            padding: 0.8rem 2rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transform: translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover .view-project {
+            transform: translateY(0);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-category {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .project-description {
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-stats {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .project-tech {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tech-tag {
+            padding: 0.3rem 0.8rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        /* Case Study Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            display: none;
+            overflow-y: auto;
+        }
+
+        .modal.active {
+            display: block;
+        }
+
+        .modal-content {
+            max-width: 1000px;
+            margin: 5rem auto;
+            padding: 3rem;
+            background: var(--bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            position: relative;
+            animation: modalIn 0.5s ease-out;
+        }
+
+        @keyframes modalIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 2rem;
+            right: 2rem;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.5rem;
+        }
+
+        .close-modal:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            transform: rotate(90deg);
+        }
+
+        .case-study-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .case-study-category {
+            display: inline-block;
+            padding: 0.4rem 1.2rem;
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-study-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .case-study-meta {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            color: var(--text-muted);
+        }
+
+        .case-study-meta span {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .case-study-body {
+            margin-bottom: 3rem;
+        }
+
+        .case-study-section {
+            margin-bottom: 3rem;
+        }
+
+        .case-study-section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .case-study-section h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+
+        .case-study-section p {
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .case-study-section ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .case-study-section li {
+            padding: 0.8rem 0;
+            padding-left: 2rem;
+            position: relative;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .case-study-section li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: var(--accent);
+            font-size: 1.2rem;
+        }
+
+        .case-study-section li strong {
+            color: var(--text-light);
+        }
+
+        .case-study-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .metric {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(0, 245, 255, 0.05);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .metric:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+
+        .metric-value {
+            display: block;
+            font-size: 3rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 0.5rem;
+        }
+
+        .metric-label {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .case-study-testimonial {
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-left: 4px solid var(--accent);
+            border-radius: 10px;
+            margin: 3rem 0;
+        }
+
+        .case-study-testimonial blockquote {
+            font-size: 1.3rem;
+            font-style: italic;
+            color: var(--text-light);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .case-study-cta {
+            text-align: center;
+            padding: 3rem;
+            background: rgba(94, 96, 206, 0.05);
+            border-radius: 20px;
+            border: 1px solid rgba(94, 96, 206, 0.2);
+        }
+
+        .case-study-cta h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .case-study-cta .btn-primary {
+            padding: 1rem 2.5rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .case-study-cta .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+
+        /* Client Testimonials */
+        .testimonials-section {
+            padding: 6rem 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .testimonials-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .section-header {
+            margin-bottom: 4rem;
+        }
+
+        .section-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            padding: 2.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 1rem;
+            left: 2rem;
+            font-size: 4rem;
+            color: var(--accent);
+            opacity: 0.2;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 2rem;
+            line-height: 1.8;
+            color: var(--text-muted);
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-1);
+            border-radius: 50%;
+        }
+
+        .author-info h4 {
+            font-size: 1.1rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .author-info p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* Footer - Same as index */
+        footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                transition: right 0.3s ease;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .portfolio-hero h1 {
+                font-size: 3rem;
+            }
+
+            .filter-tabs {
+                flex-wrap: wrap;
+            }
+
+            .portfolio-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .project-stats {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .modal-content {
+                margin: 2rem;
+                padding: 2rem;
+            }
+
+            .case-study-title {
+                font-size: 1.8rem;
+            }
+
+            .case-study-meta {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .case-study-metrics {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+            }
+
+            .metric-value {
+                font-size: 2rem;
+            }
+
+            .case-study-testimonial {
+                padding: 1.5rem;
+            }
+
+            .case-study-testimonial blockquote {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loader" id="loader">
+        <div class="loader-text">PORTFOLIO</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">LEX ROOT</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html#about">About</a></li>
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Portfolio Hero -->
+    <section class="portfolio-hero">
+        <div class="hero-bg-animation">
+            <div class="grid-lines"></div>
+        </div>
+        <div class="portfolio-hero-content">
+            <div class="hero-badge">✨ Case Studies & Success Stories</div>
+            <h1>
+                Transforming <span class="gradient-text">Legal Challenges</span><br>
+                Into Growth Opportunities
+            </h1>
+            <p>Explore how I've helped startups navigate compliance and scale with confidence</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <div class="filter-tabs">
+                <button class="filter-tab active" data-filter="all">All Projects</button>
+                <button class="filter-tab" data-filter="compliance">Compliance</button>
+                <button class="filter-tab" data-filter="content">Content Strategy</button>
+                <button class="filter-tab" data-filter="marketing">Legal Marketing</button>
+                <button class="filter-tab" data-filter="research">Research</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Grid -->
+    <section class="portfolio-section">
+        <div class="portfolio-container">
+            <div class="portfolio-grid">
+                <!-- Project 1 -->
+                <div class="project-card" data-category="compliance">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Compliance</span>
+                        <h3 class="project-title">DPDPA Compliance Framework for SaaS Startup</h3>
+                        <p class="project-description">Developed a comprehensive compliance tracking system using Notion, ensuring 100% adherence to India's Digital Personal Data Protection Act.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">100%</span>
+                                <span class="stat-label">Compliance</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">3 weeks</span>
+                                <span class="stat-label">Timeline</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Notion</span>
+                            <span class="tech-tag">DPDPA</span>
+                            <span class="tech-tag">SaaS</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="project-card" data-category="content">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Content Strategy</span>
+                        <h3 class="project-title">Legal Blog Growth Strategy</h3>
+                        <p class="project-description">Ghostwrote SEO-optimized legal content that increased organic traffic by 40% and generated 150+ qualified leads monthly.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">+40%</span>
+                                <span class="stat-label">Traffic</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">150+</span>
+                                <span class="stat-label">Leads/mo</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">SEO</span>
+                            <span class="tech-tag">Content</span>
+                            <span class="tech-tag">Analytics</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="project-card" data-category="research">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Market Research</span>
+                        <h3 class="project-title">APAC Market Entry Strategy</h3>
+                        <p class="project-description">Created comprehensive regulatory framework and content strategy for legaltech expansion into 5 Southeast Asian markets.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">5</span>
+                                <span class="stat-label">Markets</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">$2M</span>
+                                <span class="stat-label">Revenue</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">APAC</span>
+                            <span class="tech-tag">LegalTech</span>
+                            <span class="tech-tag">Strategy</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 4 -->
+                <div class="project-card" data-category="marketing">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Legal Marketing</span>
+                        <h3 class="project-title">Law Firm Digital Transformation</h3>
+                        <p class="project-description">Revamped digital presence with modern website copy, LinkedIn strategy, and email automation, tripling online inquiries.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">3x</span>
+                                <span class="stat-label">Inquiries</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">85%</span>
+                                <span class="stat-label">Open Rate</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">LinkedIn</span>
+                            <span class="tech-tag">Email</span>
+                            <span class="tech-tag">Branding</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 5 -->
+                <div class="project-card" data-category="compliance">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Compliance</span>
+                        <h3 class="project-title">GDPR & CCPA Audit System</h3>
+                        <p class="project-description">Built automated compliance monitoring dashboards for a healthtech startup handling sensitive patient data across jurisdictions.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">Zero</span>
+                                <span class="stat-label">Violations</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">80%</span>
+                                <span class="stat-label">Time Saved</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">GDPR</span>
+                            <span class="tech-tag">CCPA</span>
+                            <span class="tech-tag">HealthTech</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Project 6 -->
+                <div class="project-card" data-category="content">
+                    <div class="project-image">
+                        <div class="project-overlay">
+                            <a href="#" class="view-project">View Case Study</a>
+                        </div>
+                    </div>
+                    <div class="project-content">
+                        <span class="project-category">Content Strategy</span>
+                        <h3 class="project-title">Legal Newsletter Campaign</h3>
+                        <p class="project-description">Launched weekly legal insights newsletter reaching 5,000+ subscribers, establishing thought leadership in fintech compliance.</p>
+                        <div class="project-stats">
+                            <div class="stat">
+                                <span class="stat-value">5K+</span>
+                                <span class="stat-label">Subscribers</span>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-value">45%</span>
+                                <span class="stat-label">Open Rate</span>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-tag">Newsletter</span>
+                            <span class="tech-tag">Fintech</span>
+                            <span class="tech-tag">Content</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials-section">
+        <div class="testimonials-container">
+            <div class="section-header">
+                <span class="section-badge">Client Testimonials</span>
+                <h2 class="section-title">What Clients Say</h2>
+            </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Indrajeet transformed our compliance chaos into a streamlined system. His expertise in both legal and tech is rare and invaluable."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Sarah Chen</h4>
+                            <p>CEO, TechHealth Solutions</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"The content strategy delivered results beyond our expectations. Our legal blog is now our primary lead generation channel."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Michael Rodriguez</h4>
+                            <p>Partner, Rodriguez & Associates</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <p class="testimonial-text">"Working with Lex Root Agency was seamless. They understood our APAC expansion needs and delivered comprehensive solutions."</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar"></div>
+                        <div class="author-info">
+                            <h4>Priya Sharma</h4>
+                            <p>VP Legal, FinanceFlow</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal Structure -->
+    <div class="modal" id="caseStudyModal">
+        <div class="modal-content">
+            <div class="close-modal" id="closeModal">×</div>
+            <!-- Modal content will be dynamically inserted -->
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn">💼</a>
+                <a href="#" aria-label="Twitter">🐦</a>
+                <a href="mailto:theindrajeetk@gmail.com" aria-label="Email">✉️</a>
+            </div>
+            <p>&copy; 2024 Lex Root Agency. Crafted with precision and purpose.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 1000);
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+            
+            setTimeout(() => {
+                cursorFollower.style.left = e.clientX + 'px';
+                cursorFollower.style.top = e.clientY + 'px';
+            }, 100);
+        });
+
+        document.querySelectorAll('a, button').forEach(el => {
+            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile menu
+        const mobileMenu = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+        
+        mobileMenu.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+
+        // Filter functionality
+        const filterTabs = document.querySelectorAll('.filter-tab');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        filterTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                filterTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+
+                // Filter projects
+                const filter = tab.getAttribute('data-filter');
+                
+                projectCards.forEach((card, index) => {
+                    if (filter === 'all' || card.getAttribute('data-category') === filter) {
+                        card.style.display = 'block';
+                        // Reset animation
+                        card.style.animation = 'none';
+                        setTimeout(() => {
+                            card.style.animation = `fadeInUp 0.8s ease-out ${index * 0.1}s forwards`;
+                        }, 10);
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Case Study Data
+        const caseStudies = {
+            'dpdpa-compliance': {
+                title: 'DPDPA Compliance Framework for SaaS Startup',
+                client: 'TechVault Solutions',
+                duration: '3 weeks',
+                category: 'Compliance',
+                overview: 'TechVault, a rapidly growing SaaS startup, needed to ensure compliance with India\'s new Digital Personal Data Protection Act (DPDPA) before their Series A funding round. They required a comprehensive compliance framework that could scale with their growth.',
+                challenge: `
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>Urgent compliance deadline with potential funding at stake</li>
+                        <li>Complex data flows across multiple cloud services</li>
+                        <li>No existing documentation of data processing activities</li>
+                        <li>Limited legal resources and budget constraints</li>
+                        <li>Need for ongoing compliance monitoring</li>
+                    </ul>
+                `,
+                solution: `
+                    <h3>The Solution</h3>
+                    <p>I developed a comprehensive Notion-based compliance management system that included:</p>
+                    <ul>
+                        <li><strong>Data Mapping Dashboard:</strong> Complete visualization of data flows across all systems</li>
+                        <li><strong>Policy Templates:</strong> Customized privacy policies, consent forms, and data processing agreements</li>
+                        <li><strong>Automated Checklists:</strong> Step-by-step compliance tasks with progress tracking</li>
+                        <li><strong>Risk Assessment Matrix:</strong> Identified and prioritized compliance risks</li>
+                        <li><strong>Training Materials:</strong> Created employee handbooks and training modules</li>
+                    </ul>
+                `,
+                results: `
+                    <h3>The Results</h3>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">100%</span>
+                            <span class="metric-label">DPDPA Compliance Achieved</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">$2.5M</span>
+                            <span class="metric-label">Series A Funding Secured</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">80%</span>
+                            <span class="metric-label">Time Saved on Compliance Tasks</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">Zero</span>
+                            <span class="metric-label">Compliance Violations</span>
+                        </div>
+                    </div>
+                `,
+                testimonial: '"Indrajeet\'s compliance framework was instrumental in securing our Series A funding. The investors were impressed by our proactive approach to data protection." - Rahul Mehta, CEO'
+            },
+            'legal-blog-growth': {
+                title: 'Legal Blog Growth Strategy',
+                client: 'Sterling Law Associates',
+                duration: '6 months',
+                category: 'Content Strategy',
+                overview: 'Sterling Law Associates, a mid-sized law firm specializing in corporate law, wanted to establish thought leadership and generate leads through content marketing. Their existing blog had minimal traffic and zero lead generation.',
+                challenge: `
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>Outdated website with poor SEO performance</li>
+                        <li>No content strategy or editorial calendar</li>
+                        <li>Legal jargon making content inaccessible</li>
+                        <li>Zero organic traffic from search engines</li>
+                        <li>No lead capture or conversion strategy</li>
+                    </ul>
+                `,
+                solution: `
+                    <h3>The Solution</h3>
+                    <p>I implemented a comprehensive content strategy that included:</p>
+                    <ul>
+                        <li><strong>SEO Audit & Optimization:</strong> Identified high-value keywords and optimized existing content</li>
+                        <li><strong>Content Calendar:</strong> Developed 6-month editorial calendar targeting buyer journey stages</li>
+                        <li><strong>Ghostwriting:</strong> Produced 2 in-depth articles weekly on trending legal topics</li>
+                        <li><strong>Content Upgrades:</strong> Created downloadable guides and templates for lead capture</li>
+                        <li><strong>Distribution Strategy:</strong> Leveraged LinkedIn and email newsletters for amplification</li>
+                    </ul>
+                `,
+                results: `
+                    <h3>The Results</h3>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">+40%</span>
+                            <span class="metric-label">Organic Traffic Growth</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">150+</span>
+                            <span class="metric-label">Qualified Leads Monthly</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">12</span>
+                            <span class="metric-label">New Corporate Clients</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">$450K</span>
+                            <span class="metric-label">Revenue from Content Leads</span>
+                        </div>
+                    </div>
+                `,
+                testimonial: '"The ROI from our content investment exceeded all expectations. We\'re now seen as thought leaders in corporate law." - Priya Sterling, Managing Partner'
+            },
+            'apac-market-entry': {
+                title: 'APAC Market Entry Strategy',
+                client: 'LegalTech Innovations',
+                duration: '2 months',
+                category: 'Market Research',
+                overview: 'LegalTech Innovations, a US-based legal software company, planned to expand into Southeast Asian markets. They needed comprehensive regulatory research and go-to-market strategy for 5 countries.',
+                challenge: `
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>Complex regulatory landscape across 5 different jurisdictions</li>
+                        <li>Language barriers and cultural differences</li>
+                        <li>Varying levels of legal tech adoption</li>
+                        <li>Competition from established local players</li>
+                        <li>Need for localized content and messaging</li>
+                    </ul>
+                `,
+                solution: `
+                    <h3>The Solution</h3>
+                    <p>I delivered a comprehensive market entry package:</p>
+                    <ul>
+                        <li><strong>Regulatory Mapping:</strong> Detailed analysis of legal tech regulations in Singapore, Malaysia, Thailand, Indonesia, and Philippines</li>
+                        <li><strong>Market Analysis:</strong> Competitor landscape, pricing strategies, and market opportunities</li>
+                        <li><strong>Localization Strategy:</strong> Content adaptation guidelines for each market</li>
+                        <li><strong>Partnership Framework:</strong> Identified potential local partners and integration opportunities</li>
+                        <li><strong>Launch Roadmap:</strong> Phased approach with success metrics for each market</li>
+                    </ul>
+                `,
+                results: `
+                    <h3>The Results</h3>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">5</span>
+                            <span class="metric-label">Markets Entered Successfully</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">$2M</span>
+                            <span class="metric-label">First Year Revenue</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">8</span>
+                            <span class="metric-label">Strategic Partnerships</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">300%</span>
+                            <span class="metric-label">ROI on Market Research</span>
+                        </div>
+                    </div>
+                `,
+                testimonial: '"The depth of research and strategic insights provided gave us the confidence to enter APAC markets. We achieved profitability 6 months ahead of schedule." - David Chen, VP International'
+            },
+            'law-firm-digital': {
+                title: 'Law Firm Digital Transformation',
+                client: 'Heritage Legal Partners',
+                duration: '4 months',
+                category: 'Legal Marketing',
+                overview: 'Heritage Legal Partners, a traditional law firm with 50+ years of history, needed to modernize their digital presence to attract younger clients and remain competitive in the digital age.',
+                challenge: `
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>Outdated website from 2010 with no mobile optimization</li>
+                        <li>No social media presence or digital marketing strategy</li>
+                        <li>Declining client acquisition from traditional referrals</li>
+                        <li>Partners resistant to digital transformation</li>
+                        <li>Competition from tech-savvy boutique firms</li>
+                    </ul>
+                `,
+                solution: `
+                    <h3>The Solution</h3>
+                    <p>I led a complete digital transformation initiative:</p>
+                    <ul>
+                        <li><strong>Website Redesign:</strong> Modern, responsive design with client portal integration</li>
+                        <li><strong>Content Overhaul:</strong> Rewrote all website copy for clarity and SEO</li>
+                        <li><strong>LinkedIn Strategy:</strong> Personal branding for 12 senior partners</li>
+                        <li><strong>Email Automation:</strong> Nurture campaigns for different practice areas</li>
+                        <li><strong>Digital Training:</strong> Workshops for lawyers on digital networking</li>
+                    </ul>
+                `,
+                results: `
+                    <h3>The Results</h3>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">3x</span>
+                            <span class="metric-label">Online Inquiries</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">85%</span>
+                            <span class="metric-label">Email Open Rate</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">45</span>
+                            <span class="metric-label">New Clients from Digital</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">250%</span>
+                            <span class="metric-label">LinkedIn Engagement</span>
+                        </div>
+                    </div>
+                `,
+                testimonial: '"The digital transformation not only brought new clients but reinvigorated our entire firm. We\'re now competing with firms half our age." - Margaret Heritage, Senior Partner'
+            },
+            'gdpr-ccpa-audit': {
+                title: 'GDPR & CCPA Audit System',
+                client: 'MediCloud Technologies',
+                duration: '6 weeks',
+                category: 'Compliance',
+                overview: 'MediCloud, a healthtech startup processing patient data across US and EU markets, needed an automated compliance system to handle GDPR and CCPA requirements while maintaining HIPAA compliance.',
+                challenge: `
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>Triple compliance requirement (GDPR, CCPA, HIPAA)</li>
+                        <li>Processing sensitive health data across jurisdictions</li>
+                        <li>Manual compliance checks taking 20+ hours weekly</li>
+                        <li>Risk of significant fines for non-compliance</li>
+                        <li>Rapid scaling requiring automated solutions</li>
+                    </ul>
+                `,
+                solution: `
+                    <h3>The Solution</h3>
+                    <p>I designed and implemented an automated compliance system:</p>
+                    <ul>
+                        <li><strong>Unified Dashboard:</strong> Single view for all compliance requirements</li>
+                        <li><strong>Automated Audits:</strong> Weekly compliance checks with alerts</li>
+                        <li><strong>Data Flow Mapping:</strong> Visual representation of data movement</li>
+                        <li><strong>Consent Management:</strong> Integrated system for all jurisdictions</li>
+                        <li><strong>Incident Response:</strong> Automated breach notification workflows</li>
+                    </ul>
+                `,
+                results: `
+                    <h3>The Results</h3>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">Zero</span>
+                            <span class="metric-label">Compliance Violations</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">80%</span>
+                            <span class="metric-label">Time Saved on Audits</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">$500K</span>
+                            <span class="metric-label">Potential Fines Avoided</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">24/7</span>
+                            <span class="metric-label">Compliance Monitoring</span>
+                        </div>
+                    </div>
+                `,
+                testimonial: '"The automated compliance system gave us peace of mind to focus on growth. We passed our SOC 2 audit with flying colors." - Dr. Sarah Kim, CTO'
+            },
+            'legal-newsletter': {
+                title: 'Legal Newsletter Campaign',
+                client: 'FinTech Legal Advisors',
+                duration: '8 months',
+                category: 'Content Strategy',
+                overview: 'FinTech Legal Advisors wanted to establish thought leadership in the fintech compliance space through a weekly newsletter targeting startup founders and compliance officers.',
+                challenge: `
+                    <h3>The Challenge</h3>
+                    <ul>
+                        <li>Crowded fintech newsletter space</li>
+                        <li>Complex regulations requiring simple explanations</li>
+                        <li>Need for consistent, high-quality content</li>
+                        <li>Building subscriber list from zero</li>
+                        <li>Converting readers to clients</li>
+                    </ul>
+                `,
+                solution: `
+                    <h3>The Solution</h3>
+                    <p>I created and managed a comprehensive newsletter strategy:</p>
+                    <ul>
+                        <li><strong>Content Framework:</strong> Weekly themes covering regulations, case studies, and trends</li>
+                        <li><strong>Lead Magnets:</strong> Compliance checklists and regulatory guides</li>
+                        <li><strong>Guest Contributors:</strong> Interviews with regulators and industry leaders</li>
+                        <li><strong>Interactive Elements:</strong> Polls, Q&As, and compliance quizzes</li>
+                        <li><strong>Conversion Strategy:</strong> Soft CTAs and exclusive webinar invitations</li>
+                    </ul>
+                `,
+                results: `
+                    <h3>The Results</h3>
+                    <div class="case-study-metrics">
+                        <div class="metric">
+                            <span class="metric-value">5,000+</span>
+                            <span class="metric-label">Active Subscribers</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">45%</span>
+                            <span class="metric-label">Average Open Rate</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">28</span>
+                            <span class="metric-label">New Clients</span>
+                        </div>
+                        <div class="metric">
+                            <span class="metric-value">$1.2M</span>
+                            <span class="metric-label">Revenue Generated</span>
+                        </div>
+                    </div>
+                `,
+                testimonial: '"The newsletter positioned us as the go-to fintech compliance experts. It\'s our most valuable marketing asset." - John Martinez, Managing Director'
+            }
+        };
+
+        // Modal functionality
+        const modal = document.getElementById('caseStudyModal');
+        const closeModal = document.getElementById('closeModal');
+        const viewProjectBtns = document.querySelectorAll('.view-project');
+
+        viewProjectBtns.forEach((btn, index) => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Map project cards to case study IDs
+                const projectIds = [
+                    'dpdpa-compliance',
+                    'legal-blog-growth',
+                    'apac-market-entry',
+                    'law-firm-digital',
+                    'gdpr-ccpa-audit',
+                    'legal-newsletter'
+                ];
+                
+                const caseStudy = caseStudies[projectIds[index]];
+                
+                if (caseStudy) {
+                    // Populate modal with case study content
+                    const modalContent = document.querySelector('.modal-content');
+                    modalContent.innerHTML = `
+                        <div class="close-modal" id="closeModal">×</div>
+                        <div class="case-study-header">
+                            <span class="case-study-category">${caseStudy.category}</span>
+                            <h1 class="case-study-title">${caseStudy.title}</h1>
+                            <div class="case-study-meta">
+                                <span><strong>Client:</strong> ${caseStudy.client}</span>
+                                <span><strong>Duration:</strong> ${caseStudy.duration}</span>
+                            </div>
+                        </div>
+                        
+                        <div class="case-study-body">
+                            <section class="case-study-section">
+                                <h2>Overview</h2>
+                                <p>${caseStudy.overview}</p>
+                            </section>
+                            
+                            <section class="case-study-section">
+                                ${caseStudy.challenge}
+                            </section>
+                            
+                            <section class="case-study-section">
+                                ${caseStudy.solution}
+                            </section>
+                            
+                            <section class="case-study-section">
+                                ${caseStudy.results}
+                            </section>
+                            
+                            <section class="case-study-testimonial">
+                                <blockquote>${caseStudy.testimonial}</blockquote>
+                            </section>
+                        </div>
+                        
+                        <div class="case-study-cta">
+                            <h3>Interested in similar results?</h3>
+                            <a href="index.html#contact" class="btn-primary">Let's Discuss Your Project</a>
+                        </div>
+                    `;
+                    
+                    // Reattach close button event
+                    document.getElementById('closeModal').addEventListener('click', () => {
+                        modal.classList.remove('active');
+                        document.body.style.overflow = 'auto';
+                    });
+                }
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                modal.scrollTop = 0; // Scroll modal to top
+            });
+        });
+
+        closeModal.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close modal with ESC key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                modal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Smooth scrolling for any anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                }
+            });
+        });
+
+        // Parallax effect for hero background
+        const heroSection = document.querySelector('.portfolio-hero');
+        const gridLines = document.querySelector('.grid-lines');
+
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxSpeed = 0.5;
+            
+            if (gridLines) {
+                gridLines.style.transform = `translate(${scrolled * parallaxSpeed}px, ${scrolled * parallaxSpeed}px)`;
+            }
+        });
+    </script>
+</body>
+</html>
