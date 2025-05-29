@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Articles - Legal Insights & Compliance Updates | Lex Root Agency</title>
-    <!-- Lucide Icons -->
-    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/umd/lucide.css" />
+    <meta name="description" content="Explore insightful articles on legal tech, compliance, data privacy, and startup law from Lex Root Agency. Stay informed with our expert analysis.">
+    <meta name="keywords" content="legal articles, compliance updates, data privacy insights, startup law guidance, legal tech news, Lex Root Agency articles">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         * {
@@ -26,6 +26,9 @@
             --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --neon-glow: 0 0 20px rgba(0, 245, 255, 0.5);
+            --accent-rgb: 0, 245, 255;
+             --accent-alt-rgb: 255, 0, 110; /* Added for consistency if used */
+             --secondary-rgb: 94, 96, 206; /* Added for consistency if used */
         }
 
         html {
@@ -49,30 +52,31 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 10001; /* Higher than nav (1000) */
+            z-index: 10001;
             transform: translate(-50%, -50%);
             will-change: transform;
             mix-blend-mode: difference;
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
         }
 
         .cursor-follower {
             width: 40px;
             height: 40px;
-            background: rgba(0, 245, 255, 0.1);
+            background: rgba(var(--accent-rgb), 0.1);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 10000; /* Higher than nav */
+            z-index: 10000;
             transform: translate(-50%, -50%);
             will-change: transform;
+            transition: background-color 0.2s ease;
         }
 
         .cursor.hover {
             width: 40px;
             height: 40px;
-            background: rgba(0, 245, 255, 0.2);
+            background: rgba(var(--accent-rgb), 0.2);
             border-color: var(--accent-alt);
-            transition: width 0.2s ease, height 0.2s ease;
         }
 
         /* Loading Screen */
@@ -109,7 +113,7 @@
             50% { opacity: 1; }
         }
 
-        /* Navigation - Same as other pages */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -171,7 +175,8 @@
             letter-spacing: 0.5px;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active-link {
             color: var(--accent);
         }
 
@@ -187,9 +192,53 @@
             box-shadow: var(--neon-glow);
         }
 
-        .nav-links a:hover::before {
+        .nav-links a:hover::before,
+        .nav-links a.active-link::before {
             width: 100%;
         }
+         /* Buttons */
+        .btn-primary, .btn-secondary, .read-more-btn, .load-more-btn, .newsletter-submit {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none;
+            cursor: none; 
+        }
+        .btn-primary, .read-more-btn, .newsletter-submit {
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.3);
+        }
+        .btn-primary:hover, .read-more-btn:hover, .newsletter-submit:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.5);
+        }
+        .btn-primary:disabled, .newsletter-submit:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+        }
+        .btn-secondary, .load-more-btn {
+            background: transparent;
+            color: var(--accent);
+            border: 2px solid var(--accent);
+        }
+        .btn-secondary:hover, .load-more-btn:hover {
+            background: var(--accent);
+            color: var(--bg-dark);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.3);
+        }
+
 
         /* Articles Hero */
         .articles-hero {
@@ -198,21 +247,24 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.2) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
-            margin-top: 80px;
+            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.15) 0%, transparent 45%),
+                        radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.08) 0%, transparent 45%);
+            margin-top: 80px; 
             overflow: hidden;
+            padding: 3rem 1rem;
         }
 
-        .animated-bg {
+        .animated-bg { 
             position: absolute;
             width: 100%;
             height: 100%;
+            top:0; left:0;
             overflow: hidden;
             opacity: 0.5;
+            z-index: 0;
         }
 
-        .floating-shapes {
+        .floating-shapes { 
             position: absolute;
             width: 100%;
             height: 100%;
@@ -221,32 +273,30 @@
         .shape {
             position: absolute;
             background: var(--gradient-3);
-            filter: blur(80px);
-            opacity: 0.3;
-            animation: float-shape 20s infinite ease-in-out;
+            filter: blur(80px); 
+            opacity: 0.2; 
+            animation: float-shape 25s infinite ease-in-out alternate; 
         }
 
         .shape:nth-child(1) {
-            width: 300px;
-            height: 300px;
-            top: -150px;
-            left: -150px;
+            width: 350px; height: 350px;
+            top: -100px; left: -100px;
             animation-delay: 0s;
+            border-radius: 40% 60% 70% 30% / 30% 50% 50% 70%; 
         }
 
         .shape:nth-child(2) {
-            width: 200px;
-            height: 200px;
-            bottom: -100px;
-            right: -100px;
+            width: 250px; height: 250px;
+            bottom: -80px; right: -80px;
             animation-delay: 5s;
             background: var(--gradient-2);
+            border-radius: 50% 50% 30% 70% / 60% 40% 60% 40%; 
         }
 
         @keyframes float-shape {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(30px, -30px) scale(1.1); }
-            66% { transform: translate(-20px, 20px) scale(0.9); }
+            0% { transform: translate(0, 0) scale(1) rotate(0deg); }
+            50% { transform: translate(40px, -20px) scale(1.1) rotate(180deg); }
+            100% { transform: translate(-30px, 30px) scale(0.9) rotate(360deg); }
         }
 
         .articles-hero-content {
@@ -260,8 +310,8 @@
         .hero-badge {
             display: inline-block;
             padding: 0.5rem 1.5rem;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            background: rgba(var(--accent-rgb), 0.1);
+            border: 1px solid rgba(var(--accent-rgb), 0.3);
             border-radius: 50px;
             font-size: 0.9rem;
             color: var(--accent);
@@ -271,7 +321,7 @@
         }
 
         .articles-hero h1 {
-            font-size: clamp(3rem, 6vw, 4.5rem);
+            font-size: clamp(2.8rem, 6vw, 4.2rem); 
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -284,46 +334,32 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             display: inline-block;
-            animation: gradient-shift 3s ease-in-out infinite;
         }
+         .articles-hero h1 .gradient-text {
+             animation: gradient-shift 3s ease-in-out infinite;
+         }
+
 
         @keyframes gradient-shift {
             0%, 100% { filter: hue-rotate(0deg); }
-            50% { filter: hue-rotate(30deg); }
+            50% { filter: hue-rotate(20deg); }
         }
 
         .articles-hero p {
-            font-size: 1.3rem;
+            font-size: 1.25rem; 
             color: var(--text-muted);
             animation: fadeInUp 0.8s ease-out 0.4s backwards;
             font-weight: 300;
+            max-width: 650px;
+            margin: 0 auto;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(40px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-20px); } to { opacity: 1; transform: translateY(0); } }
 
         /* Search and Filter Section */
         .search-filter-section {
-            padding: 4rem 2rem 2rem;
+            padding: 4rem 2rem 2rem; /* Adjusted padding, AI section removed */
             position: relative;
         }
 
@@ -334,18 +370,18 @@
             justify-content: space-between;
             align-items: center;
             gap: 2rem;
-            flex-wrap: wrap;
+            flex-wrap: wrap; 
         }
 
         .search-box {
-            flex: 1;
-            max-width: 500px;
+            flex: 1 1 400px; 
+            min-width: 300px; 
             position: relative;
         }
 
         .search-input {
             width: 100%;
-            padding: 1rem 3rem 1rem 1.5rem;
+            padding: 1rem 3.5rem 1rem 1.5rem; 
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50px;
@@ -357,32 +393,36 @@
         .search-input:focus {
             outline: none;
             border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+            box-shadow: var(--neon-glow);
         }
 
-        .search-icon {
+        .search-icon { 
             position: absolute;
             right: 1.5rem;
             top: 50%;
             transform: translateY(-50%);
             color: var(--text-muted);
-            font-size: 1.2rem;
+            pointer-events: none; 
         }
+        .search-icon i { width: 20px; height: 20px; }
+
 
         .category-filters {
             display: flex;
-            gap: 1rem;
+            gap: 0.75rem; 
             flex-wrap: wrap;
+            justify-content: center; 
+            flex: 1 1 auto; 
         }
 
         .category-btn {
-            padding: 0.8rem 1.5rem;
+            padding: 0.7rem 1.5rem; 
             background: transparent;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 50px;
             color: var(--text-muted);
-            font-size: 0.9rem;
-            cursor: pointer;
+            font-size: 0.85rem; 
+            cursor: none; 
             transition: all 0.3s ease;
             font-weight: 500;
         }
@@ -402,7 +442,7 @@
 
         /* Featured Article */
         .featured-section {
-            padding: 2rem;
+            padding: 2rem; 
             max-width: 1200px;
             margin: 0 auto;
         }
@@ -413,103 +453,86 @@
             border-radius: 20px;
             overflow: hidden;
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: 1fr 1fr; 
             gap: 3rem;
             padding: 3rem;
             transition: all 0.4s ease;
             position: relative;
         }
 
-        .featured-article::before {
+        .featured-article::before { 
             content: 'FEATURED';
             position: absolute;
-            top: 2rem;
-            left: -2rem;
+            top: 2.5rem; 
+            left: -3.5rem; 
             background: var(--gradient-3);
             color: var(--bg-dark);
-            padding: 0.5rem 3rem;
+            padding: 0.5rem 4rem; 
             font-weight: 700;
-            font-size: 0.8rem;
+            font-size: 0.75rem; 
             letter-spacing: 1px;
             transform: rotate(-45deg);
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            z-index: 3; 
         }
 
         .featured-article:hover {
             transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.15);
         }
 
         .featured-content h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem; 
             margin-bottom: 1rem;
             line-height: 1.2;
             transition: color 0.3s ease;
         }
+        .featured-content h2 a { color: inherit; text-decoration: none; }
+        .featured-content h2 a:hover { color: var(--accent); }
 
-        .featured-content h2:hover {
-            color: var(--accent);
-        }
 
         .featured-meta {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem; 
             margin-bottom: 1.5rem;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem; 
+            flex-wrap: wrap;
         }
 
         .featured-meta span {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem; 
         }
+        .featured-meta i { width: 16px; height: 16px; }
+
 
         .featured-excerpt {
             color: var(--text-muted);
-            line-height: 1.8;
+            line-height: 1.7; 
             margin-bottom: 2rem;
-            font-size: 1.1rem;
+            font-size: 1rem; 
         }
 
-        .read-more-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 1rem 2rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 245, 255, 0.3);
+        .read-more-btn { 
+            gap: 0.75rem; 
         }
+        .read-more-btn i { width: 18px; height: 18px; }
 
-        .read-more-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(0, 245, 255, 0.4);
-            gap: 1rem;
-        }
 
         .featured-image {
-            background: var(--gradient-1);
+            background-size: cover;
+            background-position: center;
             border-radius: 15px;
-            height: 100%;
-            min-height: 300px;
+            min-height: 300px; 
             position: relative;
             overflow: hidden;
         }
-
-        .featured-image::after {
-            content: '📰';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 5rem;
-            opacity: 0.3;
+        .featured-image img { 
+            width: 100%; height: 100%; object-fit: cover;
         }
+
 
         /* Articles Grid */
         .articles-section {
@@ -518,20 +541,21 @@
             margin: 0 auto;
         }
 
-        .section-header {
+        .section-header { 
             text-align: center;
             margin-bottom: 3rem;
         }
 
-        .section-title {
+        .section-title { 
             font-size: 2.5rem;
             font-weight: 900;
             margin-bottom: 1rem;
+            color: var(--text-light);
         }
 
         .articles-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
             gap: 2.5rem;
         }
 
@@ -541,86 +565,90 @@
             border-radius: 20px;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            cursor: pointer;
-            opacity: 0;
-            transform: translateY(30px);
-            animation: fadeInUp 0.8s ease-out forwards;
+            cursor: none; 
+            display: flex; 
+            flex-direction: column; 
         }
+        .article-card.reveal { opacity: 0; transform: translateY(30px); }
+        .article-card.reveal.active { opacity: 1; transform: translateY(0); }
 
-        .article-card:nth-child(1) { animation-delay: 0.1s; }
-        .article-card:nth-child(2) { animation-delay: 0.2s; }
-        .article-card:nth-child(3) { animation-delay: 0.3s; }
-        .article-card:nth-child(4) { animation-delay: 0.4s; }
-        .article-card:nth-child(5) { animation-delay: 0.5s; }
-        .article-card:nth-child(6) { animation-delay: 0.6s; }
 
         .article-card:hover {
             transform: translateY(-10px);
             border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+            box-shadow: 0 20px 40px rgba(var(--accent-rgb), 0.15);
         }
 
         .article-image {
             height: 200px;
-            background: var(--gradient-2);
+            background-size: cover;
+            background-position: center;
             position: relative;
             overflow: hidden;
         }
+        .article-image img { width: 100%; height: 100%; object-fit: cover; }
 
-        .article-image::before {
+
+        .article-image::before { 
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.7) 100%);
-            opacity: 0;
+            background: linear-gradient(to bottom, transparent 30%, rgba(0,0,0,0.6) 100%);
+            opacity: 0.4;
             transition: opacity 0.3s ease;
         }
 
         .article-card:hover .article-image::before {
-            opacity: 1;
+            opacity: 0.7;
         }
 
         .article-category {
             position: absolute;
             top: 1rem;
             left: 1rem;
-            padding: 0.3rem 1rem;
-            background: rgba(94, 96, 206, 0.9);
+            padding: 0.3rem 0.8rem; 
+            background: rgba(var(--secondary-rgb, 94, 96, 206), 0.8); 
             border-radius: 50px;
-            font-size: 0.8rem;
+            font-size: 0.75rem; 
             color: var(--text-light);
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px; 
+            z-index: 1; 
         }
 
         .article-content {
-            padding: 2rem;
+            padding: 1.5rem; 
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1; 
         }
 
         .article-title {
-            font-size: 1.4rem;
+            font-size: 1.3rem; 
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 0.75rem; 
             line-height: 1.3;
             transition: color 0.3s ease;
+            color: var(--text-light); 
         }
+        .article-title a { color: inherit; text-decoration: none; }
+        .article-title a:hover { color: var(--accent); }
 
-        .article-card:hover .article-title {
-            color: var(--accent);
-        }
 
         .article-excerpt {
             color: var(--text-muted);
             line-height: 1.6;
             margin-bottom: 1.5rem;
+            font-size: 0.9rem; 
             display: -webkit-box;
             -webkit-line-clamp: 3;
             -webkit-box-orient: vertical;
             overflow: hidden;
+            flex-grow: 1; 
         }
 
         .article-meta {
@@ -628,7 +656,8 @@
             justify-content: space-between;
             align-items: center;
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem; 
+            margin-top: auto; 
         }
 
         .article-author {
@@ -637,16 +666,18 @@
             gap: 0.5rem;
         }
 
-        .author-avatar {
-            width: 30px;
-            height: 30px;
+        .author-avatar { 
+            width: 24px; 
+            height: 24px;
             background: var(--gradient-1);
             border-radius: 50%;
         }
+        .author-avatar img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover;}
+
 
         .article-stats {
             display: flex;
-            gap: 1rem;
+            gap: 0.8rem; 
         }
 
         .article-stats span {
@@ -654,59 +685,29 @@
             align-items: center;
             gap: 0.3rem;
         }
+        .article-stats i { width: 14px; height: 14px; }
+
 
         /* Load More Button */
         .load-more-container {
             text-align: center;
             margin-top: 4rem;
         }
+        /* .load-more-btn is already styled */
+        .load-more-btn i { width: 18px; height: 18px; }
 
-        .load-more-btn {
-            padding: 1rem 3rem;
-            background: transparent;
-            border: 2px solid var(--accent);
-            border-radius: 50px;
-            color: var(--accent);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .load-more-btn::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-3);
-            transition: left 0.3s ease;
-            z-index: -1;
-        }
-
-        .load-more-btn:hover {
-            color: var(--bg-dark);
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
-        }
-
-        .load-more-btn:hover::before {
-            left: 0;
-        }
 
         /* Newsletter CTA */
         .newsletter-section {
             padding: 6rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
+            background: rgba(255, 255, 255, 0.015); 
             position: relative;
             overflow: hidden;
+             border-top: 1px solid rgba(255,255,255,0.08);
         }
 
         .newsletter-container {
-            max-width: 800px;
+            max-width: 700px; 
             margin: 0 auto;
             text-align: center;
             position: relative;
@@ -716,8 +717,8 @@
         .newsletter-badge {
             display: inline-block;
             padding: 0.4rem 1rem;
-            background: rgba(255, 0, 110, 0.1);
-            border: 1px solid rgba(255, 0, 110, 0.3);
+            background: rgba(var(--accent-alt-rgb), 0.1); 
+            border: 1px solid rgba(var(--accent-alt-rgb), 0.3); 
             border-radius: 50px;
             font-size: 0.8rem;
             color: var(--accent-alt);
@@ -727,7 +728,7 @@
         }
 
         .newsletter-title {
-            font-size: 3rem;
+            font-size: 2.5rem; 
             font-weight: 900;
             margin-bottom: 1rem;
             background: var(--gradient-2);
@@ -736,9 +737,10 @@
         }
 
         .newsletter-description {
-            font-size: 1.2rem;
+            font-size: 1.1rem; 
             color: var(--text-muted);
-            margin-bottom: 3rem;
+            margin-bottom: 2.5rem; 
+            max-width: 550px; margin-left: auto; margin-right: auto; 
         }
 
         .newsletter-form {
@@ -762,28 +764,14 @@
         .newsletter-input:focus {
             outline: none;
             border-color: var(--accent-alt);
-            box-shadow: 0 0 20px rgba(255, 0, 110, 0.2);
+            box-shadow: 0 0 20px rgba(var(--accent-alt-rgb), 0.2);
         }
 
-        .newsletter-submit {
-            padding: 1rem 2rem;
-            background: var(--gradient-2);
-            border: none;
-            border-radius: 50px;
-            color: var(--text-light);
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            white-space: nowrap;
-        }
+        /* .newsletter-submit is already styled */
+        .newsletter-submit i { width: 18px; height: 18px; }
 
-        .newsletter-submit:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(255, 0, 110, 0.3);
-        }
 
-        /* Footer - Same as other pages */
+        /* Footer */
         footer {
             padding: 4rem 2rem 2rem;
             text-align: center;
@@ -814,14 +802,15 @@
             text-decoration: none;
             color: var(--text-muted);
             transition: all 0.3s ease;
-            font-size: 1.2rem;
         }
+        .social-links a i { width: 24px; height: 24px; }
+
 
         .social-links a:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
             color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.3);
         }
 
         /* Mobile Menu */
@@ -829,19 +818,28 @@
             display: none;
             flex-direction: column;
             gap: 4px;
-            cursor: pointer;
+            cursor: none; 
             padding: 10px;
+            z-index: 1001;
+            background: transparent;
+            border: none;
         }
+        .mobile-menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
 
         .mobile-menu-toggle span {
             width: 25px;
             height: 2px;
             background: var(--text-light);
             transition: all 0.3s ease;
+            border-radius: 1px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -851,102 +849,87 @@
                 background: var(--bg-dark);
                 flex-direction: column;
                 justify-content: center;
-                transition: right 0.3s ease;
+                align-items: center;
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 999;
             }
 
             .nav-links.active {
                 right: 0;
             }
+            .nav-links a { font-size: 1.2rem; padding: 1rem 0; }
+
 
             .mobile-menu-toggle {
                 display: flex;
             }
 
-            .articles-hero h1 {
-                font-size: 2.5rem;
-            }
+            .articles-hero h1 { font-size: 2.2rem; } 
+            .articles-hero p { font-size: 1.1rem; }
 
-            .search-filter-container {
-                flex-direction: column;
-            }
+            .search-filter-container { flex-direction: column; gap: 1.5rem; }
+            .search-box { max-width: 100%; width: 100%;}
+            .category-filters { justify-content: center; }
 
-            .search-box {
-                max-width: 100%;
-            }
+            .featured-article { grid-template-columns: 1fr; padding: 2rem; gap: 1.5rem;}
+            .featured-article::before { display: none; } 
+            .featured-content h2 { font-size: 1.8rem; }
+            .featured-meta { gap: 1rem; }
 
-            .featured-article {
-                grid-template-columns: 1fr;
-                padding: 2rem;
-            }
+            .articles-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .article-title { font-size: 1.2rem; }
 
-            .featured-article::before {
-                display: none;
-            }
-
-            .articles-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .newsletter-form {
-                flex-direction: column;
-            }
-
-            .newsletter-title {
-                font-size: 2rem;
-            }
+            .newsletter-form { flex-direction: column; }
+            .newsletter-input { margin-bottom: 1rem; }
+            .newsletter-title { font-size: 2rem; }
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-dark);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--accent);
-            border-radius: 5px;
+            border-radius: 4px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--secondary);
         }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spin { animation: spin 1s linear infinite; display: inline-block; }
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loader" id="loader">
-<div class="loader-text">ARTICLES</div>
+        <div class="loader-text">ARTICLES</div>
     </div>
 
-    <!-- Custom Cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursor-follower"></div>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">LEX ROOT</a>
             <ul class="nav-links" id="navLinks">
                 <li><a href="index.html">Home</a></li>
-                <li><a href="index.html#about">About</a></li>
-                <li><a href="index.html#services">Services</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="articles.html">Articles</a></li>
-                <li><a href="index.html#contact">Contact</a></li>
+                <li><a href="articles.html" class="active-link">Articles</a></li>
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="mobile-menu-toggle" id="mobileMenu">
+            <button class="mobile-menu-toggle" id="mobileMenu" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
-    <!-- Articles Hero -->
-    <section class="articles-hero">
+    <section class="articles-hero reveal">
         <div class="animated-bg">
             <div class="floating-shapes">
                 <div class="shape"></div>
@@ -959,19 +942,18 @@
                 Decoding <span class="gradient-text">Legal Complexity</span><br>
                 for Business Success
             </h1>
-            <p>Expert insights on compliance, regulatory updates, and legal strategies for startups</p>
+            <p>Expert insights on compliance, regulatory updates, and legal strategies for startups & innovators.</p>
         </div>
     </section>
 
-    <!-- Search and Filter Section -->
-    <section class="search-filter-section">
+    <section class="search-filter-section reveal">
         <div class="search-filter-container">
             <div class="search-box">
-                <input type="text" class="search-input" placeholder="Search articles..." />
-                <span class="search-icon">🔍</span>
+                <input type="text" id="searchInput" class="search-input" placeholder="Search articles (e.g., GDPR, AI ethics)..." />
+                <span class="search-icon"><i data-lucide="search"></i></span>
             </div>
             <div class="category-filters">
-                <button class="category-btn active" data-category="all">All Articles</button>
+                <button class="category-btn active" data-category="all">All</button>
                 <button class="category-btn" data-category="compliance">Compliance</button>
                 <button class="category-btn" data-category="data-privacy">Data Privacy</button>
                 <button class="category-btn" data-category="startup-law">Startup Law</button>
@@ -979,280 +961,427 @@
             </div>
         </div>
     </section>
-
-    <!-- Featured Article -->
-    <section class="featured-section">
-        <div class="featured-article">
-            <div class="featured-content">
-                <h2>Understanding India's Digital Personal Data Protection Act 2023: A Comprehensive Guide</h2>
-                <div class="featured-meta">
-                    <span><i data-lucide="calendar"></i> May 25, 2024</span>
-                    <span><i data-lucide="clock"></i> 12 min read</span>
-                    <span>🏷️ Data Privacy</span>
-                </div>
-                <p class="featured-excerpt">The DPDPA 2023 marks a watershed moment in India's data protection landscape. This comprehensive guide breaks down what startups need to know about compliance requirements, implementation timelines, and strategic approaches to data governance in the new regulatory environment.</p>
-                <a href="articles/digital_personal_data_protection_act_2023.html" class="read-more-btn">Read Full Article →</a>
+    
+    <section class="featured-section reveal">
+        <div class="featured-article" id="featuredArticle">
             </div>
-            <div class="featured-image"></div>
+    </section>
+
+    <section class="articles-section">
+        <div class="section-header reveal">
+            <h2 class="section-title">Latest Articles</h2>
+        </div>
+        <div class="articles-grid" id="articlesGrid">
+            </div>
+        <div class="load-more-container reveal">
+            <button class="load-more-btn" id="loadMoreBtn" style="display: none;">
+                <i data-lucide="loader-2" class="spin-icon" style="display: none;"></i>
+                <span class="btn-text">Load More Articles</span>
+            </button>
+        </div>
+        <p id="noMoreArticles" style="text-align: center; color: var(--text-muted); margin-top: 2rem; display: none;">No more articles to load.</p>
+    </section>
+
+    <section class="newsletter-section reveal">
+        <div class="newsletter-container">
+            <span class="newsletter-badge">Stay Updated</span>
+            <h2 class="newsletter-title">Subscribe to Our Insights</h2>
+            <p class="newsletter-description">Get the latest legal insights, compliance updates, and tech trends delivered straight to your inbox.</p>
+            <form class="newsletter-form" id="newsletterForm">
+                <input type="email" id="newsletterEmail" class="newsletter-input" placeholder="Enter your email" required />
+                <button type="submit" class="newsletter-submit">
+                    <i data-lucide="mail-plus"></i> Subscribe
+                </button>
+            </form>
+            <p id="newsletterStatus" style="margin-top: 1rem; font-size: 0.9rem;"></p>
         </div>
     </section>
 
-    <!-- Articles Grid -->
-    <section class="articles-section">
-        <div class="section-header">
-            <h2 class="section-title">Latest Articles</h2>
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="https://linkedin.com/company/lexroot" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="https://twitter.com/lexroot" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <a href="mailto:hello@lexroot.com" aria-label="Email"><i data-lucide="mail"></i></a>
+            </div>
+            <p>&copy; <span id="currentYear"></span> Lex Root Agency. Crafted with precision and purpose.</p>
         </div>
-        <div class="articles-grid">
-            <!-- Article 1 -->
-            <article class="article-card" data-category="compliance">
-                <div class="article-image">
-                    <span class="article-category">Compliance</span>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">GDPR vs CCPA: Key Differences Every SaaS Startup Should Know</h3>
-                    <p class="article-excerpt">Navigate the complexities of international data privacy laws with this detailed comparison of GDPR and CCPA requirements, focusing on practical implications for SaaS businesses operating globally.</p>
-                    <div class="article-meta">
-                        <div class="article-author">
-                            <div class="author-avatar"></div>
-                            <span>Indrajeet K.</span>
-                        </div>
-                        <div class="article-stats">
-                            <span><i data-lucide="eye"></i> 2.3k</span>
-                            <span><i data-lucide="clock"></i> 8 min</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+    </footer>
 
-            <!-- Article 2 -->
-            <article class="article-card" data-category="legal-tech">
-                <div class="article-image">
-                    <span class="article-category">Legal Tech</span>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">AI in Legal Compliance: Tools That Are Transforming the Industry</h3>
-                    <p class="article-excerpt">Explore how artificial intelligence is revolutionizing compliance management, from automated contract review to predictive risk assessment, with real-world case studies.</p>
-                    <div class="article-meta">
-                        <div class="article-author">
-                            <div class="author-avatar"></div>
-                            <span>Indrajeet K.</span>
-                        </div>
-                        <div class="article-stats">
-                            <span><i data-lucide="eye"></i> 1.8k</span>
-                            <span><i data-lucide="clock"></i> 10 min</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+    <script>
+        // Dynamically set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
 
-            <!-- Article 3 -->
-            <article class="article-card" data-category="startup-law">
-                <div class="article-image">
-                    <span class="article-category">Startup Law</span>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">Term Sheet Negotiations: What Founders Often Overlook</h3>
-                    <p class="article-excerpt">Learn about the critical legal provisions in term sheets that can impact your startup's future, including liquidation preferences, anti-dilution clauses, and board composition.</p>
-                    <div class="article-meta">
-                        <div class="article-author">
-                            <div class="author-avatar"></div>
-                            <span>Indrajeet K.</span>
-                        </div>
-                        <div class="article-stats">
-                            <span><i data-lucide="eye"></i> 3.1k</span>
-                            <span><i data-lucide="clock"></i> 10 min</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
+        // Loading Screen
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader) loader.classList.add('hidden');
+            }, 300);
+        });
 
-            <!-- Article 4 -->
-            <article class="article-card" data-category="data-privacy">
-                <div class="article-image">
-                    <span class="article-category">Data Privacy</span>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">Building Privacy-First Products: A Legal Framework for Developers</h3>
-                    <p class="article-excerpt">A structured legal framework for developers to build privacy-first products ensuring compliance and fostering user trust in the digital age.</p>
-                    <div class="article-meta">
-                        <div class="article-author">
-                            <div class="author-avatar"></div>
-                            <span>Indrajeet K.</span>
-                        </div>
-                        <div class="article-stats">
-                            <span><i data-lucide="eye"></i> 1.2k</span>
-                            <span><i data-lucide="clock"></i> 10 min</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Article 5 -->
-            <article class="article-card" data-category="compliance">
-                <div class="article-image">
-                    <span class="article-category">Compliance</span>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">Cross-Border Data Transfers: Navigating the New Normal</h3>
-                    <p class="article-excerpt">Practical insights into managing cross-border data transfers effectively and compliantly in today's evolving regulatory environment.</p>
-                    <div class="article-meta">
-                        <div class="article-author">
-                            <div class="author-avatar"></div>
-                            <span>Indrajeet K.</span>
-                        </div>
-                        <div class="article-stats">
-                            <span><i data-lucide="eye"></i> 1.0k</span>
-                            <span><i data-lucide="clock"></i> 10 min</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-
-            <!-- Article 6 -->
-            <article class="article-card" data-category="legal-tech">
-                <div class="article-image">
-                    <span class="article-category">Legal Tech</span>
-                </div>
-                <div class="article-content">
-                    <h3 class="article-title">Smart Contracts and Legal Validity: Where We Stand in 2024</h3>
-                    <p class="article-excerpt">Explore the current legal status of smart contracts, regulatory milestones, and practical guidance for businesses and developers in 2024.</p>
-                    <div class="article-meta">
-                        <div class="article-author">
-                            <div class="author-avatar"></div>
-                            <span>Indrajeet K.</span>
-                        </div>
-                        <div class="article-stats">
-                            <span><i data-lucide="eye"></i> 1.5k</span>
-                            <span><i data-lucide="clock"></i> 12 min</span>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        </div>
-
-            <!-- Add missing sections and complete scripts -->
-            <div class="load-more-container">
-                <button class="load-more-btn">Load More Articles</button>
-            </div>
-        </section>
-
-        <!-- Add the missing newsletter section, footer, and complete scripts -->
-        <section class="newsletter-section">
-            <div class="newsletter-container">
-                <span class="newsletter-badge">Stay Updated</span>
-                <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
-                <p class="newsletter-description">Get the latest legal insights and compliance updates delivered straight to your inbox.</p>
-                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
-                    <input type="email" class="newsletter-input" placeholder="Enter your email" required />
-                    <button type="submit" class="newsletter-submit">Subscribe</button>
-                </form>
-            </div>
-        </section>
-
-        <footer>
-            <div class="footer-content">
-                <div class="social-links">
-                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-                    <a href="mailto:theindrajeetk@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
-                </div>
-                <p>&copy; 2024 Lex Root Agency. Crafted with precision and purpose.</p>
-            </div>
-        </footer>
-
-        <script>
-            // Loading Screen
-            window.addEventListener('load', () => {
-                setTimeout(() => {
-                    document.getElementById('loader').classList.add('hidden');
-                }, 1000);
-            });
-
-            // Custom Cursor - Ultra Smooth Animation
-            const cursor = document.getElementById('cursor');
-            const cursorFollower = document.getElementById('cursor-follower');
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
             let mouseX = 0;
             let mouseY = 0;
             let followerX = 0;
             let followerY = 0;
+            const KFS = 0.25; 
 
-            // Update mouse position
+            mouseX = window.innerWidth / 2; 
+            mouseY = window.innerHeight / 2;
+            followerX = mouseX;
+            followerY = mouseY;
+
             document.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
                 mouseY = e.clientY;
             });
-
-            // Initialize follower position
-            followerX = mouseX;
-            followerY = mouseY;
-
-            // Smooth animation using requestAnimationFrame
+            
             function animateCursor() {
-                // Main cursor - instant movement
-                cursor.style.left = mouseX + 'px';
-                cursor.style.top = mouseY + 'px';
-
-                // Follower cursor - ultra smooth trailing effect
-                const dx = mouseX - followerX;
-                const dy = mouseY - followerY;
-
-                // Increased easing for smoother movement
-                followerX += dx * 0.25;
-                followerY += dy * 0.25;
-
-                cursorFollower.style.left = followerX + 'px';
-                cursorFollower.style.top = followerY + 'px';
-
+                if (cursor && cursorFollower) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
                 requestAnimationFrame(animateCursor);
             }
             animateCursor();
 
-            // Hover effects
-            document.querySelectorAll('a, button').forEach(el => {
+            document.querySelectorAll('a, button, input, .article-card, .category-btn').forEach(el => {
                 el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
                 el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
             });
 
-            // Hide cursor when leaving window
             document.addEventListener('mouseleave', () => {
-                cursor.style.opacity = '0';
-                cursorFollower.style.opacity = '0';
+                if(cursor) cursor.style.opacity = '0';
+                if(cursorFollower) cursorFollower.style.opacity = '0';
             });
-
             document.addEventListener('mouseenter', () => {
-                cursor.style.opacity = '1';
-                cursorFollower.style.opacity = '1';
+                if(cursor) cursor.style.opacity = '1';
+                if(cursorFollower) cursorFollower.style.opacity = '1';
             });
+        }
 
-            // Navbar scroll effect
-            const navbar = document.getElementById('navbar');
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
             window.addEventListener('scroll', () => {
-                if (window.scrollY > 100) {
+                if (window.scrollY > 50) {
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
                 }
             });
+        }
 
-            // Mobile menu
-            const mobileMenu = document.getElementById('mobileMenu');
-            const navLinks = document.getElementById('navLinks');
-
-            mobileMenu.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
+        // Mobile menu
+        const mobileMenuToggle = document.getElementById('mobileMenu');
+        const navLinksList = document.getElementById('navLinks');
+       
+        if (mobileMenuToggle && navLinksList) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isActive = navLinksList.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('open');
+                mobileMenuToggle.setAttribute('aria-expanded', isActive);
             });
+            navLinksList.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinksList.classList.contains('active')) {
+                        navLinksList.classList.remove('active');
+                        mobileMenuToggle.classList.remove('open');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+        
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+           revealElements.forEach(el => {
+               const windowHeight = window.innerHeight;
+               const elementTop = el.getBoundingClientRect().top;
+               const elementVisible = 50; 
+               
+               if (elementTop < windowHeight - elementVisible) {
+                   el.classList.add('active');
+               }
+           });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        setTimeout(revealOnScroll, 100); 
 
-            // Newsletter form submission
-            function handleNewsletterSubmit(e) {
-                e.preventDefault();
-                alert('Thank you for subscribing to our newsletter!');
-                e.target.reset();
+        // Article Data
+        const allArticles = [
+            { 
+                id: 'dpdpa-guide-2023',
+                title: "Understanding India's Digital Personal Data Protection Act 2023: A Comprehensive Guide", 
+                category: "data-privacy", 
+                date: "May 25, 2024", 
+                readTime: "12 min", 
+                author: "Indrajeet K.", 
+                avatar: "https://placehold.co/40x40/00f5ff/0a0e27?text=IK",
+                views: "3.5k",
+                excerpt: "The DPDPA 2023 marks a watershed moment in India's data protection landscape. This comprehensive guide breaks down what startups need to know about compliance requirements, implementation timelines, and strategic approaches to data governance.",
+                imageUrl: "https://placehold.co/600x400/0a0e27/00f5ff?text=DPDPA+2023",
+                link: "article-dpdpa-guide-2023.html", 
+                isFeatured: true
+            },
+            { 
+                id: 'gdpr-vs-ccpa',
+                title: "GDPR vs CCPA: Key Differences Every SaaS Startup Should Know", 
+                category: "compliance", 
+                date: "April 10, 2024", 
+                readTime: "8 min", 
+                author: "Lex Root Team", 
+                avatar: "https://placehold.co/40x40/5e60ce/ffffff?text=LR",
+                views: "2.3k",
+                excerpt: "Navigate the complexities of international data privacy laws with this detailed comparison of GDPR and CCPA requirements, focusing on practical implications for SaaS businesses.",
+                imageUrl: "https://placehold.co/600x400/5e60ce/ffffff?text=GDPR+vs+CCPA",
+                link: "article-gdpr-vs-ccpa.html", 
+                isFeatured: false
+            },
+            { 
+                id: 'ai-legal-compliance',
+                title: "AI in Legal Compliance: Tools That Are Transforming the Industry", 
+                category: "legal-tech", 
+                date: "March 15, 2024", 
+                readTime: "10 min", 
+                author: "Indrajeet K.", 
+                avatar: "https://placehold.co/40x40/00f5ff/0a0e27?text=IK",
+                views: "1.8k",
+                excerpt: "Explore how artificial intelligence is revolutionizing compliance management, from automated contract review to predictive risk assessment, with real-world case studies.",
+                imageUrl: "https://placehold.co/600x400/ff006e/ffffff?text=AI+Compliance",
+                link: "article-ai-legal-compliance.html",
+                isFeatured: false
+            },
+            { 
+                id: 'term-sheet-negotiations',
+                title: "Term Sheet Negotiations: What Founders Often Overlook", 
+                category: "startup-law", 
+                date: "February 20, 2024", 
+                readTime: "10 min", 
+                author: "Lex Root Team", 
+                avatar: "https://placehold.co/40x40/5e60ce/ffffff?text=LR",
+                views: "3.1k",
+                excerpt: "Learn about the critical legal provisions in term sheets that can impact your startup's future, including liquidation preferences, anti-dilution clauses, and board composition.",
+                imageUrl: "https://placehold.co/600x400/00f2fe/0a0e27?text=Term+Sheets",
+                link: "article-term-sheet-negotiations.html",
+                isFeatured: false
+            },
+            {
+                id: 'privacy-first-products',
+                title: "Building Privacy-First Products: A Legal Framework for Developers",
+                category: "data-privacy",
+                date: "January 28, 2024",
+                readTime: "9 min",
+                author: "Indrajeet K.",
+                avatar: "https://placehold.co/40x40/00f5ff/0a0e27?text=IK",
+                views: "1.2k",
+                excerpt: "A structured legal framework for developers to build privacy-first products ensuring compliance and fostering user trust in the digital age.",
+                imageUrl: "https://placehold.co/600x400/667eea/ffffff?text=Privacy+First",
+                link: "article-privacy-first-products.html",
+                isFeatured: false
+            },
+            {
+                id: 'cross-border-data',
+                title: "Cross-Border Data Transfers: Navigating the New Normal",
+                category: "compliance",
+                date: "December 05, 2023",
+                readTime: "11 min",
+                author: "Lex Root Team",
+                avatar: "https://placehold.co/40x40/5e60ce/ffffff?text=LR",
+                views: "1.0k",
+                excerpt: "Practical insights into managing cross-border data transfers effectively and compliantly in today's evolving regulatory environment.",
+                imageUrl: "https://placehold.co/600x400/764ba2/ffffff?text=Data+Transfers",
+                link: "article-cross-border-data.html",
+                isFeatured: false
+            },
+            {
+                id: 'smart-contracts-legal',
+                title: "Smart Contracts and Legal Validity: Where We Stand in 2024",
+                category: "legal-tech",
+                date: "November 10, 2023",
+                readTime: "12 min",
+                author: "Indrajeet K.",
+                avatar: "https://placehold.co/40x40/00f5ff/0a0e27?text=IK",
+                views: "1.5k",
+                excerpt: "Explore the current legal status of smart contracts, regulatory milestones, and practical guidance for businesses and developers in 2024.",
+                imageUrl: "https://placehold.co/600x400/f093fb/0a0e27?text=Smart+Contracts",
+                link: "article-smart-contracts-legal.html",
+                isFeatured: false
+            }
+        ];
+
+        const articlesGrid = document.getElementById('articlesGrid');
+        const featuredArticleContainer = document.getElementById('featuredArticle');
+        const searchInput = document.getElementById('searchInput');
+        const categoryFilters = document.querySelectorAll('.category-btn');
+        const loadMoreBtn = document.getElementById('loadMoreBtn');
+        const noMoreArticlesMsg = document.getElementById('noMoreArticles');
+        let articlesToShow = 3; 
+        let currentFilter = 'all';
+        let currentSearchTerm = '';
+
+        function renderArticles() {
+            if (!articlesGrid || !featuredArticleContainer) return;
+            
+            articlesGrid.innerHTML = ''; 
+            
+            const featured = allArticles.find(a => a.isFeatured);
+            const nonFeaturedArticles = allArticles.filter(a => !a.isFeatured);
+
+            if (featured) {
+                featuredArticleContainer.innerHTML = `
+                    <div class="featured-content">
+                        <h2><a href="${featured.link}">${featured.title}</a></h2>
+                        <div class="featured-meta">
+                            <span><i data-lucide="calendar"></i> ${featured.date}</span>
+                            <span><i data-lucide="clock"></i> ${featured.readTime}</span>
+                            <span><i data-lucide="tag"></i> ${featured.category.replace('-', ' ')}</span>
+                        </div>
+                        <p class="featured-excerpt">${featured.excerpt}</p>
+                        <a href="${featured.link}" class="read-more-btn">
+                            <i data-lucide="arrow-right-circle"></i> Read Full Article
+                        </a>
+                    </div>
+                    <div class="featured-image" style="background-image: url('${featured.imageUrl}');"></div>
+                `;
+            } else {
+                 featuredArticleContainer.style.display = 'none'; 
             }
 
-            // Initialize Lucide icons
-            document.addEventListener('DOMContentLoaded', function() {
-                lucide.createIcons();
+            const filteredArticles = nonFeaturedArticles
+                .filter(article => 
+                    (currentFilter === 'all' || article.category === currentFilter) &&
+                    (article.title.toLowerCase().includes(currentSearchTerm) || article.excerpt.toLowerCase().includes(currentSearchTerm))
+                );
+
+            const articlesToDisplay = filteredArticles.slice(0, articlesToShow);
+
+            articlesToDisplay.forEach((article, index) => {
+                const articleCard = `
+                    <article class="article-card reveal" data-category="${article.category}" style="animation-delay: ${index * 0.1}s">
+                        <a href="${article.link}" style="text-decoration:none; color:inherit; display:flex; flex-direction:column; height:100%;">
+                            <div class="article-image" style="background-image: url('${article.imageUrl}');">
+                                <span class="article-category">${article.category.replace('-', ' ')}</span>
+                            </div>
+                            <div class="article-content">
+                                <h3 class="article-title">${article.title}</h3>
+                                <p class="article-excerpt">${article.excerpt}</p>
+                                <div class="article-meta">
+                                    <div class="article-author">
+                                        <img src="${article.avatar}" alt="${article.author}" class="author-avatar">
+                                        <span>${article.author}</span>
+                                    </div>
+                                    <div class="article-stats">
+                                        <span><i data-lucide="eye"></i> ${article.views}</span>
+                                        <span><i data-lucide="clock-3"></i> ${article.readTime}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </article>
+                `;
+                articlesGrid.innerHTML += articleCard;
             });
-        </script>
-    </body>
+
+            if (articlesToDisplay.length === 0 && articlesGrid.innerHTML === '') {
+                articlesGrid.innerHTML = '<p style="color: var(--text-muted); grid-column: 1 / -1; text-align: center;">No articles found matching your criteria.</p>';
+            }
+            
+            setTimeout(() => {
+                document.querySelectorAll('#articlesGrid .article-card.reveal:not(.active)').forEach(el => {
+                    el.classList.add('active'); 
+                });
+            }, 50);
+
+
+            if (articlesToShow >= filteredArticles.length) {
+                loadMoreBtn.style.display = 'none';
+                if (filteredArticles.length > 0) noMoreArticlesMsg.style.display = 'block';
+                else noMoreArticlesMsg.style.display = 'none';
+            } else {
+                loadMoreBtn.style.display = 'inline-flex';
+                noMoreArticlesMsg.style.display = 'none';
+            }
+            if (typeof lucide !== 'undefined') lucide.createIcons();
+        }
+
+        searchInput.addEventListener('input', (e) => {
+            currentSearchTerm = e.target.value.toLowerCase();
+            articlesToShow = 3; 
+            renderArticles();
+        });
+
+        categoryFilters.forEach(tab => {
+            tab.addEventListener('click', () => {
+                categoryFilters.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                currentFilter = tab.dataset.category;
+                articlesToShow = 3; 
+                renderArticles();
+            });
+        });
+
+        loadMoreBtn.addEventListener('click', () => {
+            const spinIcon = loadMoreBtn.querySelector('.spin-icon');
+            const btnText = loadMoreBtn.querySelector('.btn-text');
+            
+            if(spinIcon) spinIcon.style.display = 'inline-block';
+            if(btnText) btnText.textContent = 'Loading...';
+            loadMoreBtn.disabled = true;
+
+            setTimeout(() => { 
+                articlesToShow += 3;
+                renderArticles();
+                if(spinIcon) spinIcon.style.display = 'none';
+                if(btnText) btnText.textContent = 'Load More Articles';
+                loadMoreBtn.disabled = false;
+                if (typeof lucide !== 'undefined') lucide.createIcons(); 
+            }, 700);
+        });
+        
+        // Newsletter Form
+        const newsletterForm = document.getElementById('newsletterForm');
+        const newsletterEmailInput = document.getElementById('newsletterEmail');
+        const newsletterStatus = document.getElementById('newsletterStatus');
+
+        if (newsletterForm) {
+            newsletterForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = newsletterEmailInput.value;
+                newsletterStatus.style.color = 'var(--accent)';
+                newsletterStatus.textContent = `Thank you for subscribing, ${email}!`;
+                newsletterEmailInput.value = '';
+                setTimeout(() => { newsletterStatus.textContent = ''; }, 4000);
+            });
+        }
+
+
+        // Initial render and Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            renderArticles(); 
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded. Retrying...');
+                setTimeout(() => {
+                     if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                     } else {
+                        console.error('Lucide icons failed to load after retry.');
+                     }
+                }, 500);
+            }
+            revealOnScroll(); 
+        });
+    </script>
+</body>
 </html>

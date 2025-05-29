@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Our Services | Lex Root Agency - AI-Powered Legal Solutions</title>
+    <meta name="description" content="Explore Lex Root Agency's expert legal content, compliance research, and marketing services. Use our AI recommender to find the perfect solution for your needs.">
+    <meta name="keywords" content="legal services, compliance research, legal content strategy, legal marketing, lex root agency, law firm services, legal tech solutions, AI service recommender">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --secondary: #5e60ce;
+            --accent: #00f5ff;
+            --accent-alt: #ff006e;
+            --text-light: #ffffff;
+            --text-muted: #b4b4b4;
+            --bg-dark: #030616;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --neon-glow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.2);
+            border-color: var(--accent-alt);
+            transition: width 0.2s ease, height 0.2s ease;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '™';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active-link {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active-link::before {
+            width: 100%;
+        }
+        
+        /* Page Hero for Services Page */
+        .page-hero {
+            padding-top: 120px; 
+            padding-bottom: 4rem;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(0, 245, 255, 0.08) 0%, transparent 35%),
+                        radial-gradient(circle at 20% 70%, rgba(94, 96, 206, 0.08) 0%, transparent 40%);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+         .page-hero h1 .gradient-text {
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section Badge & Title (Common) */
+        .section-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        
+        /* Gemini AI Common Styles */
+        .gemini-common-section {
+            padding: 4rem 2rem; 
+            background: rgba(255, 255, 255, 0.015); 
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+        .gemini-common-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .gemini-common-container .section-title { 
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+        }
+        .gemini-common-container .section-badge { 
+             background: rgba(0, 245, 255, 0.1);
+             border-color: rgba(0, 245, 255, 0.3);
+             color: var(--accent);
+        }
+         .gemini-common-description {
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+         }
+        .gemini-input-group {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center; 
+        }
+        .gemini-input-group input[type="text"],
+        .gemini-input-group textarea { 
+            flex-grow: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px; 
+            color: var(--text-light);
+            font-size: 1rem;
+            height: 50px; 
+            font-family: 'Inter', sans-serif;
+        }
+        .gemini-input-group textarea {
+            height: auto; 
+            min-height: 100px; 
+            border-radius: 25px; 
+            resize: vertical; 
+            padding-top: 1rem; 
+        }
+        .gemini-input-group input[type="text"]:focus,
+        .gemini-input-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--neon-glow);
+        }
+        .gemini-input-group button {
+            height: 50px; 
+            padding: 0 2.5rem; 
+            flex-shrink: 0; 
+        }
+        .btn-primary { 
+            padding: 1rem 2.5rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 0.5rem; 
+            border: none; 
+            cursor: none; 
+        }
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+        .btn-primary:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed; 
+        }
+
+        .gemini-response-area {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(10, 14, 39, 0.7); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-height: 100px;
+            text-align: left;
+            color: var(--text-muted);
+            line-height: 1.7;
+            white-space: pre-wrap; 
+            font-size: 0.95rem; 
+        }
+        .gemini-loading-indicator {
+            display: none; 
+            margin: 1rem auto;
+            width: 30px; 
+            height: 30px;
+            border: 3px solid rgba(0, 245, 255, 0.2);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .gemini-error-message {
+            color: var(--accent-alt);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none; 
+        }
+
+        /* Services Section */
+        #services-page-content { 
+             padding: 4rem 2rem; 
+        }
+        
+        .services-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .services-header { 
+            text-align: center;
+            margin-bottom: 3rem; 
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            padding: 3rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+            display: flex; 
+            flex-direction: column; 
+        }
+         .service-card-content {
+            flex-grow: 1; 
+        }
+
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-3);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            border-color: var(--accent);
+            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
+        }
+
+        .service-card:hover::before {
+            opacity: 0.05;
+        }
+
+        .service-icon {
+            width: 70px; 
+            height: 70px;
+            background: var(--gradient-3);
+            border-radius: 15px; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.2rem; 
+            color: var(--bg-dark); 
+            margin-bottom: 1.5rem; 
+            box-shadow: 0 8px 25px rgba(0, 245, 255, 0.25);
+            flex-shrink: 0; 
+        }
+        .service-icon i { 
+            width: 32px;
+            height: 32px;
+        }
+
+        .service-card h3 {
+            font-size: 1.4rem; 
+            margin-bottom: 0.75rem; 
+            font-weight: 700;
+            color: var(--text-light);
+        }
+
+        .service-card p.service-description { 
+            color: var(--text-muted);
+            margin-bottom: 1.5rem; 
+            line-height: 1.7;
+            font-size: 0.95rem; 
+        }
+
+        .service-features {
+            list-style: none; /* Ensure no default browser bullets */
+            padding-left: 0; 
+            margin-top: auto; 
+        }
+
+        .service-features li {
+            padding: 0.6rem 0; 
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 1.5em; /* Space for custom bullet */
+            transition: color 0.3s ease;
+            font-size: 0.9rem; 
+        }
+        .service-features li::before {
+            content: ''; /* Empty content, will be styled */
+            position: absolute;
+            left: 0.5em; /* Position of the bullet */
+            top: 50%;
+            transform: translateY(-50%);
+            width: 0.4em; /* Size of the bullet */
+            height: 0.4em; /* Size of the bullet */
+            background-color: var(--accent); /* Bullet color */
+            border-radius: 50%; /* Make it a circle */
+            transition: background-color 0.3s ease;
+        }
+
+
+        .service-card:hover .service-features li {
+            color: var(--text-light);
+        }
+        .service-card:hover .service-features li::before {
+            background-color: var(--text-light); /* Change bullet color on hover */
+        }
+
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            font-size: 1.2rem; 
+        }
+        .social-links a i { 
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001; 
+            background: transparent; 
+            border: none; 
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+            border-radius: 1px; 
+        }
+        .mobile-menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; } 
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
+                z-index: 999; 
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+             .nav-links a { 
+                font-size: 1.2rem;
+                padding: 1rem 0;
+            }
+
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+             .page-hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            .gemini-common-section {
+                padding: 3rem 1rem;
+            }
+            .gemini-common-container .section-title {
+                font-size: 2rem;
+            }
+            .gemini-input-group {
+                flex-direction: column;
+            }
+            .gemini-input-group input[type="text"],
+            .gemini-input-group textarea {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            .gemini-input-group button {
+                 width: 100%;
+            }
+
+
+            .services-grid { 
+                grid-template-columns: 1fr;
+            }
+            #services-page-content {
+                 padding: 2rem 1rem 4rem 1rem; 
+            }
+            .section-title { font-size: 2.2rem; }
+
+        }
+
+        /* Animations for scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); 
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px; 
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">LEX ROOT</div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo">LEX ROOT</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="about.html">About</a></li> 
+                <li><a href="services.html" class="active-link">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenu" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-hero reveal">
+        <h1 class="reveal"><span class="gradient-text">Our Expert Services</span></h1>
+        <p class="reveal">Driving legal innovation and clarity with solutions tailored for your growth. Discover how Lex Root can empower your business.</p>
+    </header>
+
+    <section class="gemini-common-section reveal" id="aiServiceRecommenderSection">
+        <div class="gemini-common-container">
+            <span class="section-badge">Personalized Guidance</span>
+            <h2 class="section-title">✨ Find Your Solution</h2>
+            <p class="gemini-common-description">Describe your challenge or goal below, and our AI assistant will suggest the Lex Root services best suited to help you succeed.</p>
+            <div class="gemini-input-group">
+                <textarea id="recommender-user-need" placeholder="e.g., 'Help launching a fintech app compliantly in Europe' or 'Need engaging blog posts for my legal tech startup'"></textarea>
+            </div>
+            <div class="gemini-input-group" style="justify-content: center;"> 
+                 <button id="recommender-submit-button" class="btn-primary">
+                    <i data-lucide="lightbulb"></i> Get Recommendation
+                </button>
+            </div>
+            <div class="gemini-loading-indicator" id="recommender-loading"></div>
+            <div id="recommender-response-area" class="gemini-response-area" aria-live="polite">Your service recommendations will appear here...</div>
+            <p id="recommender-error-message" class="gemini-error-message" role="alert"></p>
+        </div>
+    </section>
+
+
+    <main id="services-page-content">
+       <div class="services-container">
+           <div class="services-header reveal">
+               <h2 class="section-title">Core Service Areas</h2>
+           </div>
+           <div class="services-grid">
+               <div class="service-card reveal" data-service-name="Compliance Research" data-service-description="Understand regulations before they become roadblocks. We provide in-depth analysis and actionable insights for global compliance.">
+                   <div class="service-icon">
+                        <i data-lucide="bar-chart-big"></i>
+                   </div>
+                   <div class="service-card-content">
+                       <h3>Compliance Research</h3>
+                       <p class="service-description">Understand regulations before they become roadblocks. We provide in-depth analysis and actionable insights for global compliance.</p>
+                       <ul class="service-features">
+                           <li>Regulatory summaries across 20+ countries</li>
+                           <li>Market-entry playbooks & risk assessments</li>
+                           <li>Licensing requirement breakdowns</li>
+                           <li>Ongoing regulatory monitoring & mapping</li>
+                       </ul>
+                   </div>
+               </div>
+               <div class="service-card reveal" data-service-name="Legal Content Strategy" data-service-description="Turn complexity into clarity with smart legal storytelling. We craft compelling content that educates and engages your audience.">
+                   <div class="service-icon">
+                        <i data-lucide="pen-tool"></i>
+                   </div>
+                    <div class="service-card-content">
+                       <h3>Legal Content Strategy</h3>
+                       <p class="service-description">Turn complexity into clarity with smart legal storytelling. We craft compelling content that educates and engages your audience.</p>
+                       <ul class="service-features">
+                           <li>SEO legal blogs & evergreen explainers</li>
+                           <li>Case studies, whitepapers, and in-depth reports</li>
+                           <li>Client education & onboarding materials</li>
+                           <li>Regulatory update landing pages & summaries</li>
+                       </ul>
+                   </div>
+               </div>
+               <div class="service-card reveal" data-service-name="Legal Marketing & Positioning" data-service-description="We help law-forward brands stand out and scale. Our strategies are designed to enhance your visibility and authority in the legal space.">
+                   <div class="service-icon">
+                        <i data-lucide="rocket"></i>
+                   </div>
+                   <div class="service-card-content">
+                       <h3>Legal Marketing & Positioning</h3>
+                       <p class="service-description">We help law-forward brands stand out and scale. Our strategies are designed to enhance your visibility and authority in the legal space.</p>
+                       <ul class="service-features">
+                           <li>Social media ghostwriting & management</li>
+                           <li>Strategic content calendars & distribution</li>
+                           <li>Thought leadership & personal branding strategy</li>
+                           <li>Website copy & compliance-safe marketing funnels</li>
+                       </ul>
+                   </div>
+               </div>
+               <div class="service-card reveal" data-service-name="AI & Legal Tech Consulting" data-service-description="Leverage the power of AI and technology to optimize your legal operations and content workflows efficiently.">
+                   <div class="service-icon">
+                        <i data-lucide="brain-circuit"></i>
+                   </div>
+                   <div class="service-card-content">
+                       <h3>AI & Legal Tech Consulting</h3>
+                       <p class="service-description">Leverage the power of AI and technology to optimize your legal operations and content workflows efficiently.</p>
+                       <ul class="service-features">
+                           <li>AI tool integration for legal teams</li>
+                           <li>Workflow automation design</li>
+                           <li>Custom knowledge base development</li>
+                           <li>Legal tech stack advisory</li>
+                       </ul>
+                   </div>
+               </div>
+                <div class="service-card reveal" data-service-name="Regulatory Change Management" data-service-description="Navigate the evolving legal landscape with confidence. We help you adapt to new regulations seamlessly.">
+                   <div class="service-icon">
+                        <i data-lucide="shield-check"></i>
+                   </div>
+                   <div class="service-card-content">
+                       <h3>Regulatory Change Management</h3>
+                       <p class="service-description">Navigate the evolving legal landscape with confidence. We help you adapt to new regulations seamlessly.</p>
+                       <ul class="service-features">
+                           <li>Impact analysis of new laws</li>
+                           <li>Policy drafting and updates</li>
+                           <li>Training material development</li>
+                           <li>Compliance program implementation support</li>
+                       </ul>
+                   </div>
+               </div>
+               <div class="service-card reveal" data-service-name="Legal Document Simplification" data-service-description="Transform dense legal documents into clear, user-friendly content without sacrificing accuracy or compliance.">
+                   <div class="service-icon">
+                        <i data-lucide="book-open-check"></i>
+                   </div>
+                   <div class="service-card-content">
+                       <h3>Legal Document Simplification</h3>
+                       <p class="service-description">Transform dense legal documents into clear, user-friendly content without sacrificing accuracy or compliance.</p>
+                       <ul class="service-features">
+                           <li>Plain language contract summaries</li>
+                           <li>User agreement and policy redesign</li>
+                           <li>Internal compliance guide simplification</li>
+                           <li>FAQ and knowledge base creation</li>
+                       </ul>
+                   </div>
+               </div>
+           </div>
+       </div>
+    </main>
+
+   <footer>
+       <div class="footer-content">
+           <div class="social-links">
+               <a href="https://linkedin.com/company/lexroot" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/lexroot" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:hello@lexroot.com" aria-label="Email"><i data-lucide="mail"></i></a>
+           </div>
+           <p>&copy; <span id="currentYear"></span> Lex Root Agency. Built with purpose.</p>
+       </div>
+   </footer>
+
+   <script>
+        // Dynamically set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+           setTimeout(() => {
+               const loader = document.getElementById('loader');
+               if (loader) loader.classList.add('hidden');
+           }, 300); 
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            const KFS = 0.25; 
+
+            mouseX = window.innerWidth / 2;
+            mouseY = window.innerHeight / 2;
+            followerX = mouseX;
+            followerY = mouseY;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                if (cursor && cursorFollower) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            document.querySelectorAll('a, button, .service-card, textarea, input[type="text"]').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (cursor) cursor.style.opacity = '0';
+                if (cursorFollower) cursorFollower.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', () => {
+                if (cursor) cursor.style.opacity = '1';
+                if (cursorFollower) cursorFollower.style.opacity = '1';
+            });
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+           window.addEventListener('scroll', () => {
+               if (window.scrollY > 50) { 
+                   navbar.classList.add('scrolled');
+               } else {
+                   navbar.classList.remove('scrolled');
+               }
+           });
+        }
+
+        // Mobile menu
+        const mobileMenuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+       
+        if (mobileMenuToggle && navLinks) {
+           mobileMenuToggle.addEventListener('click', () => {
+               const isActive = navLinks.classList.toggle('active');
+               mobileMenuToggle.classList.toggle('open'); 
+               mobileMenuToggle.setAttribute('aria-expanded', isActive);
+           });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuToggle.classList.remove('open');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+           revealElements.forEach(el => {
+               const windowHeight = window.innerHeight;
+               const elementTop = el.getBoundingClientRect().top;
+               const elementVisible = 50; 
+               
+               if (elementTop < windowHeight - elementVisible) {
+                   el.classList.add('active');
+               }
+           });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); 
+
+        function sanitizeForPrompt(text) {
+            if (typeof text !== 'string') return '';
+            return text.replace(/\\/g, '\\\\')
+                       .replace(/`/g, '\\`')
+                       .replace(/\$\{/g, '\\${');
+        }
+
+        // Common Gemini API call function
+        async function callGeminiAPI(prompt, responseAreaElem, loadingIndicatorElem, errorMessageElem, submitButtonElem) {
+            loadingIndicatorElem.style.display = 'block';
+            responseAreaElem.innerHTML = '<p>AI is thinking...</p>'; 
+            errorMessageElem.style.display = 'none';
+            if(submitButtonElem) submitButtonElem.disabled = true;
+
+            try {
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('Gemini API Error Response:', errorData); 
+                    const errorMessageDetail = errorData?.error?.message || 'An unknown API error occurred.';
+                    throw new Error(`API request failed with status ${response.status}: ${errorMessageDetail}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0 && 
+                    typeof result.candidates[0].content.parts[0].text === 'string' ) { 
+                    let htmlResponse = result.candidates[0].content.parts[0].text;
+                    htmlResponse = htmlResponse.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); 
+                    htmlResponse = htmlResponse.replace(/^\* (.*$)/gm, '<li>$1</li>'); 
+                    htmlResponse = htmlResponse.replace(/(<li>.*<\/li>)/gs, '<ul>$1</ul>'); 
+                    htmlResponse = htmlResponse.replace(/\n/g, '<br>'); 
+                    responseAreaElem.innerHTML = htmlResponse;
+                } else {
+                    console.error('Unexpected API response structure:', result);
+                    responseAreaElem.innerHTML = '<p>Sorry, I received an unexpected response from the AI. Please try again.</p>';
+                }
+
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                responseAreaElem.innerHTML = '<p>Sorry, I encountered an error. Please check the console and try again later.</p>';
+                errorMessageElem.textContent = `Error: ${error.message}`;
+                errorMessageElem.style.display = 'block';
+            } finally {
+                loadingIndicatorElem.style.display = 'none';
+                if(submitButtonElem) submitButtonElem.disabled = false;
+            }
+        }
+
+        // AI Service Recommender Functionality
+        const recommenderUserInput = document.getElementById('recommender-user-need');
+        const recommenderSubmitButton = document.getElementById('recommender-submit-button');
+        const recommenderResponseArea = document.getElementById('recommender-response-area');
+        const recommenderLoadingIndicator = document.getElementById('recommender-loading');
+        const recommenderErrorMessage = document.getElementById('recommender-error-message');
+
+        if (recommenderUserInput && recommenderSubmitButton && recommenderResponseArea && recommenderLoadingIndicator && recommenderErrorMessage) {
+            recommenderSubmitButton.addEventListener('click', handleServiceRecommendation);
+            recommenderUserInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter' && !event.shiftKey) { 
+                    event.preventDefault();
+                    handleServiceRecommendation();
+                }
+            });
+        }
+
+        function getLexRootServicesContext() {
+            let servicesContext = "Lex Root Agency offers the following services:\n";
+            const serviceCards = document.querySelectorAll('.service-card');
+            serviceCards.forEach(card => {
+                const serviceName = card.dataset.serviceName || card.querySelector('h3')?.textContent;
+                const serviceDescription = card.dataset.serviceDescription || card.querySelector('p.service-description')?.textContent;
+                if (serviceName && serviceDescription) {
+                    servicesContext += `\nService Name: ${sanitizeForPrompt(serviceName)}\nDescription: ${sanitizeForPrompt(serviceDescription)}\nKey Features:\n`;
+                    const features = card.querySelectorAll('.service-features li');
+                    features.forEach(feature => {
+                        const featureText = feature.textContent.trim();
+                        if (featureText) {
+                             servicesContext += `- ${sanitizeForPrompt(featureText)}\n`;
+                        }
+                    });
+                }
+            });
+            return servicesContext;
+        }
+
+        async function handleServiceRecommendation() {
+            const userNeed = recommenderUserInput.value.trim();
+            if (!userNeed) {
+                recommenderErrorMessage.textContent = 'Please describe your need or challenge.';
+                recommenderErrorMessage.style.display = 'block';
+                recommenderResponseArea.innerHTML = '<p>Your service recommendations will appear here...</p>';
+                return;
+            }
+
+            const servicesOffered = getLexRootServicesContext();
+            const sanitizedUserNeed = sanitizeForPrompt(userNeed);
+
+            const prompt = `You are an AI assistant for Lex Root Agency, a company specializing in legal content, compliance, and marketing.
+Your goal is to recommend the most relevant Lex Root services based on the user's stated need or challenge.
+
+Here are the services Lex Root Agency offers:
+--- START OF LEX ROOT SERVICES ---
+${servicesOffered}
+--- END OF LEX ROOT SERVICES ---
+
+User's stated need/challenge: "${sanitizedUserNeed}"
+
+Based on the user's need and the services Lex Root offers, please recommend one or two most relevant services.
+For each recommended service:
+1.  Clearly state the Service Name.
+2.  Briefly explain (1-2 sentences) *why* this service is a good fit for the user's specific need.
+3.  You can list a couple of key features from the service description that are particularly relevant if applicable.
+
+Format your response clearly. Use bold for service names.
+If the user's need is too vague or completely unrelated to legal, compliance, content, or marketing services, politely state that you need more specific information related to these areas to make a recommendation, or that their query seems outside the scope of Lex Root's services. Do not invent services.
+`;
+            callGeminiAPI(prompt, recommenderResponseArea, recommenderLoadingIndicator, recommenderErrorMessage, recommenderSubmitButton);
+        }
+
+
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded or failed to initialize. Retrying...');
+                setTimeout(() => {
+                     if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                     } else {
+                        console.error('Lucide icons failed to load after retry.');
+                     }
+                }, 500);
+            }
+        });
+   </script>
+</body>
+</html>

@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <title>About Lex Root Agency | Our Mission & Expertise</title>
+    <meta name="description" content="Learn about Lex Root Agency's mission to simplify legal complexity, our core values, and the expertise we bring to legal content and compliance. Features an AI assistant and mission statement generator." />
+    <meta name="keywords" content="about us, legal innovation, content mastery, global reach, legal expertise, tech-driven law, compliance solutions, AI legal assistant, mission statement generator" />
+    <meta name="author" content="Indrajeet K." />
+    
+    <meta property="og:title" content="About Lex Root Agency | Our Mission & Expertise" />
+    <meta property="og:description" content="Learn about Lex Root Agency's mission to simplify legal complexity, our core values, and the expertise we bring to legal content and compliance. Features an AI assistant and mission statement generator." />
+    <meta property="og:image" content="https://yourdomain.com/images/lexroot-about-og-image.jpg" /> 
+    <meta property="og:url" content="https://yourdomain.com/about.html" /> 
+    <meta property="og:type" content="website" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="About Lex Root Agency | Our Mission & Expertise" />
+    <meta name="twitter:description" content="Learn about Lex Root Agency's mission to simplify legal complexity, our core values, and the expertise we bring to legal content and compliance. Features an AI assistant and mission statement generator." />
+    <meta name="twitter:image" content="https://yourdomain.com/images/lexroot-about-twitter-image.jpg" /> 
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+    <style>
+        /* Global Resets and Base Styles (Consistent with other pages) */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --secondary: #5e60ce;
+            --accent: #00f5ff;
+            --accent-alt: #ff006e;
+            --text-light: #ffffff;
+            --text-muted: #b4b4b4;
+            --bg-dark: #030616;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --neon-glow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        html {
+            scroll-behavior: smooth;
+            cursor: none; 
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: none; 
+        }
+
+        /* Custom Cursor (Consistent with other pages) */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            transition: background-color 0.2s ease;
+        }
+
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.2);
+            border-color: var(--accent-alt);
+        }
+
+        /* Loading Screen (Consistent with other pages) */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation (Consistent with other pages) */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '™';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        /* Button styles (Consistent with other pages) */
+        .btn-primary, .cta-button { 
+            padding: 1rem 2.5rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; /* Center icon and text */
+            gap: 0.5rem; 
+            border: none; 
+            cursor: none; 
+        }
+
+        .btn-primary:hover, .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+        .btn-primary:disabled, .cta-button:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+        }
+        
+        /* Footer (Consistent with other pages) */
+        footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a { 
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        /* Mobile Menu Toggle (Consistent with other pages) */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px; 
+            z-index: 1001; 
+            background: transparent; 
+            border: none; 
+        }
+        .mobile-menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+            border-radius: 1px; 
+        }
+        
+        /* Responsive Styles (Consistent with other pages, with About page specifics merged) */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark); 
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
+                z-index: 999; 
+                gap: 2rem;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+            .nav-links a { 
+                font-size: 1.2rem;
+                padding: 0.5rem 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .about-page-hero h1 { 
+                 font-size: clamp(2.5rem, 8vw, 3.5rem); 
+            }
+            .about-page-hero p {
+                font-size: 1.1rem;
+            }
+            .about-page-hero { 
+                margin-top: 70px; 
+                min-height: 50vh; 
+                padding: 2rem 1rem;
+            }
+            .about-container { 
+                grid-template-columns: 1fr; 
+                gap: 3rem;
+            }
+            .about-visual { 
+                height: 350px; 
+            }
+            .about-highlights { 
+                grid-template-columns: 1fr; 
+            }
+            .section-title {
+                font-size: 2.2rem; 
+            }
+            .gemini-input-group, /* Updated class name */
+            .mission-generator-input-group { /* New class for mission generator */
+                flex-direction: column;
+            }
+            .gemini-input-group input,
+            .mission-generator-input-group input {
+                margin-bottom: 1rem;
+                width: 100%; 
+            }
+            .gemini-input-group button,
+            .mission-generator-input-group button {
+                width: 100%; 
+            }
+            .gemini-ai-chat-section,
+            .mission-generator-section { /* New class for mission generator */
+                padding: 3rem 1rem;
+            }
+            .gemini-ai-chat-container .section-title,
+            .mission-generator-container .section-title { /* New class for mission generator */
+                font-size: 2rem;
+            }
+        }
+
+        /* Scroll Animations (Consistent with other pages) */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); 
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar (Consistent with other pages) */
+        ::-webkit-scrollbar {
+            width: 8px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+
+        /* About Page Specific Styles */
+        .about-page-hero { 
+            min-height: 60vh; 
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            background: radial-gradient(circle at 30% 60%, rgba(0, 245, 255, 0.08) 0%, transparent 40%), 
+                        radial-gradient(circle at 70% 30%, rgba(94, 96, 206, 0.12) 0%, transparent 45%);
+            margin-top: 80px; 
+            padding: 3rem 1rem; 
+            text-align: center;
+            overflow: hidden; 
+        }
+
+        .about-page-hero-content {
+            max-width: 900px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .about-page-hero .hero-badge { 
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid rgba(0, 245, 255, 0.3);
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--accent);
+            margin-bottom: 1.5rem;
+            animation: fadeInDown 0.8s ease-out;
+            backdrop-filter: blur(5px); 
+        }
+
+
+        .about-page-hero h1 {
+            font-size: clamp(3rem, 7vw, 4.5rem); 
+            font-weight: 900;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: -2px;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            color: transparent; 
+            -webkit-text-fill-color: transparent;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+        .gradient-text { 
+             background: var(--gradient-3);
+            -webkit-background-clip: text;
+            color: transparent;
+            -webkit-text-fill-color: transparent;
+        }
+
+
+        .about-page-hero p {
+            font-size: 1.25rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto 2rem auto;
+            line-height: 1.7;
+            animation: fadeInUp 0.8s ease-out 0.4s backwards;
+        }
+        
+        .about-section-content { 
+            padding: 6rem 2rem; 
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-container { 
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .section-badge { 
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .section-title { 
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+            color: var(--text-light); 
+        }
+
+        .about-text p { 
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-highlights { 
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .highlight-item { 
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .highlight-item:hover { 
+            transform: translateY(-5px) scale(1.02); 
+            border-color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+
+        .highlight-icon { 
+            font-size: 2rem; 
+            margin-bottom: 1rem;
+            display: block;
+            color: var(--accent); 
+            line-height: 1; 
+        }
+         .highlight-item h4 { 
+            font-size: 1.1rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+         }
+         .highlight-item p { 
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+            margin-bottom: 0; 
+         }
+
+
+        .about-visual { 
+            position: relative;
+            height: 600px;
+            display: flex; 
+            align-items: center;
+            justify-content: center;
+        }
+
+        .about-image { 
+            width: 100%;
+            height: 100%;
+            background-image: url('https://placehold.co/600x600/0a0e27/00f5ff?text=Lex+Root+Innovation'); 
+            background-size: cover;
+            background-position: center;
+            border-radius: 30px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Gemini AI Common Styles (for chat and mission generator) */
+        .gemini-common-section { /* Renamed from gemini-ai-chat-section */
+            padding: 4rem 2rem;
+            background: rgba(255, 255, 255, 0.015); 
+            border-top: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-top: 4rem;
+        }
+        .gemini-common-container { /* Renamed from gemini-ai-chat-container */
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+        .gemini-common-container .section-title {
+            font-size: 2.5rem; 
+            margin-bottom: 1rem;
+        }
+        .gemini-common-container .section-badge { /* Style for badges in Gemini sections */
+             background: rgba(0, 245, 255, 0.1);
+             border-color: rgba(0, 245, 255, 0.3);
+             color: var(--accent);
+        }
+         .gemini-common-description { /* Renamed from gemini-ai-chat-description */
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            font-size: 1.1rem;
+         }
+        .gemini-input-group { /* Common class for input groups */
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            align-items: center; 
+        }
+        .gemini-input-group input[type="text"] { /* Common style for text inputs */
+            flex-grow: 1;
+            padding: 1rem 1.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: var(--text-light);
+            font-size: 1rem;
+            height: 50px; 
+        }
+        .gemini-input-group input[type="text"]:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--neon-glow);
+        }
+        .gemini-input-group button { /* Common style for buttons in these groups */
+            height: 50px; 
+            padding: 0 2.5rem; 
+        }
+        .gemini-response-area { /* Common class for response display */
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(10, 14, 39, 0.7); 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            min-height: 100px;
+            text-align: left;
+            color: var(--text-muted);
+            line-height: 1.7;
+            white-space: pre-wrap; 
+            font-size: 0.95rem; 
+        }
+        .gemini-loading-indicator { /* Common loading spinner */
+            display: none; 
+            margin: 1rem auto;
+            width: 30px; 
+            height: 30px;
+            border: 3px solid rgba(0, 245, 255, 0.2);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        .gemini-error-message { /* Common error message style */
+            color: var(--accent-alt);
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            display: none; 
+        }
+
+        /* Mission Generator Specific Styles (can inherit from common if needed) */
+        /* .mission-generator-section uses .gemini-common-section */
+        /* .mission-generator-container uses .gemini-common-container */
+        /* .mission-generator-input-group uses .gemini-input-group */
+        /* #mission-generator-keywords-input uses common input style */
+        /* #mission-generator-submit-button uses common button style */
+        /* #mission-generator-response-area uses .gemini-response-area */
+        /* #mission-generator-loading uses .gemini-loading-indicator */
+        /* #mission-generator-error-message uses .gemini-error-message */
+
+
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">LEX ROOT</div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo">LEX ROOT</a> 
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="about.html">About</a></li> 
+                <li><a href="index.html#services">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="articles.html">Articles</a></li> 
+                <li><a href="index.html#contact">Contact</a></li>
+            </ul>
+            <button class="mobile-menu-toggle" id="mobileMenu" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+    
+    <section class="about-page-hero">
+        <div class="about-page-hero-content">
+            <div class="hero-badge">Our Story</div>
+            <h1>Meet <span class="gradient-text">Lex Root Agency</span></h1>
+            <p>We are a dynamic team of legal innovators, content strategists, and tech enthusiasts dedicated to making complex legal information accessible and actionable for businesses worldwide.</p>
+        </div>
+    </section>
+
+    <section class="about-section-content">
+       <div class="about-container">
+           <div class="about-text reveal">
+               <span class="section-badge">Who We Are</span>
+               <h2 class="section-title">Legal Innovation, Content Mastery, Global Reach</h2>
+               <p>Lex Root is a next-generation legal content and compliance agency built for the digital era. Our mission is simple: to make law understandable, scalable, and actionable for businesses around the world. We blend legal expertise with technology, content strategy, and smart design to support startups, enterprises, and legal tech platforms.</p>
+               <p>From crafting high-quality legal articles to mapping complex compliance systems, our team works across borders, industries, and time zones to deliver clarity and confidence. We believe that understanding the law shouldn't be a barrier to innovation or growth, but a catalyst for it.</p>
+               <div class="about-highlights">
+                   <div class="highlight-item">
+                       <i data-lucide="graduation-cap" class="highlight-icon"></i>
+                       <h4>Legal Expertise</h4>
+                       <p>Trained in business and law, our team possesses deep subject matter knowledge.</p>
+                   </div>
+                   <div class="highlight-item">
+                       <i data-lucide="zap" class="highlight-icon"></i>
+                       <h4>Tech-Driven</h4>
+                       <p>Experts in Notion, AI tools & automation to deliver efficient solutions.</p>
+                   </div>
+                   <div class="highlight-item">
+                       <i data-lucide="globe" class="highlight-icon"></i>
+                       <h4>Cross-Border Ready</h4>
+                       <p>Content and compliance coverage across 15+ key jurisdictions.</p>
+                   </div>
+                   <div class="highlight-item">
+                       <i data-lucide="trending-up" class="highlight-icon"></i>
+                       <h4>ROI-Focused</h4>
+                       <p>We develop strategies with clear, measurable outcomes for your business.</p>
+                   </div>
+               </div>
+           </div>
+           <div class="about-visual reveal">
+               <div class="about-image" role="img" aria-label="Lex Root Agency team working collaboratively">
+                   </div>
+           </div>
+       </div>
+    </section>
+    
+    <section class="gemini-common-section reveal" id="aiChatSection">
+        <div class="gemini-common-container">
+            <span class="section-badge">Interactive Q&A</span>
+            <h2 class="section-title">✨ Ask Lex Root AI About Us</h2>
+            <p class="gemini-common-description">Have a question about our agency, mission, or expertise? Type it below and let our AI assistant provide you with an answer based on our story.</p>
+            <div class="gemini-input-group">
+                <input type="text" id="gemini-user-question" placeholder="e.g., What is Lex Root's mission?">
+                <button id="gemini-submit-question" class="btn-primary">
+                    <i data-lucide="send"></i> Ask AI
+                </button>
+            </div>
+            <div class="gemini-loading-indicator" id="gemini-chat-loading"></div>
+            <div id="gemini-ai-response-area" class="gemini-response-area" aria-live="polite">Your answer will appear here...</div>
+            <p id="gemini-chat-error-message" class="gemini-error-message" role="alert"></p>
+        </div>
+    </section>
+
+    <section class="gemini-common-section reveal" id="missionGeneratorSection">
+        <div class="gemini-common-container">
+            <span class="section-badge">Creative Spark</span>
+            <h2 class="section-title">✨ Craft Your Innovation Mission</h2>
+            <p class="gemini-common-description">Inspired by Lex Root? Enter a few keywords about your project or idea, and let our AI help you draft a mission statement with an innovative, tech-forward edge.</p>
+            <div class="gemini-input-group" id="mission-generator-input-group">
+                <input type="text" id="mission-generator-keywords-input" placeholder="e.g., sustainable tech, community, education">
+                <button id="mission-generator-submit-button" class="btn-primary">
+                    <i data-lucide="sparkles"></i> Generate Mission
+                </button>
+            </div>
+            <div class="gemini-loading-indicator" id="mission-generator-loading"></div>
+            <div id="mission-generator-response-area" class="gemini-response-area" aria-live="polite">Your generated mission statement will appear here...</div>
+            <p id="mission-generator-error-message" class="gemini-error-message" role="alert"></p>
+        </div>
+    </section>
+
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+               <a href="https://www.linkedin.com/company/lexroot" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/lexroot" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:hello@lexroot.com" aria-label="Email"><i data-lucide="mail"></i></a>
+            </div>
+            <p>&copy; <span id="currentYear"></span> Lex Root Agency. All Rights Reserved. Built with purpose.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Dynamically set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Loading Screen 
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader) {
+                    loader.classList.add('hidden');
+                }
+            }, 300); 
+        });
+
+        // Custom Cursor 
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            const KFS = 0.25; 
+
+            mouseX = window.innerWidth / 2; 
+            mouseY = window.innerHeight / 2;
+            followerX = mouseX;
+            followerY = mouseY;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursor() {
+                if (cursor && cursorFollower) { 
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor(); 
+
+            document.querySelectorAll('a, button, .highlight-item, input[type="text"], .mobile-menu-toggle').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorFollower.style.opacity = '0';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorFollower.style.opacity = '1';
+            });
+        }
+
+        // Navbar scroll effect 
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 50) { 
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }, false);
+        }
+
+        // Mobile menu 
+        const mobileMenuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+       
+        if (mobileMenuToggle && navLinks) {
+            mobileMenuToggle.addEventListener('click', () => {
+                const isActive = navLinks.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('open'); 
+                mobileMenuToggle.setAttribute('aria-expanded', isActive);
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuToggle.classList.remove('open');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal'); 
+        if (revealElements.length > 0) {
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                revealElements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const elementVisible = 50; 
+                    
+                    if (elementTop < windowHeight - elementVisible) {
+                        el.classList.add('active');
+                    }
+                });
+            };
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); 
+        }
+        
+        function sanitizeForPrompt(text) {
+            if (typeof text !== 'string') return '';
+            return text.replace(/\\/g, '\\\\')
+                       .replace(/`/g, '\\`')
+                       .replace(/\$\{/g, '\\${');
+        }
+
+        // Common Gemini API call function
+        async function callGeminiAPI(prompt, responseAreaElem, loadingIndicatorElem, errorMessageElem, submitButtonElem) {
+            loadingIndicatorElem.style.display = 'block';
+            responseAreaElem.textContent = 'AI is thinking...';
+            errorMessageElem.style.display = 'none';
+            if(submitButtonElem) submitButtonElem.disabled = true;
+
+            try {
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""; // Provided by Canvas environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('Gemini API Error Response:', errorData); 
+                    const errorMessageDetail = errorData?.error?.message || 'An unknown API error occurred.';
+                    throw new Error(`API request failed with status ${response.status}: ${errorMessageDetail}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0 && 
+                    typeof result.candidates[0].content.parts[0].text === 'string' ) { 
+                    responseAreaElem.textContent = result.candidates[0].content.parts[0].text;
+                } else {
+                    console.error('Unexpected API response structure:', result);
+                    responseAreaElem.textContent = 'Sorry, I received an unexpected response from the AI. Please try again.';
+                }
+
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                responseAreaElem.textContent = 'Sorry, I encountered an error. Please check the console and try again later.';
+                errorMessageElem.textContent = `Error: ${error.message}`;
+                errorMessageElem.style.display = 'block';
+            } finally {
+                loadingIndicatorElem.style.display = 'none';
+                if(submitButtonElem) submitButtonElem.disabled = false;
+            }
+        }
+
+
+        // Gemini AI Chat Functionality
+        const geminiChatSubmitButton = document.getElementById('gemini-submit-question');
+        const geminiChatUserInput = document.getElementById('gemini-user-question');
+        const geminiChatResponseArea = document.getElementById('gemini-ai-response-area');
+        const geminiChatLoadingIndicator = document.getElementById('gemini-chat-loading');
+        const geminiChatErrorMessage = document.getElementById('gemini-chat-error-message');
+
+        if (geminiChatSubmitButton && geminiChatUserInput && geminiChatResponseArea && geminiChatLoadingIndicator && geminiChatErrorMessage) {
+            geminiChatSubmitButton.addEventListener('click', handleGeminiChatQuery);
+            geminiChatUserInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault(); 
+                    handleGeminiChatQuery();
+                }
+            });
+        }
+        
+        async function handleGeminiChatQuery() {
+            const userQuestion = geminiChatUserInput.value.trim();
+            if (!userQuestion) {
+                geminiChatErrorMessage.textContent = 'Please enter a question.';
+                geminiChatErrorMessage.style.display = 'block';
+                geminiChatResponseArea.textContent = 'Your answer will appear here...';
+                return;
+            }
+
+            let pageContext = "";
+            const heroTitle = document.querySelector('.about-page-hero h1');
+            const heroP = document.querySelector('.about-page-hero p');
+            if (heroTitle) pageContext += "Page Title: " + sanitizeForPrompt(heroTitle.innerText) + "\\n";
+            if (heroP) pageContext += "Hero Intro: " + sanitizeForPrompt(heroP.innerText) + "\\n";
+
+            const aboutSectionTitle = document.querySelector('.about-text .section-title');
+            if (aboutSectionTitle) pageContext += "Section Title: " + sanitizeForPrompt(aboutSectionTitle.innerText) + "\\n";
+            const aboutTextElements = document.querySelectorAll('.about-text p');
+            aboutTextElements.forEach(p => {
+                pageContext += sanitizeForPrompt(p.textContent) + "\\n";
+            });
+            const aboutHighlights = document.querySelectorAll('.highlight-item');
+            pageContext += "Key Highlights:\\n";
+            aboutHighlights.forEach(h => {
+                const titleElement = h.querySelector('h4');
+                const paraElement = h.querySelector('p');
+                if (titleElement && paraElement) {
+                    const title = sanitizeForPrompt(titleElement.textContent);
+                    const para = sanitizeForPrompt(paraElement.textContent);
+                    pageContext += "- " + title + ": " + para + "\\n";
+                }
+            });
+            
+            const sanitizedUserQuestion = sanitizeForPrompt(userQuestion);
+            const prompt = `You are Lex Root AI, an assistant for the Lex Root Agency.
+            Based *only* on the following information about Lex Root Agency, answer the user's question concisely and professionally.
+            If the information to answer the question is not present in the provided text, clearly state that you don't have that specific detail. Do not invent information.
+
+            ---START OF AGENCY INFORMATION---
+            ${pageContext}
+            ---END OF AGENCY INFORMATION---
+            
+            User's question: "${sanitizedUserQuestion}"
+            Answer:`;
+
+            callGeminiAPI(prompt, geminiChatResponseArea, geminiChatLoadingIndicator, geminiChatErrorMessage, geminiChatSubmitButton);
+        }
+
+        // Mission Statement Generator Functionality
+        const missionKeywordsInput = document.getElementById('mission-generator-keywords-input');
+        const missionSubmitButton = document.getElementById('mission-generator-submit-button');
+        const missionResponseArea = document.getElementById('mission-generator-response-area');
+        const missionLoadingIndicator = document.getElementById('mission-generator-loading');
+        const missionErrorMessage = document.getElementById('mission-generator-error-message');
+
+        if (missionKeywordsInput && missionSubmitButton && missionResponseArea && missionLoadingIndicator && missionErrorMessage) {
+            missionSubmitButton.addEventListener('click', handleMissionGeneration);
+            missionKeywordsInput.addEventListener('keypress', function(event) {
+                if (event.key === 'Enter') {
+                    event.preventDefault();
+                    handleMissionGeneration();
+                }
+            });
+        }
+
+        async function handleMissionGeneration() {
+            const keywords = missionKeywordsInput.value.trim();
+            if (!keywords) {
+                missionErrorMessage.textContent = 'Please enter some keywords for your mission.';
+                missionErrorMessage.style.display = 'block';
+                missionResponseArea.textContent = 'Your generated mission statement will appear here...';
+                return;
+            }
+
+            const sanitizedKeywords = sanitizeForPrompt(keywords);
+            const prompt = `You are an AI assistant helping to craft an inspiring mission statement.
+            The user wants a mission statement for their project/company, inspired by the innovative, tech-forward, and clarity-focused approach of an agency like Lex Root.
+            Lex Root's values include: legal innovation, content mastery, global reach, tech-driven solutions, ROI-focus, making complex information accessible and actionable.
+
+            Based on the user's keywords: "${sanitizedKeywords}"
+
+            Generate a concise and impactful mission statement (1-2 sentences). It should sound professional, ambitious, and modern.
+            Mission Statement:`;
+            
+            callGeminiAPI(prompt, missionResponseArea, missionLoadingIndicator, missionErrorMessage, missionSubmitButton);
+        }
+
+
+        // Initialize Lucide icons after the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded or failed to initialize.');
+            }
+        });
+    </script>
+</body>
+</html>

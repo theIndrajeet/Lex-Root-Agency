@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Lex Root Agency - Next-Gen Legal Solutions</title>
-    <!-- Lucide Icons -->
+    <title>Lex Root Agency - AI-Powered Legal Insights & Compliance Solutions</title>
+    <meta name="description" content="Lex Root Agency: Expert compliance content, regulatory research, and legal marketing, featuring AI-powered legal trend insights. We simplify complexity for modern businesses worldwide.">
+    <meta name="keywords" content="Lex Root Agency, legal solutions, compliance content, regulatory research, legal marketing, legal tech, AI legal, legal trends, AI compliance">
     <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         * {
@@ -52,6 +53,7 @@
             transform: translate(-50%, -50%);
             will-change: transform;
             mix-blend-mode: difference;
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
         }
 
         .cursor-follower {
@@ -64,6 +66,7 @@
             z-index: 10000;
             transform: translate(-50%, -50%);
             will-change: transform;
+            transition: background-color 0.2s ease;
         }
 
         .cursor.hover {
@@ -71,7 +74,6 @@
             height: 40px;
             background: rgba(0, 245, 255, 0.2);
             border-color: var(--accent-alt);
-            transition: width 0.2s ease, height 0.2s ease;
         }
 
         /* Loading Screen */
@@ -170,7 +172,8 @@
             letter-spacing: 0.5px;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links a.active-link { 
             color: var(--accent);
         }
 
@@ -186,9 +189,59 @@
             box-shadow: var(--neon-glow);
         }
 
-        .nav-links a:hover::before {
+        .nav-links a:hover::before,
+        .nav-links a.active-link::before {
             width: 100%;
         }
+        
+        /* Buttons (Primary and Secondary) */
+        .btn-primary, .btn-secondary {
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            border: none; /* Ensure no default border for buttons */
+        }
+
+        .btn-primary {
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+         .btn-primary:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-light);
+            border: 2px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.3);
+        }
+
 
         /* Hero Section */
         .hero {
@@ -199,13 +252,16 @@
             position: relative;
             background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.2) 0%, transparent 50%),
                         radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
+            padding-top: 80px; 
         }
 
         .particles {
             position: absolute;
             width: 100%;
             height: 100%;
+            top:0; left:0; 
             overflow: hidden;
+            z-index: 0; 
         }
 
         .particle {
@@ -249,7 +305,7 @@
         }
 
         .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(3rem, 7vw, 5.5rem); 
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: 1.5rem;
@@ -271,11 +327,14 @@
         }
 
         .hero p {
-            font-size: 1.4rem;
+            font-size: 1.3rem; 
             color: var(--text-muted);
             margin-bottom: 3rem;
             animation: fadeInUp 0.8s ease-out 0.4s backwards;
             font-weight: 300;
+            max-width: 700px; 
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .hero-buttons {
@@ -286,42 +345,6 @@
             animation: fadeInUp 0.8s ease-out 0.6s backwards;
         }
 
-        .btn-primary {
-            padding: 1rem 2.5rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
-        }
-
-        .btn-secondary {
-            padding: 1rem 2.5rem;
-            background: transparent;
-            color: var(--text-light);
-            text-decoration: none;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-
-        .btn-secondary:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.3);
-        }
 
         @keyframes fadeInUp {
             from {
@@ -350,39 +373,128 @@
             position: absolute;
             border-radius: 50%;
             background: var(--gradient-1);
-            opacity: 0.1;
-            filter: blur(40px);
+            opacity: 0.08; 
+            filter: blur(50px); 
             animation: float 15s infinite ease-in-out;
+            z-index: 0;
         }
 
         .floating-element:nth-child(1) {
-            width: 300px;
-            height: 300px;
+            width: 350px; 
+            height: 350px;
             top: 10%;
-            left: -150px;
+            left: -180px; 
             animation-delay: 0s;
         }
 
         .floating-element:nth-child(2) {
-            width: 200px;
-            height: 200px;
+            width: 250px; 
+            height: 250px;
             top: 60%;
-            right: -100px;
+            right: -120px; 
             animation-delay: 5s;
             background: var(--gradient-2);
         }
 
         @keyframes float {
             0%, 100% {
-                transform: translate(0, 0) rotate(0deg);
+                transform: translate(0, 0) rotate(0deg) scale(1);
             }
             33% {
-                transform: translate(30px, -30px) rotate(120deg);
+                transform: translate(30px, -30px) rotate(120deg) scale(1.1);
             }
             66% {
-                transform: translate(-20px, 20px) rotate(240deg);
+                transform: translate(-20px, 20px) rotate(240deg) scale(0.9);
             }
         }
+
+        /* General Section Styling */
+        .section {
+            padding: 6rem 2rem; 
+            position: relative;
+            overflow: hidden;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+         .section-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(94, 96, 206, 0.1);
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .section-title {
+            font-size: 2.8rem; 
+            font-weight: 900;
+            margin-bottom: 1rem; 
+            line-height: 1.2;
+            letter-spacing: -1px;
+            color: var(--text-light);
+        }
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto 2.5rem auto; 
+            line-height: 1.7;
+        }
+
+        /* AI Trend Spotlight Section */
+        #ai-trend-spotlight {
+            background: rgba(var(--accent-rgb, 0, 245, 255), 0.05); /* Using accent color with low opacity */
+            border-top: 1px solid rgba(var(--accent-rgb, 0, 245, 255), 0.2);
+            border-bottom: 1px solid rgba(var(--accent-rgb, 0, 245, 255), 0.2);
+        }
+        .ai-trend-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 3rem 1rem; /* Internal padding for the spotlight box */
+            background: rgba(10, 14, 39, 0.7); /* Slightly darker inner box */
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        #ai-trend-spotlight .section-badge { /* Specific badge for AI trend */
+             background: rgba(var(--accent-rgb, 0, 245, 255), 0.15);
+             border-color: rgba(var(--accent-rgb, 0, 245, 255), 0.4);
+             color: var(--accent);
+        }
+        #ai-trend-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+        #ai-trend-summary {
+            font-size: 1rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            min-height: 3em; /* Reserve space while loading */
+        }
+        .ai-trend-loading-placeholder {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 5em; /* Match approx height of content */
+        }
+        .ai-trend-spinner {
+            width: 24px;
+            height: 24px;
+            border: 3px solid rgba(var(--accent-rgb, 0, 245, 255), 0.3);
+            border-left-color: var(--accent);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
 
         /* Stats Section */
         .stats {
@@ -397,8 +509,8 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); 
+            gap: 2rem; 
             text-align: center;
         }
 
@@ -407,7 +519,7 @@
         }
 
         .stat-number {
-            font-size: 3rem;
+            font-size: 2.8rem; 
             font-weight: 900;
             background: var(--gradient-3);
             -webkit-background-clip: text;
@@ -418,440 +530,82 @@
 
         .stat-label {
             color: var(--text-muted);
-            font-size: 1.1rem;
+            font-size: 1rem; 
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        /* About Section */
-        #about {
-            padding: 8rem 2rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .about-container {
-            max-width: 1200px;
+        /* About Section (Condensed) */
+        #about .about-container-condensed {
+            max-width: 900px; 
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
+            text-align: center; 
         }
+        #about .about-visual { display: none; } 
 
-        .section-badge {
-            display: inline-block;
-            padding: 0.4rem 1rem;
-            background: rgba(94, 96, 206, 0.1);
-            border: 1px solid rgba(94, 96, 206, 0.3);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: var(--secondary);
-            margin-bottom: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
 
-        .section-title {
-            font-size: 3rem;
-            font-weight: 900;
-            margin-bottom: 2rem;
-            line-height: 1.2;
-            letter-spacing: -1px;
-        }
-
-        .about-text p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-            line-height: 1.8;
-        }
-
-        .about-highlights {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .highlight-item {
-            padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-        }
-
-        .highlight-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
-        }
-
-        .highlight-icon {
-            font-size: 2rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .about-visual {
-            position: relative;
-            height: 600px;
-        }
-
-        .about-image {
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-1);
-            border-radius: 30px;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: repeating-linear-gradient(
-                45deg,
-                transparent,
-                transparent 10px,
-                rgba(255, 255, 255, 0.05) 10px,
-                rgba(255, 255, 255, 0.05) 20px
-            );
-            animation: slide 20s linear infinite;
-        }
-
-        @keyframes slide {
-            0% { transform: translate(0, 0); }
-            100% { transform: translate(50px, 50px); }
-        }
-
-        /* Services Section */
+        /* Services Section (Condensed) */
         #services {
-            padding: 8rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            position: relative;
+            background: rgba(255, 255, 255, 0.02); 
         }
-
-        .services-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .services-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            padding: 3rem 2rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: var(--gradient-3);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: -1;
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px) scale(1.02);
-            border-color: var(--accent);
-            box-shadow: 0 20px 40px rgba(0, 245, 255, 0.3);
-        }
-
-        .service-card:hover::before {
-            opacity: 0.05;
-        }
-
-        .service-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-3);
-            border-radius: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            margin-bottom: 2rem;
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            font-weight: 700;
-        }
-
-        .service-card p {
-            color: var(--text-muted);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .service-features {
-            list-style: none;
-        }
-
-        .service-features li {
-            padding: 0.8rem 0;
-            color: var(--text-muted);
-            position: relative;
-            padding-left: 2rem;
-            transition: color 0.3s ease;
-        }
-
-        .service-features li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: var(--accent);
-            font-weight: bold;
-            transition: transform 0.3s ease;
-        }
-
-        .service-card:hover .service-features li {
-            color: var(--text-light);
-        }
-
-        .service-card:hover .service-features li::before {
-            transform: translateX(5px);
-        }
-
-        /* Portfolio Section */
-        #portfolio {
-            padding: 8rem 2rem;
-            position: relative;
-        }
-
-        .portfolio-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .portfolio-header {
-            text-align: center;
-            margin-bottom: 5rem;
-        }
-
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
-        }
-
-        .portfolio-item {
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .portfolio-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        .portfolio-image {
-            height: 300px;
-            background: var(--gradient-2);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .portfolio-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .portfolio-item:hover .portfolio-overlay {
-            opacity: 1;
-        }
-
-        .portfolio-content {
-            padding: 2rem;
-        }
-
-        .portfolio-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .portfolio-content p {
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-        }
-
-        .portfolio-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-        }
-
-        .tag {
-            padding: 0.4rem 1rem;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
-            border-radius: 50px;
-            font-size: 0.8rem;
-            color: var(--accent);
-        }
-
-        /* Contact Section */
-        #contact {
-            padding: 8rem 2rem;
-            background: rgba(255, 255, 255, 0.02);
-            position: relative;
-        }
-
-        .contact-container {
-            max-width: 800px;
+        #services .services-container-condensed {
+            max-width: 900px;
             margin: 0 auto;
             text-align: center;
         }
-
-        .contact-header {
-            margin-bottom: 4rem;
-        }
-
-        .contact-info {
-            margin-bottom: 3rem;
-        }
-
-        .contact-info p {
-            font-size: 1.2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-        }
-
-        .contact-form {
+        .service-teaser-grid {
             display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
+            margin-bottom: 2.5rem;
         }
-
-        .form-group {
-            position: relative;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
+        .service-teaser-item {
             padding: 1.5rem;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            color: var(--text-light);
-            font-size: 1rem;
-            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.05);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
-
-        .form-group input:focus,
-        .form-group textarea:focus {
-            outline: none;
-            border-color: var(--accent);
-            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        .service-teaser-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
         }
-
-        .form-group label {
-            position: absolute;
-            top: 1.5rem;
-            left: 1.5rem;
-            color: var(--text-muted);
-            transition: all 0.3s ease;
-            pointer-events: none;
-        }
-
-        .form-group input:focus + label,
-        .form-group input:not(:placeholder-shown) + label,
-        .form-group textarea:focus + label,
-        .form-group textarea:not(:placeholder-shown) + label {
-            top: -0.5rem;
-            left: 1rem;
-            font-size: 0.8rem;
-            background: var(--bg-dark);
-            padding: 0 0.5rem;
+        .service-teaser-item i {
             color: var(--accent);
+            margin-bottom: 0.75rem;
+            display: block; 
+            font-size: 1.8rem; 
+        }
+        .service-teaser-item h4 {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+         .service-teaser-item p {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            line-height: 1.6;
         }
 
-        .submit-btn {
-            padding: 1.5rem 3rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-            justify-self: center;
+
+        /* Portfolio Section (Teaser) */
+        #portfolio .portfolio-container-condensed {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        .submit-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.4);
+
+        /* Contact Section (Condensed) */
+        #contact {
+            background: rgba(10, 14, 39, 0.7); 
+        }
+        #contact .contact-container-condensed {
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
         }
 
-        .submit-btn::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            transform: translate(-50%, -50%);
-            transition: width 0.6s, height 0.6s;
-        }
-
-        .submit-btn:active::before {
-            width: 300px;
-            height: 300px;
-        }
 
         /* Footer */
         footer {
@@ -884,8 +638,11 @@
             text-decoration: none;
             color: var(--text-muted);
             transition: all 0.3s ease;
-            font-size: 1.2rem;
         }
+        .social-links a i { 
+            width: 24px; height: 24px;
+        }
+
 
         .social-links a:hover {
             transform: translateY(-5px);
@@ -901,17 +658,26 @@
             gap: 4px;
             cursor: pointer;
             padding: 10px;
+            z-index: 1001;
+            background: transparent;
+            border: none;
         }
+        .mobile-menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
 
         .mobile-menu-toggle span {
             width: 25px;
             height: 2px;
             background: var(--text-light);
             transition: all 0.3s ease;
+            border-radius: 1px;
         }
 
         /* Responsive */
         @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
             .nav-links {
                 position: fixed;
                 top: 0;
@@ -921,36 +687,45 @@
                 background: var(--bg-dark);
                 flex-direction: column;
                 justify-content: center;
-                transition: right 0.3s ease;
+                align-items: center;
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 999;
             }
 
             .nav-links.active {
                 right: 0;
             }
+            .nav-links a { font-size: 1.2rem; padding: 1rem 0; }
+
 
             .mobile-menu-toggle {
                 display: flex;
             }
 
-            .hero h1 {
-                font-size: 3rem;
-            }
+            .hero h1 { font-size: clamp(2.5rem, 10vw, 4rem); } 
+            .hero p { font-size: 1.1rem; }
+            
+            .section { padding: 4rem 1rem; } 
+            .section-title { font-size: 2.2rem; }
+            .section-subtitle { font-size: 1rem; }
 
-            .about-container,
-            .portfolio-grid {
-                grid-template-columns: 1fr;
-            }
+            .ai-trend-container { padding: 2rem 1rem; }
+            #ai-trend-title { font-size: 1.5rem; }
+            #ai-trend-summary { font-size: 0.95rem; }
 
-            .stats-container {
-                grid-template-columns: repeat(2, 1fr);
-            }
+
+            .stats-container { grid-template-columns: repeat(2, 1fr); gap: 1.5rem; }
+            .stat-number { font-size: 2.2rem; }
+            .stat-label { font-size: 0.9rem; }
+
+            .service-teaser-grid { grid-template-columns: 1fr; }
         }
 
         /* Animations for scroll */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
-            transition: all 0.8s ease;
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
         .reveal.active {
@@ -960,7 +735,7 @@
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 10px;
+            width: 8px;
         }
 
         ::-webkit-scrollbar-track {
@@ -969,7 +744,7 @@
 
         ::-webkit-scrollbar-thumb {
             background: var(--accent);
-            border-radius: 5px;
+            border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
@@ -978,36 +753,28 @@
     </style>
 </head>
 <body>
-    <!-- Loading Screen -->
     <div class="loader" id="loader">
         <div class="loader-text">LEX ROOT</div>
     </div>
 
-    <!-- Custom Cursor -->
     <div class="cursor" id="cursor"></div>
     <div class="cursor-follower" id="cursor-follower"></div>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <a href="#home" class="logo">LEX ROOT</a>
-            <ul class="nav-links" id="navLinks">
+            <a href="#home" class="logo">LEX ROOT</a> <ul class="nav-links" id="navLinks">
                 <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#services">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="about.html">About</a></li> <li><a href="services.html">Services</a></li> <li><a href="portfolio.html">Portfolio</a></li>
                 <li><a href="articles.html">Articles</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-            <div class="mobile-menu-toggle" id="mobileMenu">
+                <li><a href="contact.html">Contact</a></li> </ul>
+            <button class="mobile-menu-toggle" id="mobileMenu" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="particles" id="particles"></div>
         <div class="floating-element"></div>
@@ -1017,17 +784,33 @@
             <h1>
                 Simplifying <span class="gradient-text">Compliance</span><br> for Modern Businesses
            </h1>
-           <p>Compliance content, regulatory research, and legal marketing—crafted for scale, precision, and global impact.</p>
+           <p>Compliance content, regulatory research, and legal marketing—crafted for scale, precision, and global impact. We bridge law and innovation.</p>
            <div class="hero-buttons">
-               <a href="#contact" class="btn-primary">
-                   📅 Start Your Project
+               <a href="contact.html" class="btn-primary"> 
+                   <i data-lucide="send"></i> Start Your Project
                </a>
-               <a href="#portfolio" class="btn-secondary">View Case Studies</a>
+               <a href="services.html" class="btn-secondary">
+                    <i data-lucide="briefcase"></i> Explore Services
+                </a>
            </div>
        </div>
    </section>
 
-   <!-- Stats Section -->
+    <section id="ai-trend-spotlight" class="section reveal">
+        <div class="ai-trend-container">
+            <span class="section-badge">Stay Informed</span>
+            <h3 id="ai-trend-title">✨ AI Legal Trend Spotlight</h3>
+            <p id="ai-trend-summary">Loading latest legal trend...</p>
+            <div id="ai-trend-loading-placeholder" class="ai-trend-loading-placeholder">
+                <div class="ai-trend-spinner"></div>
+            </div>
+            <!-- <button id="refresh-trend-btn" class="btn-secondary" style="margin-top: 1.5rem; padding: 0.6rem 1.2rem; font-size: 0.9rem;">
+                <i data-lucide="refresh-cw" style="width:16px; height:16px;"></i> Refresh Trend
+            </button> -->
+        </div>
+    </section>
+
+
    <section class="stats">
        <div class="stats-container">
            <div class="stat-item reveal">
@@ -1043,246 +826,207 @@
                <span class="stat-label">Client Satisfaction</span>
            </div>
            <div class="stat-item reveal">
-               <span class="stat-number">24hr</span>
-               <span class="stat-label">Avg Response Time</span>
+               <span class="stat-number">1000+</span>
+               <span class="stat-label">Hours of Research</span>
            </div>
        </div>
    </section>
 
-   <!-- About Section -->
-   <section id="about">
-       <div class="about-container">
-           <div class="about-text reveal">
-           <span class="section-badge">About Us</span>
-           <h2 class="section-title">Legal Innovation, Content Mastery, Global Reach</h2>
-           <p>Lex Root is a next-generation legal content and compliance agency built for the digital era. Our mission is simple: to make law understandable, scalable, and actionable for businesses around the world. We blend legal expertise with technology, content strategy, and smart design to support startups, enterprises, and legal tech platforms.</p>
-           <p>From crafting high-quality legal articles to mapping complex compliance systems, our team works across borders, industries, and time zones to deliver clarity and confidence.</p>
-           <div class="about-highlights">
-               <div class="highlight-item">
-                   <span class="highlight-icon">🎓</span>
-                   <h4>Legal Expertise</h4>
-                   <p>Trained in business and law</p>
-               </div>
-               <div class="highlight-item">
-                   <span class="highlight-icon">⚡</span>
-                   <h4>Tech-Driven</h4>
-                   <p>Experts in Notion, AI tools & automation</p>
-               </div>
-               <div class="highlight-item">
-                   <span class="highlight-icon">🌍</span>
-                   <h4>Cross-Border Ready</h4>
-                   <p>Coverage across 15+ jurisdictions</p>
-               </div>
-               <div class="highlight-item">
-                   <span class="highlight-icon">📈</span>
-                   <h4>ROI-Focused</h4>
-                   <p>Strategy with measurable outcomes</p>
-               </div>
+   <section id="about" class="section">
+       <div class="about-container-condensed">
+           <div class="section-header reveal">
+               <span class="section-badge">Who We Are</span>
+               <h2 class="section-title">Innovation at the Core of Law</h2>
+               <p class="section-subtitle">Lex Root is where legal expertise meets cutting-edge technology and content mastery. We're dedicated to making complex legal landscapes accessible and actionable for businesses globally.</p>
            </div>
-           </div>
-           <div class="about-visual reveal">
-               <div class="about-image"></div>
-           </div>
+           <a href="about.html" class="btn-primary reveal">
+                <i data-lucide="users"></i> Learn More About Us
+            </a>
        </div>
    </section>
 
-   <!-- Services Section -->
-   <section id="services">
-       <div class="services-container">
-           <div class="services-header reveal">
-               <span class="section-badge">Services</span>
-           <h2 class="section-title">Solutions Tailored for Law + Growth</h2>
+   <section id="services" class="section">
+       <div class="services-container-condensed">
+           <div class="section-header reveal">
+               <span class="section-badge">Our Expertise</span>
+               <h2 class="section-title">Solutions Tailored for Growth</h2>
+               <p class="section-subtitle">From in-depth compliance research to compelling legal content and strategic marketing, we provide comprehensive solutions designed for impact.</p>
            </div>
-           <div class="services-grid">
-               <div class="service-card reveal">
-                   <div class="service-icon">
-                       📊
-                   </div>
-                   <h3>Compliance Research</h3>
-                   <p>Understand regulations before they become roadblocks.</p>
-                   <ul class="service-features">
-                       <li>Regulatory summaries across 20+ countries</li>
-                       <li>Market-entry playbooks</li>
-                       <li>Licensing requirement breakdowns</li>
-                       <li>Risk-focused reporting & mapping</li>
-                   </ul>
-               </div>
-               <div class="service-card reveal">
-                   <div class="service-icon">
-                       ✍️
-                   </div>
-                   <h3>Legal Content Strategy</h3>
-                   <p>Turn complexity into clarity with smart legal storytelling.</p>
-                   <ul class="service-features">
-                       <li>SEO legal blogs & evergreen explainers</li>
-                       <li>Case studies, whitepapers, and reports</li>
-                       <li>Client education content</li>
-                       <li>Regulatory landing pages</li>
-                   </ul>
-               </div>
-               <div class="service-card reveal">
-                   <div class="service-icon">
-                       🚀
-                   </div>
-                   <h3>Legal Marketing & Positioning</h3>
-                   <p>We help law-forward brands stand out and scale.</p>
-                   <ul class="service-features">
-                       <li>Social media ghostwriting</li>
-                       <li>Content calendars</li>
-                       <li>Thought leadership strategy</li>
-                       <li>Website copy & compliance-safe funnels</li>
-                   </ul>
-               </div>
+           <div class="service-teaser-grid reveal">
+                <div class="service-teaser-item">
+                    <i data-lucide="bar-chart-big"></i>
+                    <h4>Compliance Research</h4>
+                    <p>Navigate global regulations with confidence through our expert analysis.</p>
+                </div>
+                <div class="service-teaser-item">
+                    <i data-lucide="pen-tool"></i>
+                    <h4>Legal Content Strategy</h4>
+                    <p>Transform complex legal topics into clear, engaging narratives.</p>
+                </div>
+                <div class="service-teaser-item">
+                    <i data-lucide="rocket"></i>
+                    <h4>Legal Marketing</h4>
+                    <p>Elevate your brand's authority and reach in the legal space.</p>
+                </div>
            </div>
+           <a href="services.html" class="btn-primary reveal">
+                <i data-lucide="layout-grid"></i> Explore All Services
+            </a>
        </div>
    </section>
 
-   <!-- Portfolio Section -->
-   <section id="portfolio">
-       <div class="portfolio-container">
-           <div class="portfolio-header reveal">
-               <span class="section-badge">Portfolio</span>
+   <section id="portfolio" class="section">
+       <div class="portfolio-container-condensed">
+           <div class="section-header reveal">
+               <span class="section-badge">Our Work</span>
                <h2 class="section-title">Success Stories That Speak Volumes</h2>
+               <p class="section-subtitle">Discover how we've helped businesses like yours achieve clarity, compliance, and growth through our innovative legal solutions.</p>
            </div>
-           <div class="portfolio-grid" style="justify-content: center;">
-               <a href="portfolio.html" class="btn-primary">View All Case Studies</a>
-           </div>
+           <a href="portfolio.html" class="btn-primary reveal">
+                <i data-lucide="image"></i> View Our Portfolio
+            </a>
        </div>
    </section>
 
-   <!-- Contact Section -->
-   <section id="contact">
-       <div class="contact-container">
-           <div class="contact-header reveal">
-               <span class="section-badge">Partner With Lex Root</span>
-               <h2 class="section-title">Partner With Lex Root</h2>
+   <section id="contact" class="section">
+       <div class="contact-container-condensed">
+           <div class="section-header reveal">
+               <span class="section-badge">Partner With Us</span>
+               <h2 class="section-title">Ready to Innovate Together?</h2>
+               <p class="section-subtitle">Let’s discuss your challenges and how Lex Root can tailor solutions to drive your success. Reach out to start the conversation.</p>
            </div>
-           <div class="contact-info">
-               <p>Let’s talk strategy, compliance, and content that works. Whether you’re building your first legal knowledge hub or scaling across markets, we’ve got your back.</p>
-           </div>
-           <form class="contact-form" onsubmit="handleSubmit(event)">
-               <div class="form-group">
-                   <input type="text" id="name" placeholder=" " required>
-                   <label for="name">Your Name</label>
-               </div>
-               <div class="form-group">
-                   <input type="email" id="email" placeholder=" " required>
-                   <label for="email">Email Address</label>
-               </div>
-               <div class="form-group">
-                   <textarea id="message" rows="5" placeholder=" " required></textarea>
-                   <label for="message">Tell me about your project</label>
-               </div>
-               <button type="submit" class="submit-btn">Send Message</button>
-           </form>
+           <a href="contact.html" class="btn-primary reveal">
+                <i data-lucide="mail"></i> Get In Touch
+            </a>
        </div>
    </section>
 
-   <!-- Footer -->
    <footer>
        <div class="footer-content">
            <div class="social-links">
-               <a href="#" aria-label="LinkedIn">💼</a>
-               <a href="#" aria-label="Twitter">🐦</a>
-               <a href="mailto:theindrajeetk@gmail.com" aria-label="Email">✉️</a>
+               <a href="https://linkedin.com/company/lexroot" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/lexroot" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:hello@lexroot.com" aria-label="Email"><i data-lucide="mail"></i></a>
            </div>
-           <p>&copy; 2024 Lex Root Agency. Built with purpose.</p>
+           <p>&copy; <span id="currentYear"></span> Lex Root Agency. Built with purpose.</p>
        </div>
    </footer>
 
    <script>
+        // Dynamically set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
        // Loading Screen
        window.addEventListener('load', () => {
            setTimeout(() => {
-               document.getElementById('loader').classList.add('hidden');
-           }, 1000);
+               const loader = document.getElementById('loader');
+               if(loader) loader.classList.add('hidden');
+           }, 300); 
        });
 
-        // Custom Cursor - Ultra Smooth Animation
+        // Custom Cursor
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursor-follower');
-        let mouseX = 0;
-        let mouseY = 0;
-        let followerX = 0;
-        let followerY = 0;
+        if (cursor && cursorFollower) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            const KFS = 0.25; 
 
-        // Update mouse position
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
+            mouseX = window.innerWidth / 2; 
+            mouseY = window.innerHeight / 2;
+            followerX = mouseX;
+            followerY = mouseY;
 
-        // Initialize follower position
-        followerX = mouseX;
-        followerY = mouseY;
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            function animateCursor() {
+                if (cursor && cursorFollower) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
 
-        // Smooth animation using requestAnimationFrame
-        function animateCursor() {
-            // Main cursor - instant movement
-            cursor.style.left = mouseX + 'px';
-            cursor.style.top = mouseY + 'px';
-            
-            // Follower cursor - ultra smooth trailing effect
-            const dx = mouseX - followerX;
-            const dy = mouseY - followerY;
-            
-            // Increased easing for smoother movement
-            followerX += dx * 0.25;
-            followerY += dy * 0.25;
-            
-            cursorFollower.style.left = followerX + 'px';
-            cursorFollower.style.top = followerY + 'px';
-            
-            requestAnimationFrame(animateCursor);
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if(cursor) cursor.style.opacity = '0';
+                if(cursorFollower) cursorFollower.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', () => {
+                if(cursor) cursor.style.opacity = '1';
+                if(cursorFollower) cursorFollower.style.opacity = '1';
+            });
         }
-        animateCursor();
-
-        // Hover effects
-        document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
-
-        // Hide cursor when leaving window
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            cursorFollower.style.opacity = '0';
-        });
-
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '1';
-            cursorFollower.style.opacity = '1';
-        });
 
 
        // Navbar scroll effect
        const navbar = document.getElementById('navbar');
-       window.addEventListener('scroll', () => {
-           if (window.scrollY > 100) {
-               navbar.classList.add('scrolled');
-           } else {
-               navbar.classList.remove('scrolled');
-           }
-       });
+       if (navbar) {
+           window.addEventListener('scroll', () => {
+               if (window.scrollY > 50) { 
+                   navbar.classList.add('scrolled');
+               } else {
+                   navbar.classList.remove('scrolled');
+               }
+           });
+       }
+
 
        // Mobile menu
-       const mobileMenu = document.getElementById('mobileMenu');
-       const navLinks = document.getElementById('navLinks');
+       const mobileMenuToggle = document.getElementById('mobileMenu');
+       const navLinksList = document.getElementById('navLinks'); 
        
-       mobileMenu.addEventListener('click', () => {
-           navLinks.classList.toggle('active');
-       });
-
-       // Particles
-       const particlesContainer = document.getElementById('particles');
-       for (let i = 0; i < 50; i++) {
-           const particle = document.createElement('div');
-           particle.className = 'particle';
-           particle.style.left = Math.random() * 100 + '%';
-           particle.style.animationDelay = Math.random() * 20 + 's';
-           particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-           particlesContainer.appendChild(particle);
+       if (mobileMenuToggle && navLinksList) {
+           mobileMenuToggle.addEventListener('click', () => {
+               const isActive = navLinksList.classList.toggle('active');
+               mobileMenuToggle.classList.toggle('open');
+               mobileMenuToggle.setAttribute('aria-expanded', isActive);
+           });
+            navLinksList.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinksList.classList.contains('active')) {
+                        if (link.pathname !== window.location.pathname || !link.hash || link.hash === "#home") {
+                            navLinksList.classList.remove('active');
+                            mobileMenuToggle.classList.remove('open');
+                            mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        } else { 
+                             navLinksList.classList.remove('active');
+                             mobileMenuToggle.classList.remove('open');
+                             mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
        }
+
+
+       // Particles 
+       const particlesContainer = document.getElementById('particles');
+       if (particlesContainer) {
+           for (let i = 0; i < 30; i++) { 
+               const particle = document.createElement('div');
+               particle.className = 'particle';
+               particle.style.left = Math.random() * 100 + '%';
+               particle.style.animationDelay = (Math.random() * 10) + 's'; 
+               particle.style.animationDuration = (Math.random() * 15 + 10) + 's'; 
+               particlesContainer.appendChild(particle);
+           }
+       }
+
 
        // Reveal on scroll
        const revealElements = document.querySelectorAll('.reveal');
@@ -1290,28 +1034,104 @@
            revealElements.forEach(el => {
                const windowHeight = window.innerHeight;
                const elementTop = el.getBoundingClientRect().top;
-               const elementVisible = 150;
+               const elementVisible = 50; 
                
                if (elementTop < windowHeight - elementVisible) {
                    el.classList.add('active');
                }
            });
        };
-
        window.addEventListener('scroll', revealOnScroll);
-       revealOnScroll();
+       revealOnScroll(); 
 
-       // Form submission
-       function handleSubmit(e) {
-           e.preventDefault();
-           alert('Thank you for your message! I\'ll get back to you within 24 hours.');
-           e.target.reset();
-       }
+        // AI Legal Trend Spotlight Functionality
+        const trendTitleElement = document.getElementById('ai-trend-title');
+        const trendSummaryElement = document.getElementById('ai-trend-summary');
+        const trendLoadingPlaceholder = document.getElementById('ai-trend-loading-placeholder');
+        // const refreshTrendButton = document.getElementById('refresh-trend-btn'); // Optional
 
-       // Initialize Lucide icons when they're loaded
-       if (typeof lucide !== 'undefined') {
-           lucide.createIcons();
-       }
+        async function fetchLegalTrend() {
+            if (!trendTitleElement || !trendSummaryElement || !trendLoadingPlaceholder) return;
+
+            trendLoadingPlaceholder.style.display = 'flex'; // Show spinner
+            trendTitleElement.textContent = '✨ AI Legal Trend Spotlight'; // Reset title
+            trendSummaryElement.textContent = 'Loading latest legal trend...';
+
+            const prompt = `You are a legal tech analyst AI. Your task is to identify one significant and current legal or compliance trend highly relevant to modern businesses (e.g., developments in AI regulation, new data privacy standards, evolving ESG reporting requirements, changes in cross-border e-commerce law, intellectual property in the metaverse).
+
+            Provide the output as a JSON object with two keys: "trend_title" and "trend_summary".
+            - "trend_title": A concise and compelling title for this trend (max 5-7 words).
+            - "trend_summary": A brief summary (2-3 sentences, max 50-60 words) explaining the trend and its importance for businesses.
+
+            Focus on a trend that is actionable or requires awareness from a broad range of businesses. Ensure the information is general and not specific legal advice.
+            Example of a good trend: "AI Governance Frameworks Emerging" or "Enhanced Scrutiny on Greenwashing Claims".
+            `;
+
+            try {
+                const payload = {
+                    contents: [{ role: "user", parts: [{ text: prompt }] }],
+                    generationConfig: { // Request JSON output
+                        responseMimeType: "application/json",
+                    }
+                };
+                const apiKey = ""; // Provided by Canvas environment
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('Gemini API Error (Trend):', errorData);
+                    throw new Error(`API request failed with status ${response.status}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0].content && result.candidates[0].content.parts && result.candidates[0].content.parts[0].text) {
+                    const trendData = JSON.parse(result.candidates[0].content.parts[0].text);
+                    trendTitleElement.textContent = `✨ ${trendData.trend_title || 'Legal Trend Spotlight'}`;
+                    trendSummaryElement.textContent = trendData.trend_summary || 'Could not retrieve trend summary at this time.';
+                } else {
+                    throw new Error('Unexpected API response structure for trend data.');
+                }
+
+            } catch (error) {
+                console.error('Error fetching legal trend:', error);
+                trendTitleElement.textContent = '✨ Legal Trend Spotlight';
+                trendSummaryElement.textContent = 'Could not load the latest legal trend. Please check back later.';
+            } finally {
+                trendLoadingPlaceholder.style.display = 'none'; // Hide spinner
+                 if (typeof lucide !== 'undefined') { // Re-render icons if any were in the updated text (though not expected here)
+                    lucide.createIcons();
+                }
+            }
+        }
+
+       // Initialize Lucide icons and fetch trend on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded. Retrying...');
+                 setTimeout(() => {
+                     if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                     } else {
+                        console.error('Lucide icons failed to load after retry.');
+                     }
+                }, 500);
+            }
+            fetchLegalTrend(); // Fetch the trend when the page is ready
+
+            // Optional: Add event listener for a refresh button
+            // if (refreshTrendButton) {
+            //     refreshTrendButton.addEventListener('click', fetchLegalTrend);
+            // }
+        });
    </script>
 </body>
 </html>

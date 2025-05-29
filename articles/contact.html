@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Contact Us | Lex Root Agency - AI-Assisted Inquiry</title>
+    <meta name="description" content="Contact Lex Root Agency to discuss your legal content, compliance, or marketing needs. Use our AI assistant to help draft your inquiry.">
+    <meta name="keywords" content="contact lex root, get in touch, legal services contact, compliance support, legal marketing agency, lex root agency contact, AI inquiry assistance">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #0a0e27;
+            --secondary: #5e60ce;
+            --accent: #00f5ff;
+            --accent-alt: #ff006e;
+            --text-light: #ffffff;
+            --text-muted: #b4b4b4;
+            --bg-dark: #030616;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --neon-glow: 0 0 20px rgba(0, 245, 255, 0.5);
+            --accent-alt-rgb: 255, 0, 110; 
+            --secondary-rgb: 94, 96, 206; 
+        }
+
+        html {
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+        }
+
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.2);
+            border-color: var(--accent-alt);
+            transition: width 0.2s ease, height 0.2s ease;
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '™';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active-link {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-links a:hover::before,
+        .nav-links a.active-link::before {
+            width: 100%;
+        }
+        
+        /* Page Hero for Contact Page */
+        .page-hero {
+            padding-top: 120px; 
+            padding-bottom: 4rem;
+            text-align: center;
+            background: radial-gradient(circle at 50% 0%, rgba(var(--accent-alt-rgb), 0.08) 0%, transparent 35%),
+                        radial-gradient(circle at 80% 70%, rgba(var(--secondary-rgb), 0.08) 0%, transparent 40%);
+        }
+
+        .page-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 900;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+        }
+         .page-hero h1 .gradient-text {
+            background: linear-gradient(135deg, var(--accent-alt) 0%, var(--accent) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .page-hero p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* Section Badge & Title (Common) */
+        .section-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: rgba(94, 96, 206, 0.1); 
+            border: 1px solid rgba(94, 96, 206, 0.3);
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--secondary);
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        .contact-page-badge { 
+            background: rgba(var(--accent-alt-rgb), 0.1);
+            border-color: rgba(var(--accent-alt-rgb), 0.3);
+            color: var(--accent-alt);
+        }
+        .ai-assist-badge { /* Badge for AI assist section */
+            background: rgba(0, 245, 255, 0.1);
+            border-color: rgba(0, 245, 255, 0.3);
+            color: var(--accent);
+        }
+
+
+        .section-title {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 2rem;
+            line-height: 1.2;
+            letter-spacing: -1px;
+        }
+        
+        /* Contact Section Styles */
+        #contact-page-content {
+            padding: 4rem 2rem; 
+            position: relative;
+        }
+
+        .contact-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .contact-header { 
+            margin-bottom: 3rem;
+        }
+
+        .contact-intro-text { 
+            font-size: 1.1rem; 
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 3rem;
+            max-width: 650px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .contact-details {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .contact-detail-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        .contact-detail-item:hover {
+            color: var(--accent);
+        }
+        .contact-detail-item i { 
+            color: var(--accent);
+            width: 24px;
+            height: 24px;
+        }
+
+        /* AI Inquiry Draft Assist Section */
+        .ai-draft-assist-section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.02);
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.08);
+        }
+        .ai-draft-assist-section h3 {
+            font-size: 1.5rem;
+            color: var(--text-light);
+            margin-bottom: 0.5rem;
+        }
+        .ai-draft-assist-section p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+        }
+        .ai-draft-input-group {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            margin-bottom: 1rem; /* Space for loading/error */
+        }
+        #ai-draft-keywords {
+            flex-grow: 1;
+            padding: 0.8rem 1.2rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50px;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            height: 44px;
+        }
+        #ai-draft-keywords:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: var(--neon-glow);
+        }
+        #ai-draft-submit {
+            padding: 0.8rem 1.5rem; /* Smaller button */
+            height: 44px;
+            font-size: 0.9rem;
+        }
+        .ai-draft-status { /* For loading and error messages specific to draft assist */
+            font-size: 0.85rem;
+            min-height: 1.2em; /* Reserve space */
+        }
+        .ai-draft-loading {
+            color: var(--accent);
+        }
+        .ai-draft-error {
+            color: var(--accent-alt);
+        }
+
+
+        .contact-form {
+            display: grid;
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+            text-align: left;
+        }
+
+        .form-group {
+            position: relative;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            color: var(--text-light);
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.2);
+        }
+
+        .form-group label { 
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            background: var(--bg-dark); 
+            padding: 0 0.3rem;
+        }
+
+        .form-group input:focus + label,
+        .form-group input:not(:placeholder-shown) + label,
+        .form-group textarea:focus + label,
+        .form-group textarea:not(:placeholder-shown) + label {
+            top: -0.6rem; 
+            left: 1rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+         .form-group textarea {
+            min-height: 120px; 
+            resize: vertical;
+        }
+
+
+        .submit-btn { 
+            padding: 1.2rem 3rem; 
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: none; 
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            justify-self: center; 
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.4);
+        }
+        .submit-btn:disabled {
+             background: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
+        }
+
+
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            font-size: 1.2rem; 
+        }
+        .social-links a i { 
+            width: 24px;
+            height: 24px;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px;
+            z-index: 1001; 
+            background: transparent; 
+            border: none; 
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+            border-radius: 1px; 
+        }
+        .mobile-menu-toggle.open span:nth-child(1) {
+            transform: rotate(45deg) translate(5px, 5px);
+        }
+        .mobile-menu-toggle.open span:nth-child(2) {
+            opacity: 0;
+        }
+        .mobile-menu-toggle.open span:nth-child(3) {
+            transform: rotate(-45deg) translate(5px, -5px);
+        }
+
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; } 
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1); 
+                z-index: 999; 
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+             .nav-links a { 
+                font-size: 1.2rem;
+                padding: 1rem 0;
+            }
+
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+
+            .page-hero h1 {
+                font-size: 2.5rem;
+            }
+             .page-hero p {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+            #contact-page-content {
+                 padding: 2rem 1rem 4rem 1rem; 
+            }
+            .section-title { font-size: 2.2rem; }
+            .contact-form { padding: 0 1rem; } 
+            .ai-draft-input-group {
+                flex-direction: column;
+            }
+            #ai-draft-keywords {
+                width: 100%;
+                margin-bottom: 1rem;
+            }
+            #ai-draft-submit {
+                width: 100%;
+            }
+        }
+
+        /* Animations for scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1); 
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px; 
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
+         @keyframes spin { 
+            to { transform: rotate(360deg); } 
+        }
+        .spin { 
+            animation: spin 1s linear infinite; 
+            display: inline-block; 
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">LEX ROOT</div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="index.html#home" class="logo">LEX ROOT</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html#home">Home</a></li>
+                <li><a href="about.html">About</a></li> 
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="articles.html">Articles</a></li>
+                <li><a href="contact.html" class="active-link">Contact</a></li> </ul>
+            <button class="mobile-menu-toggle" id="mobileMenu" aria-label="Toggle menu" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
+
+    <header class="page-hero reveal">
+        <h1 class="reveal"><span class="gradient-text">Get In Touch</span></h1>
+        <p class="reveal">We're here to answer your questions and help you find the best solutions for your legal content and compliance needs. Reach out to us today!</p>
+    </header>
+
+    <main id="contact-page-content">
+       <div class="contact-container">
+           <div class="contact-header reveal">
+               <span class="section-badge contact-page-badge">Let's Connect</span>
+               <h2 class="section-title">Start a Conversation</h2>
+           </div>
+           <p class="contact-intro-text reveal">
+               Whether you have a specific project in mind, need advice on navigating complex regulations, or want to explore how our content strategies can elevate your brand, our team is ready to assist. Fill out the form below, or reach out via our direct channels.
+           </p>
+            <div class="contact-details reveal">
+                <a href="mailto:hello@lexroot.com" class="contact-detail-item">
+                    <i data-lucide="mail"></i>
+                    <span>hello@lexroot.com</span>
+                </a>
+                <a href="tel:+1234567890" class="contact-detail-item"> <i data-lucide="phone"></i>
+                    <span>+1 (234) 567-890</span> </a>
+                <div class="contact-detail-item"> <i data-lucide="map-pin"></i>
+                    <span>123 Innovation Drive, Tech City, TX 75001</span> </div>
+            </div>
+
+            <section class="ai-draft-assist-section reveal">
+                <span class="section-badge ai-assist-badge">Quick Start</span>
+                <h3>✨ AI-Assisted Inquiry Drafting</h3>
+                <p>Not sure how to phrase your query? Enter a few keywords, and let our AI help you draft a starting message.</p>
+                <div class="ai-draft-input-group">
+                    <input type="text" id="ai-draft-keywords" placeholder="e.g., GDPR help, blog content, contract review">
+                    <button id="ai-draft-submit" class="submit-btn" style="padding: 0.8rem 1.5rem; font-size: 0.9rem; height: 44px;">
+                        <i data-lucide="sparkles"></i> Draft
+                    </button>
+                </div>
+                <div id="ai-draft-status" class="ai-draft-status"></div>
+            </section>
+
+           <form class="contact-form reveal" id="lexRootContactForm">
+               <div class="form-group">
+                   <input type="text" id="name" name="name" placeholder=" " required>
+                   <label for="name">Your Name</label>
+               </div>
+               <div class="form-group">
+                   <input type="email" id="email" name="email" placeholder=" " required>
+                   <label for="email">Email Address</label>
+               </div>
+                <div class="form-group">
+                    <input type="text" id="company" name="company" placeholder=" ">
+                    <label for="company">Company (Optional)</label>
+                </div>
+               <div class="form-group">
+                   <textarea id="message" name="message" rows="5" placeholder=" " required></textarea>
+                   <label for="message">Your Message</label> 
+               </div>
+               <button type="submit" class="submit-btn">
+                    <i data-lucide="send"></i> Send Message
+               </button>
+           </form>
+           <div id="form-status-message" style="margin-top: 1.5rem; font-size: 1rem;"></div>
+       </div>
+    </main>
+
+   <footer>
+       <div class="footer-content">
+           <div class="social-links">
+               <a href="https://linkedin.com/company/lexroot" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/lexroot" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:hello@lexroot.com" aria-label="Email"><i data-lucide="mail"></i></a>
+           </div>
+           <p>&copy; <span id="currentYear"></span> Lex Root Agency. Built with purpose.</p>
+       </div>
+   </footer>
+
+   <script>
+        // Dynamically set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+        // Loading Screen
+        window.addEventListener('load', () => {
+           setTimeout(() => {
+               const loader = document.getElementById('loader');
+               if (loader) loader.classList.add('hidden');
+           }, 300); 
+        });
+
+        // Custom Cursor
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            const KFS = 0.25; 
+
+            mouseX = window.innerWidth / 2;
+            mouseY = window.innerHeight / 2;
+            followerX = mouseX;
+            followerY = mouseY;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            function animateCursor() {
+                if (cursor && cursorFollower) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            document.querySelectorAll('a, button, textarea, input[type="text"], input[type="email"]').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            document.addEventListener('mouseleave', () => {
+                if (cursor) cursor.style.opacity = '0';
+                if (cursorFollower) cursorFollower.style.opacity = '0';
+            });
+            document.addEventListener('mouseenter', () => {
+                if (cursor) cursor.style.opacity = '1';
+                if (cursorFollower) cursorFollower.style.opacity = '1';
+            });
+        }
+
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+           window.addEventListener('scroll', () => {
+               if (window.scrollY > 50) { 
+                   navbar.classList.add('scrolled');
+               } else {
+                   navbar.classList.remove('scrolled');
+               }
+           });
+        }
+
+        // Mobile menu
+        const mobileMenuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+       
+        if (mobileMenuToggle && navLinks) {
+           mobileMenuToggle.addEventListener('click', () => {
+               const isActive = navLinks.classList.toggle('active');
+               mobileMenuToggle.classList.toggle('open'); 
+               mobileMenuToggle.setAttribute('aria-expanded', isActive);
+           });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    if (navLinks.classList.contains('active')) {
+                        navLinks.classList.remove('active');
+                        mobileMenuToggle.classList.remove('open');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            });
+        }
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+           revealElements.forEach(el => {
+               const windowHeight = window.innerHeight;
+               const elementTop = el.getBoundingClientRect().top;
+               const elementVisible = 50; 
+               
+               if (elementTop < windowHeight - elementVisible) {
+                   el.classList.add('active');
+               }
+           });
+        };
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); 
+
+        function sanitizeForPrompt(text) {
+            if (typeof text !== 'string') return '';
+            return text.replace(/\\/g, '\\\\')
+                       .replace(/`/g, '\\`')
+                       .replace(/\$\{/g, '\\${');
+        }
+
+        // Common Gemini API call function (modified to return text directly)
+        async function callGeminiAPI(prompt, statusElement, loadingClass, errorClass, buttonElement) {
+            if (statusElement) statusElement.textContent = 'AI is thinking...';
+            if (statusElement) statusElement.className = `ai-draft-status ${loadingClass}`; // Use specific class for loading
+            if (buttonElement) buttonElement.disabled = true;
+
+            try {
+                let chatHistory = [{ role: "user", parts: [{ text: prompt }] }];
+                const payload = { contents: chatHistory };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    console.error('Gemini API Error Response:', errorData); 
+                    const errorMessageDetail = errorData?.error?.message || 'An unknown API error occurred.';
+                    throw new Error(`API request failed with status ${response.status}: ${errorMessageDetail}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates.length > 0 &&
+                    result.candidates[0].content && result.candidates[0].content.parts &&
+                    result.candidates[0].content.parts.length > 0 && 
+                    typeof result.candidates[0].content.parts[0].text === 'string' ) { 
+                    if (statusElement) statusElement.textContent = ''; // Clear status on success
+                    if (statusElement) statusElement.className = 'ai-draft-status';
+                    return result.candidates[0].content.parts[0].text; // Return the text
+                } else {
+                    console.error('Unexpected API response structure:', result);
+                    throw new Error('Unexpected API response structure.');
+                }
+
+            } catch (error) {
+                console.error('Error calling Gemini API:', error);
+                if (statusElement) statusElement.textContent = `Error: ${error.message}`;
+                if (statusElement) statusElement.className = `ai-draft-status ${errorClass}`; // Use specific class for error
+                return null; // Indicate failure
+            } finally {
+                if (buttonElement) buttonElement.disabled = false;
+            }
+        }
+
+        // AI-Assisted Inquiry Drafting
+        const aiDraftKeywordsInput = document.getElementById('ai-draft-keywords');
+        const aiDraftSubmitButton = document.getElementById('ai-draft-submit');
+        const mainMessageTextarea = document.getElementById('message'); // Target the main form's textarea
+        const aiDraftStatusElement = document.getElementById('ai-draft-status');
+
+        if (aiDraftKeywordsInput && aiDraftSubmitButton && mainMessageTextarea && aiDraftStatusElement) {
+            aiDraftSubmitButton.addEventListener('click', async () => {
+                const keywords = aiDraftKeywordsInput.value.trim();
+                if (!keywords) {
+                    aiDraftStatusElement.textContent = 'Please enter some keywords.';
+                    aiDraftStatusElement.className = 'ai-draft-status ai-draft-error';
+                    return;
+                }
+
+                const prompt = `You are an AI assistant helping a user draft an initial inquiry message to Lex Root Agency, a firm specializing in legal content, compliance, and marketing.
+                Based on the user's keywords: "${sanitizeForPrompt(keywords)}"
+                Generate a polite, professional, and concise inquiry message (2-4 sentences) that the user can send.
+                The message should clearly state their interest or need based on the keywords.
+                Start the message with something like "Dear Lex Root Team," or "Hello,".
+                End with a polite closing like "Sincerely," or "Best regards," but DO NOT add a name placeholder after the closing. The user will add their own name.
+                
+                Drafted Inquiry:`;
+
+                const draftedMessage = await callGeminiAPI(prompt, aiDraftStatusElement, 'ai-draft-loading', 'ai-draft-error', aiDraftSubmitButton);
+
+                if (draftedMessage) {
+                    mainMessageTextarea.value = draftedMessage;
+                    // Trigger input event for floating label to update if it relies on input/change
+                    mainMessageTextarea.dispatchEvent(new Event('input', { bubbles: true }));
+                    mainMessageTextarea.focus(); // Focus on the textarea so user can edit
+                    aiDraftKeywordsInput.value = ''; // Clear keywords input
+                }
+            });
+        }
+
+
+        // Contact Form Submission
+        const contactForm = document.getElementById('lexRootContactForm');
+        const formStatusMessage = document.getElementById('form-status-message');
+
+        if (contactForm && formStatusMessage) {
+            contactForm.addEventListener('submit', function(event) {
+                event.preventDefault(); 
+
+                const submitButton = contactForm.querySelector('.submit-btn');
+                const originalButtonHtml = submitButton.innerHTML; // Store original button content
+                submitButton.disabled = true;
+                submitButton.innerHTML = '<i data-lucide="loader-2" class="spin"></i> Sending...'; 
+                if (typeof lucide !== 'undefined') lucide.createIcons(); 
+
+                setTimeout(() => {
+                    formStatusMessage.textContent = 'Thank you for your message! We\'ll get back to you within 24 hours.';
+                    formStatusMessage.style.color = 'var(--accent)';
+                    contactForm.reset(); 
+                    
+                     contactForm.querySelectorAll('input, textarea').forEach(input => {
+                        const label = input.nextElementSibling;
+                        if (label && label.tagName === 'LABEL') {
+                           // For floating labels that react to :not(:placeholder-shown) or input events,
+                           // resetting the value should be enough. If they react to focus/blur,
+                           // you might need to manually trigger a blur event if the label doesn't reset.
+                           // Example: input.dispatchEvent(new Event('blur', { bubbles: true }));
+                        }
+                    });
+
+                    submitButton.disabled = false;
+                    submitButton.innerHTML = originalButtonHtml; // Restore original button content
+                    if (typeof lucide !== 'undefined') lucide.createIcons();
+
+                    setTimeout(() => {
+                        formStatusMessage.textContent = '';
+                    }, 5000);
+
+                }, 1500); 
+            });
+        }
+        
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded or failed to initialize. Retrying...');
+                setTimeout(() => {
+                     if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                     } else {
+                        console.error('Lucide icons failed to load after retry.');
+                     }
+                }, 500);
+            }
+        });
+   </script>
+</body>
+</html>

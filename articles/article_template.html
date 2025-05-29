@@ -1,25 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <title>Your Article Title Here | Lex Root Agency</title>
-    <meta name="description" content="Article description here - 150-160 characters for SEO">
-    <meta name="keywords" content="legal compliance, startup law, data privacy">
-    <meta name="author" content="Indrajeet K.">
+    <title>Article Title Placeholder | Lex Root Agency</title>
+    <meta name="description" content="Compelling 150-160 character summary of this specific article's content.">
+    <meta name="keywords" content="relevant keyword 1, relevant keyword 2, legal tech, compliance insight">
+    <meta name="author" content="Author Name (e.g., Indrajeet K.)">
     
-    <meta property="og:title" content="Your Article Title Here">
-    <meta property="og:description" content="Article description for social media">
-    <meta property="og:image" content="https://yourdomain.com/images/article-image.jpg"> <meta property="og:url" content="https://yourdomain.com/articles/article-name.html"> <meta property="og:type" content="article">
-    
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Your Article Title Here">
-    <meta name="twitter:description" content="Article description for Twitter">
-    <meta name="twitter:image" content="https://yourdomain.com/images/article-image.jpg"> <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://yourdomain.com/articles/article-specific-url.html">
+    <meta property="og:title" content="Article Title Placeholder | Lex Root Agency">
+    <meta property="og:description" content="Slightly longer, engaging description for social media sharing (approx. 200 chars).">
+    <meta property="og:image" content="https://yourdomain.com/images/article-banner-image.jpg"> <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://yourdomain.com/articles/article-specific-url.html">
+    <meta property="twitter:title" content="Article Title Placeholder | Lex Root Agency">
+    <meta property="twitter:description" content="Concise description for Twitter (under 200 chars).">
+    <meta property="twitter:image" content="https://yourdomain.com/images/article-banner-image.jpg"> <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
-        /* Styles from main site (index.html) */
+        /* Styles from main site (index.html / common styles) */
         * {
             margin: 0;
             padding: 0;
@@ -38,11 +39,14 @@
             --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
             --neon-glow: 0 0 20px rgba(0, 245, 255, 0.5);
+            --accent-rgb: 0, 245, 255;
+            --accent-alt-rgb: 255, 0, 110;
+            --secondary-rgb: 94, 96, 206;
         }
 
         html {
             scroll-behavior: smooth;
-            cursor: none; /* Ensure custom cursor is intended for all pages */
+            cursor: none; 
         }
 
         body {
@@ -50,7 +54,7 @@
             background: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
-            cursor: none; /* Ensure custom cursor is intended for all pages */
+            cursor: none; 
         }
 
         /* Custom Cursor */
@@ -65,26 +69,26 @@
             transform: translate(-50%, -50%);
             will-change: transform;
             mix-blend-mode: difference;
-            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; /* Added for smoother hover */
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
         }
 
         .cursor-follower {
             width: 40px;
             height: 40px;
-            background: rgba(0, 245, 255, 0.1);
+            background: rgba(var(--accent-rgb), 0.1);
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
             z-index: 10000;
             transform: translate(-50%, -50%);
             will-change: transform;
-            transition: background-color 0.2s ease; /* Added for smoother hover */
+            transition: background-color 0.2s ease;
         }
 
         .cursor.hover {
             width: 40px;
             height: 40px;
-            background: rgba(0, 245, 255, 0.2);
+            background: rgba(var(--accent-rgb), 0.2);
             border-color: var(--accent-alt);
         }
 
@@ -96,7 +100,7 @@
             width: 100%;
             height: 100%;
             background: var(--bg-dark);
-            z-index: 10000;
+            z-index: 10002; /* Above everything else initially */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -130,7 +134,7 @@
             padding: 1.5rem 3rem;
             z-index: 1000;
             backdrop-filter: blur(20px);
-            background: rgba(10, 14, 39, 0.8);
+            background: rgba(10, 14, 39, 0.85); /* Slightly more opaque */
             transition: all 0.3s ease;
         }
 
@@ -184,7 +188,7 @@
             letter-spacing: 0.5px;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover, .nav-links a.active-link {
             color: var(--accent);
         }
 
@@ -200,33 +204,43 @@
             box-shadow: var(--neon-glow);
         }
 
-        .nav-links a:hover::before {
+        .nav-links a:hover::before, .nav-links a.active-link::before {
             width: 100%;
         }
         
-        /* Button styles from main site (can be used for back button too) */
-        .btn-primary, .cta-button, .back-button { /* Added .back-button here */
+        /* Button styles */
+        .btn-primary, .cta-button, .back-button {
             padding: 1rem 2.5rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
             text-decoration: none;
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
-            display: inline-flex; /* For icon alignment */
-            align-items: center; /* For icon alignment */
-            gap: 0.5rem; /* Space between icon and text */
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: 0.5rem; 
+            border: none;
+            cursor: none;
         }
-
-        .btn-primary:hover, .cta-button:hover, .back-button:hover {
+        .btn-primary, .cta-button {
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            box-shadow: 0 4px 20px rgba(var(--accent-rgb), 0.3);
+        }
+        .btn-primary:hover, .cta-button:hover {
             transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+            box-shadow: 0 8px 30px rgba(var(--accent-rgb), 0.5);
+        }
+        .btn-primary:disabled {
+            background: var(--text-muted);
+            box-shadow: none;
+            transform: none;
+            cursor: not-allowed;
         }
         
-        /* Footer specific styles from main site */
+        /* Footer */
         footer {
             padding: 4rem 2rem 2rem;
             text-align: center;
@@ -257,84 +271,44 @@
             text-decoration: none;
             color: var(--text-muted);
             transition: all 0.3s ease;
-            font-size: 1.2rem;
         }
+         .social-links a i { width: 24px; height: 24px; }
 
         .social-links a:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
             color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(var(--accent-rgb), 0.3);
         }
         
-        /* Mobile Menu Toggle from main site */
+        /* Mobile Menu Toggle */
         .mobile-menu-toggle {
             display: none;
             flex-direction: column;
             gap: 4px;
-            cursor: pointer;
+            cursor: none;
             padding: 10px; 
             z-index: 1001; 
+            background: transparent;
+            border: none;
         }
+        .mobile-menu-toggle.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-toggle.open span:nth-child(2) { opacity: 0; }
+        .mobile-menu-toggle.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .mobile-menu-toggle span {
             width: 25px;
             height: 2px;
             background: var(--text-light);
             transition: all 0.3s ease;
+            border-radius: 1px;
         }
         
-        /* Responsive styles from main site */
-        @media (max-width: 768px) {
-            nav {
-                padding: 1rem 1.5rem; /* Adjust padding for smaller screens */
-            }
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%; 
-                width: 100%;
-                height: 100vh;
-                background: var(--bg-dark);
-                flex-direction: column;
-                justify-content: center;
-                align-items: center; 
-                transition: right 0.5s ease-in-out; 
-                z-index: 999; 
-                gap: 2rem; /* Adjust gap for mobile nav links */
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
-            .article-title {
-                 font-size: clamp(2rem, 7vw, 3rem); /* Adjusted clamp for mobile */
-            }
-            .article-hero {
-                margin-top: 70px; /* Adjust for potentially smaller nav height */
-            }
-            .back-button-container {
-                padding: 1.5rem 1rem; /* Adjust padding for mobile */
-            }
-            .back-button {
-                padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
-            }
-             .related-grid {
-                grid-template-columns: 1fr; /* Stack related articles on mobile */
-            }
-        }
-
-        /* Animations for scroll from main site */
+        /* Animations for scroll */
         .reveal {
             opacity: 0;
             transform: translateY(50px);
-            transition: all 0.8s ease;
+            transition: all 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
         }
 
         .reveal.active {
@@ -342,98 +316,97 @@
             transform: translateY(0);
         }
 
-        /* Custom Scrollbar from main site */
+        /* Custom Scrollbar */
         ::-webkit-scrollbar {
-            width: 8px; /* Slightly thinner scrollbar */
+            width: 8px; 
         }
-
         ::-webkit-scrollbar-track {
             background: var(--bg-dark);
         }
-
         ::-webkit-scrollbar-thumb {
             background: var(--accent);
             border-radius: 4px;
         }
-
         ::-webkit-scrollbar-thumb:hover {
             background: var(--secondary);
         }
 
         /* Article Specific Styles */
         .article-hero {
-            min-height: 50vh; /* Slightly reduced height */
+            min-height: 50vh; 
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.15) 0%, transparent 40%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.08) 0%, transparent 40%);
-            margin-top: 80px; 
-            padding: 2rem 1rem; /* Add some padding */
+            background: radial-gradient(circle at 20% 50%, rgba(var(--secondary-rgb), 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(var(--accent-rgb), 0.08) 0%, transparent 40%);
+            margin-top: 80px; /* Navbar height */
+            padding: 3rem 1rem; 
         }
 
         .article-hero-content {
             text-align: center;
             max-width: 900px;
-            padding: 2rem 1rem; /* Ensure padding */
+            padding: 2rem 1rem; 
             position: relative;
             z-index: 2;
         }
 
-        .article-category {
+        .article-category-badge { 
             display: inline-block;
             padding: 0.5rem 1.5rem;
-            background: rgba(0, 245, 255, 0.1);
-            border: 1px solid rgba(0, 245, 255, 0.3);
+            background: rgba(var(--accent-rgb), 0.1);
+            border: 1px solid rgba(var(--accent-rgb), 0.3);
             border-radius: 50px;
             font-size: 0.9rem;
             color: var(--accent);
-            margin-bottom: 1.5rem; /* Adjusted margin */
+            margin-bottom: 1.5rem; 
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .article-title {
-            font-size: clamp(2.2rem, 6vw, 3.5rem); /* Adjusted clamp */
+        .article-main-title { 
+            font-size: clamp(2.5rem, 6vw, 4rem); 
             font-weight: 900;
-            line-height: 1.15; /* Slightly increased line height */
-            margin-bottom: 1.5rem; /* Adjusted margin */
-            letter-spacing: -1.5px; /* Adjusted letter spacing */
+            line-height: 1.15; 
+            margin-bottom: 1.5rem; 
+            letter-spacing: -1.5px; 
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .article-meta {
+        .article-meta-hero { 
             display: flex;
-            gap: 1.5rem; /* Adjusted gap */
+            gap: 1.5rem; 
             justify-content: center;
             flex-wrap: wrap;
             color: var(--text-muted);
-            font-size: 0.9rem; /* Slightly smaller meta text */
+            font-size: 0.9rem; 
         }
 
-        .article-meta span {
+        .article-meta-hero span {
             display: flex;
             align-items: center;
-            gap: 0.4rem; /* Adjusted gap */
+            gap: 0.5rem; 
         }
-        .article-meta span i { /* Style for icons in meta if you add them */
-            width: 1em;
-            height: 1em;
+        .article-meta-hero i { 
+            width: 1.1em; 
+            height: 1.1em;
+            color: var(--accent); 
         }
 
 
         .article-container {
-            max-width: 800px;
+            max-width: 800px; 
             margin: 0 auto;
-            padding: 0rem 2rem 6rem; /* Reduced top padding as back button is above */
+            padding: 1rem 2rem 6rem; 
         }
         
-        /* Back Button Specific Styles */
         .back-button-container {
-            padding: 2rem 0rem; /* Add some spacing around the button */
+            padding: 2rem 0 1rem; 
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            margin-bottom: 2rem;
         }
 
         .back-button {
@@ -444,7 +417,7 @@
             color: var(--text-muted);
         }
         .back-button:hover {
-            background: rgba(0, 245, 255, 0.1);
+            background: rgba(var(--accent-rgb), 0.1);
             border-color: var(--accent);
             color: var(--accent);
         }
@@ -454,107 +427,190 @@
             stroke-width: 2.5;
         }
 
+        /* AI Takeaways Section */
+        .ai-takeaways-section {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(var(--accent-rgb), 0.03);
+            border: 1px solid rgba(var(--accent-rgb), 0.1);
+            border-radius: 12px;
+        }
+        .ai-takeaways-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+        .ai-takeaways-header h3 {
+            font-size: 1.3rem;
+            color: var(--accent);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5em;
+        }
+        .ai-takeaways-button {
+            padding: 0.6rem 1.2rem;
+            font-size: 0.85rem;
+            background: var(--accent);
+            color: var(--bg-dark);
+        }
+        #aiTakeawaysContent {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+        }
+        #aiTakeawaysContent strong { 
+            color: var(--text-light);
+            font-weight: 600;
+        }
+        #aiTakeawaysContent ul {
+            list-style: none;
+            padding-left: 0;
+            margin-top: 0.75rem;
+        }
+        #aiTakeawaysContent li {
+            padding: 0.3rem 0 0.3rem 1.5em;
+            position: relative;
+        }
+        #aiTakeawaysContent li::before {
+            content: '';
+            position: absolute;
+            left: 0.3em;
+            top: 0.6em;
+            width: 0.4em;
+            height: 0.4em;
+            background-color: var(--accent);
+            border-radius: 50%;
+        }
+        .ai-takeaways-status {
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+        }
+        .ai-takeaways-loading { color: var(--accent); }
+        .ai-takeaways-error { color: var(--accent-alt); }
 
-        .article-content {
+
+        .article-main-content { 
             font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-light);
         }
 
-        .article-content h2 {
-            font-size: 2rem; 
+        .article-main-content h2 {
+            font-size: 1.8rem; 
             margin: 2.5rem 0 1.2rem;
             color: var(--accent);
             font-weight: 700;
+            line-height: 1.3;
         }
 
-        .article-content h3 {
-            font-size: 1.5rem; 
+        .article-main-content h3 {
+            font-size: 1.4rem; 
             margin: 1.8rem 0 1rem;
             color: var(--text-light);
             font-weight: 600;
+            line-height: 1.4;
         }
 
-        .article-content p {
+        .article-main-content p {
             margin-bottom: 1.5rem;
             color: rgba(255, 255, 255, 0.85); 
         }
         
-        .article-content p.lead { 
+        .article-main-content p.lead { 
             font-size: 1.2rem; 
             color: var(--text-muted);
             font-weight: 300;
             margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
         }
 
-        .article-content ul,
-        .article-content ol {
+        .article-main-content ul,
+        .article-main-content ol {
             margin: 1.5rem 0;
-            padding-left: 1.5rem; 
+            padding-left: 1.8rem; 
         }
 
-        .article-content li {
-            margin-bottom: 0.7rem; 
+        .article-main-content li {
+            margin-bottom: 0.8rem; 
             color: rgba(255, 255, 255, 0.85);
+            line-height: 1.7; 
         }
+        .article-main-content ul li::marker { color: var(--accent); } 
+        .article-main-content ol li::marker { color: var(--accent); }
 
-        .article-content blockquote {
+
+        .article-main-content blockquote {
             margin: 2rem 0;
-            padding: 1.5rem;
-            background: rgba(0, 245, 255, 0.03); 
-            border-left: 3px solid var(--accent); 
+            padding: 1.5rem 2rem; 
+            background: rgba(var(--accent-rgb), 0.03); 
+            border-left: 4px solid var(--accent); 
             border-radius: 8px; 
             font-style: italic;
             color: rgba(255,255,255,0.9);
         }
-         .article-content blockquote p { 
+         .article-main-content blockquote p { 
             margin-bottom: 0;
         }
-
-
-        .article-content code {
-            background: rgba(255, 255, 255, 0.08); 
-            padding: 0.2rem 0.5rem;
-            border-radius: 4px;
-            font-family: 'SF Mono', 'Courier New', monospace; 
+         .article-main-content blockquote cite {
+            display: block;
+            text-align: right;
+            margin-top: 1rem;
             font-size: 0.9em;
+            color: var(--text-muted);
+            font-style: normal;
         }
 
-        .article-content pre {
-            background: rgba(10, 14, 39, 0.7); 
+
+        .article-main-content code {
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 0.2em 0.4em; 
+            border-radius: 4px;
+            font-family: 'SF Mono', 'Consolas', 'Courier New', monospace; 
+            font-size: 0.9em;
+            color: var(--accent-alt); 
+        }
+
+        .article-main-content pre {
+            background: rgba(10, 14, 39, 0.8); 
             border: 1px solid rgba(255,255,255,0.1);
-            padding: 1.2rem; 
+            padding: 1.5rem; 
             border-radius: 8px;
             overflow-x: auto;
-            margin: 1.5rem 0;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            margin: 2rem 0; 
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
         }
-        .article-content pre code {
+        .article-main-content pre code {
             background: none;
             padding: 0;
             font-size: 0.9em;
             color: var(--text-muted); 
+            white-space: pre-wrap; 
         }
 
 
-        .article-content a {
+        .article-main-content a {
             color: var(--accent);
             text-decoration: none;
-            border-bottom: 1px solid transparent; 
+            border-bottom: 1px dotted var(--accent); 
             transition: all 0.3s ease;
         }
 
-        .article-content a:hover {
-            border-bottom-color: var(--accent);
-            text-shadow: 0 0 5px var(--accent); 
+        .article-main-content a:hover {
+            color: var(--text-light);
+            background-color: rgba(var(--accent-rgb), 0.1);
+            border-bottom-style: solid; 
+            text-shadow: none;
         }
 
         /* Call to Action */
         .article-cta {
-            margin-top: 3rem; 
+            margin-top: 4rem; 
             padding: 2.5rem; 
-            background: rgba(94, 96, 206, 0.08); 
-            border: 1px solid rgba(94, 96, 206, 0.25);
+            background: rgba(var(--secondary-rgb), 0.08); 
+            border: 1px solid rgba(var(--secondary-rgb), 0.25);
             border-radius: 15px; 
             text-align: center;
         }
@@ -569,54 +625,6 @@
             color: var(--text-muted);
             margin-bottom: 1.5rem; 
             font-size: 1rem;
-        }
-
-        /* Share Buttons */
-        .share-section {
-            margin-top: 3rem;
-            padding: 2rem 0 1rem; 
-            border-top: 1px solid rgba(255, 255, 255, 0.08); 
-            text-align: center;
-        }
-
-        .share-section h4 {
-            margin-bottom: 1.2rem;
-            color: var(--text-muted);
-            font-size: 1rem;
-            font-weight: 500;
-        }
-
-        .share-buttons {
-            display: flex;
-            gap: 1rem;
-            justify-content: center;
-        }
-
-        .share-button {
-            width: 45px; 
-            height: 45px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            color: var(--text-light);
-            font-size: 1.1rem; 
-            transition: all 0.3s ease;
-        }
-        .share-button i { 
-            width: 1.2em;
-            height: 1.2em;
-        }
-
-        .share-button:hover {
-            transform: translateY(-3px) scale(1.05); 
-            border-color: var(--accent);
-            color: var(--accent);
-            background: rgba(0, 245, 255, 0.1); 
-            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.2);
         }
 
         /* Related Articles */
@@ -643,31 +651,71 @@
             background: rgba(255, 255, 255, 0.02); 
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 12px; 
-            padding: 1.2rem;
+            padding: 1.5rem; 
             text-decoration: none; 
             transition: all 0.3s ease;
             display: block; 
+            color: var(--text-light); 
         }
 
         .related-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
-            background: rgba(0, 245, 255, 0.05);
-            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.15);
+            background: rgba(var(--accent-rgb), 0.05);
+            box-shadow: 0 10px 25px rgba(var(--accent-rgb), 0.15);
         }
 
         .related-card h4 {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.75rem; 
             color: var(--text-light);
             font-size: 1.1rem; 
             line-height: 1.4;
+        }
+         .related-card h4:hover {
+            color: var(--accent); 
         }
 
         .related-card p {
             color: var(--text-muted);
             font-size: 0.85rem;
             line-height: 1.5; 
+            display: -webkit-box; 
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { padding: 1rem 1.5rem; }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+                transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+                z-index: 999; 
+                gap: 2rem; 
+            }
+            .nav-links.active { right: 0; }
+            .mobile-menu-toggle { display: flex; }
+            
+            .article-main-title { font-size: clamp(2rem, 7vw, 2.8rem); } 
+            .article-hero { margin-top: 70px; min-height: 40vh; }
+            .article-container { padding: 0rem 1rem 4rem; }
+            .back-button-container { padding: 1.5rem 0; }
+            .back-button { padding: 0.8rem 1.5rem; font-size: 0.9rem; }
+            .related-grid { grid-template-columns: 1fr; }
+            .article-main-content h2 { font-size: 1.6rem; }
+            .article-main-content h3 { font-size: 1.3rem; }
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        .spin { animation: spin 1s linear infinite; display: inline-block; }
     </style>
 </head>
 <body>
@@ -680,142 +728,179 @@
 
     <nav id="navbar">
         <div class="nav-container">
-            <a href="../index.html#home" class="logo">LEX ROOT</a>
+            <a href="index.html" class="logo">LEX ROOT</a>
             <ul class="nav-links" id="navLinks">
-                <li><a href="../index.html#home">Home</a></li>
-                <li><a href="../index.html#about">About</a></li>
-                <li><a href="../index.html#services">Services</a></li>
-                <li><a href="../portfolio.html">Portfolio</a></li>
-                <li><a href="../articles.html">Articles</a></li> 
-                <li><a href="../index.html#contact">Contact</a></li>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="articles.html" class="active-link">Articles</a></li> 
+                <li><a href="contact.html">Contact</a></li>
             </ul>
-            <div class="mobile-menu-toggle" id="mobileMenu">
+            <button class="mobile-menu-toggle" id="mobileMenu" aria-label="Toggle menu" aria-expanded="false">
                 <span></span>
                 <span></span>
                 <span></span>
-            </div>
+            </button>
         </div>
     </nav>
     
-    <article class="article-hero">
+    <header class="article-hero reveal">
         <div class="article-hero-content">
-            <span class="article-category">Compliance</span> <h1 class="article-title">Your Awesome Article Title Goes Here</h1>
-            <div class="article-meta">
+            <span class="article-category-badge">Data Privacy</span> 
+            <h1 class="article-main-title">Understanding India's Digital Personal Data Protection Act 2023</h1>
+            <div class="article-meta-hero">
                 <span><i data-lucide="user-circle"></i> Indrajeet K.</span>
                 <span><i data-lucide="calendar-days"></i> May 29, 2024</span>
-                <span><i data-lucide="clock"></i> 10 min read</span>
+                <span><i data-lucide="clock-3"></i> 12 min read</span>
                 <span><i data-lucide="eye"></i> <span id="viewCountDisplay">1,234</span> views</span>
             </div>
         </div>
-    </article>
+    </header>
 
     <div class="article-container">
         <div class="back-button-container">
-            <a href="javascript:history.back()" class="back-button">
-                <i data-lucide="arrow-left"></i> Back
+            <a href="articles.html" class="back-button">
+                <i data-lucide="arrow-left"></i> Back to Articles
             </a>
         </div>
 
-        <div class="article-content">
+        <section class="ai-takeaways-section reveal">
+            <div class="ai-takeaways-header">
+                <h3><i data-lucide="brain"></i> AI Summary & Takeaways</h3>
+                <button id="aiTakeawaysButton" class="btn-primary ai-takeaways-button">
+                    <i data-lucide="sparkles"></i> Generate
+                </button>
+            </div>
+            <div id="aiTakeawaysStatus" class="ai-takeaways-status"></div>
+            <div id="aiTakeawaysContent" style="display: none;">
+                </div>
+        </section>
+
+        <main class="article-main-content reveal" id="mainArticleContent">
             <p class="lead">
-                This is the compelling introduction that hooks the reader. It summarizes what the article covers and why it's incredibly important for the target audience to read on.
+                The Digital Personal Data Protection Act (DPDPA) 2023 represents a landmark shift in India's approach to data privacy. This guide delves into its core provisions, offering clarity for businesses, especially startups, navigating this new regulatory terrain.
             </p>
 
-            <h2>Understanding the Core Concepts</h2>
+            <h2>The Genesis of DPDPA 2023</h2>
             <p>
-                Dive deep into the foundational elements of your topic. Use clear language and break down complex ideas into digestible pieces. Remember to keep your paragraphs relatively short and scannable. Visual breaks are your friend.
+                India's journey towards a comprehensive data protection law has been long and deliberative. The DPDPA 2023, finally enacted, aims to balance individual privacy rights with the burgeoning needs of the digital economy. It replaces earlier, more fragmented rules, establishing a unified framework for processing digital personal data.
             </p>
             <p>
-                For instance, if discussing legal tech, you might explain the difference between AI-driven contract review and traditional methods. Use analogies if they help clarify.
+                Understanding its principles-based approach, focusing on lawful processing, purpose limitation, data minimization, and accountability, is crucial for any entity operating in India or handling the data of Indian citizens.
             </p>
 
-            <h3>Key Definitions and Terminology</h3>
+            <h3>Key Definitions Under the Act</h3>
             <p>
-                Define any jargon or specific terms that your audience might not be familiar with. This builds trust and ensures everyone is on the same page.
+                Several terms are central to interpreting the DPDPA:
             </p>
             <ul>
-                <li><strong>Term 1:</strong> A clear and concise definition.</li>
-                <li><strong>Term 2:</strong> How this term applies in a practical context.</li>
-                <li><strong>Regulatory Framework:</strong> Briefly mention relevant laws or standards.</li>
+                <li><strong>Personal Data:</strong> Any data about an individual who is identifiable by or in relation to such data.</li>
+                <li><strong>Data Fiduciary:</strong> Any person who alone or in conjunction with others determines the purpose and means of processing personal data. This is akin to a "data controller."</li>
+                <li><strong>Data Principal:</strong> The individual to whom the personal data relates.</li>
+                <li><strong>Data Processor:</strong> Any person who processes personal data on behalf of a Data Fiduciary.</li>
+                <li><strong>Consent:</strong> Must be free, specific, informed, unconditional, and unambiguous with a clear affirmative action.</li>
             </ul>
 
             <blockquote>
-                <p>"The pace of change in the legal industry demands continuous learning and adaptation. Embracing new technologies is no longer optional, it's essential." - A Fictional Expert</p>
+                <p>"The DPDPA 2023 is not just a compliance hurdle; it's an opportunity for businesses to build deeper trust with their customers by championing data privacy."</p>
+                <cite>– Dr. Ananya Sharma, Privacy Law Expert</cite>
             </blockquote>
 
-            <h2>Practical Applications and Case Studies</h2>
+            <h2>Core Obligations for Data Fiduciaries</h2>
             <p>
-                Show, don't just tell. Provide real-world examples or hypothetical case studies to illustrate your points. This makes the information more relatable and actionable.
+                Businesses, as Data Fiduciaries, have several key obligations:
+            </p>
+            <ol>
+                <li><strong>Lawful Processing & Consent:</strong> Obtain clear, informed consent before processing personal data, or ensure another legitimate basis for processing applies.</li>
+                <li><strong>Notice Requirements:</strong> Provide clear notice to Data Principals about the data being collected and the purpose of processing.</li>
+                <li><strong>Purpose Limitation:</strong> Collect personal data only for specified, explicit, and legitimate purposes.</li>
+                <li><strong>Data Minimization:</strong> Collect only as much personal data as is necessary for the specified purpose.</li>
+                <li><strong>Accuracy & Erasure:</strong> Ensure data accuracy and provide mechanisms for Data Principals to correct or erase their data.</li>
+                <li><strong>Security Safeguards:</strong> Implement reasonable security measures to prevent data breaches.</li>
+                <li><strong>Breach Notification:</strong> Report personal data breaches to the Data Protection Board of India (DPBI) and affected Data Principals.</li>
+            </ol>
+
+            <h3>Impact on Startups and SMEs</h3>
+            <p>
+                While the Act applies broadly, startups and SMEs must be particularly diligent. Key considerations include:
+            </p>
+            <ul>
+                <li>Implementing cost-effective consent management mechanisms.</li>
+                <li>Developing clear privacy policies and terms of service.</li>
+                <li>Training employees on data handling best practices.</li>
+                <li>Understanding obligations related to children's data, which carry stricter requirements.</li>
+            </ul>
+            <p>
+                The Act also introduces the concept of "Significant Data Fiduciaries" (SDFs) based on the volume and sensitivity of data processed, who will have additional obligations like appointing a Data Protection Officer (DPO) and conducting Data Protection Impact Assessments (DPIAs).
+            </p>
+            
+            <pre><code class="language-plaintext"># Pseudocode: Basic DPDPA Consent Check
+function canProcessData(dataPrincipal, purpose, consentRecord) {
+  if (!consentRecord || !consentRecord.isValidFor(purpose)) {
+    // Obtain fresh, specific consent
+    newConsent = obtainConsent(dataPrincipal, purpose);
+    if (newConsent.isGiven && newConsent.isSpecificTo(purpose)) {
+      return true;
+    } else {
+      return false; // Cannot process without valid consent
+    }
+  }
+  return true; // Existing valid consent
+}
+</code></pre>
+            <p>The above pseudocode illustrates a simplified logic for checking consent before processing data, a fundamental aspect of DPDPA compliance.</p>
+
+            <h2>The Data Protection Board of India (DPBI)</h2>
+            <p>
+                The DPBI is the adjudicatory body established under the Act. It will handle complaints, impose penalties for non-compliance, and play a crucial role in enforcing the DPDPA. Penalties can be significant, running up to ₹250 crore (approx. $30 million USD) for certain violations, making compliance a critical business priority.
             </p>
 
-            <pre><code class="language-javascript">// Example: A snippet of relevant pseudo-code or configuration
-function assessComplianceRisk(data) {
-  if (data.isSensitive && !data.isEncrypted) {
-    return "High Risk: Unencrypted sensitive data.";
-  }
-  // ... more checks
-  return "Low Risk";
-}
-console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
-</code></pre>
-            <p>Make sure to explain any code or technical examples clearly for a broader audience. Not everyone reading will be a developer.</p>
-
-            <h2>Conclusion and Future Outlook</h2>
+            <h2>Conclusion: Embracing a Privacy-First Future</h2>
             <p>
-                Summarize the main takeaways from your article. Reiterate the importance of the topic and offer some final thoughts or predictions about future trends. What should the reader do next?
+                The DPDPA 2023 is more than a set of rules; it signals a cultural shift towards prioritizing data privacy. Businesses that proactively embed privacy principles into their operations will not only ensure compliance but also build stronger customer relationships and gain a competitive edge in India's rapidly expanding digital economy. Staying informed and seeking expert guidance will be key to navigating this new era of data protection.
             </p>
 
             <div class="article-cta">
-                <h3>Ready to Navigate Legal Tech?</h3>
-                <p>Our experts can help you integrate the right solutions for your firm.</p>
-                <a href="../index.html#contact" class="cta-button">Discuss Your Needs</a>
-            </div>
-
-            <div class="share-section">
-                <h4>Share this Article</h4>
-                <div class="share-buttons">
-                    <a href="#" class="share-button" title="Share on LinkedIn" onclick="shareSocial('linkedin'); return false;">
-                        <i data-lucide="linkedin"></i>
-                    </a>
-                    <a href="#" class="share-button" title="Share on Twitter (X)" onclick="shareSocial('twitter'); return false;">
-                        <i data-lucide="twitter"></i>
-                    </a>
-                    <a href="#" class="share-button" title="Copy link" onclick="copyLink(); return false;">
-                        <i data-lucide="link-2"></i>
-                    </a>
-                </div>
+                <h3>Need Help with DPDPA Compliance?</h3>
+                <p>Lex Root Agency offers expert guidance and solutions to help your business navigate the DPDPA 2023 and build robust data protection practices.</p>
+                <a href="contact.html" class="cta-button">
+                    <i data-lucide="shield-check"></i> Get Compliance Support
+                </a>
             </div>
 
             <div class="related-articles">
                 <h3>You Might Also Like</h3>
                 <div class="related-grid">
-                    <a href="digital_personal_data_protection_act_2023.html" class="related-card"> 
-                        <h4>Understanding India's Digital Personal Data Protection Act 2023: A Comprehensive Guide</h4>
-                        <p>The DPDPA 2023 marks a watershed moment in India's data protection landscape. This comprehensive guide breaks down what startups need to know...</p>
+                    <a href="article-gdpr-vs-ccpa.html" class="related-card"> 
+                        <h4>GDPR vs CCPA: Key Differences Every SaaS Startup Should Know</h4>
+                        <p>Navigate the complexities of international data privacy laws with this detailed comparison...</p>
                     </a>
-                    <a href="gdpr-vs-ccpa-saas.html" class="related-card"> <h4>GDPR vs CCPA: Key Differences Every SaaS Startup Should Know</h4>
-                        <p>Navigate the complexities of international data privacy laws with this detailed comparison of GDPR and CCPA requirements...</p>
+                    <a href="article-ai-legal-compliance.html" class="related-card"> 
+                        <h4>AI in Legal Compliance: Tools That Are Transforming the Industry</h4>
+                        <p>Explore how artificial intelligence is revolutionizing compliance management...</p>
                     </a>
-                    <a href="ai-legal-compliance-tools.html" class="related-card"> <h4>AI in Legal Compliance: Tools That Are Transforming the Industry</h4>
-                        <p>Explore how artificial intelligence is revolutionizing compliance management, from automated contract review to predictive risk assessment...</p>
+                    <a href="article-privacy-first-products.html" class="related-card"> 
+                        <h4>Building Privacy-First Products: A Legal Framework for Developers</h4>
+                        <p>A structured legal framework for developers to build privacy-first products...</p>
                     </a>
                 </div>
             </div>
-        </div>
-    </div>
-
-    <footer>
+        </main> </div> <footer>
        <div class="footer-content">
            <div class="social-links">
-               <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
-               <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
-               <a href="mailto:theindrajeetk@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+               <a href="https://linkedin.com/company/lexroot" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/lexroot" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:hello@lexroot.com" aria-label="Email"><i data-lucide="mail"></i></a>
            </div>
-           <p>&copy; <script>document.write(new Date().getFullYear())</script> Lex Root Agency. All Rights Reserved. Built with purpose.</p>
+           <p>&copy; <span id="currentYear"></span> Lex Root Agency. All Rights Reserved. Built with purpose.</p>
        </div>
    </footer>
     
     <script>
+        // Dynamically set current year in footer
+        document.getElementById('currentYear').textContent = new Date().getFullYear();
+
         // Loading Screen 
         window.addEventListener('load', () => {
             setTimeout(() => {
@@ -834,7 +919,7 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
             let mouseY = 0;
             let followerX = 0;
             let followerY = 0;
-            const KFS = 0.25; // Follower speed factor
+            const KFS = 0.25; 
 
             document.addEventListener('mousemove', (e) => {
                 mouseX = e.clientX;
@@ -847,13 +932,10 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
             function animateCursor() {
                 if (cursor && cursorFollower) {
                     cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
-                    
                     const dx = mouseX - followerX;
                     const dy = mouseY - followerY;
-                    
                     followerX += dx * KFS;
                     followerY += dy * KFS;
-                    
                     cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
                 }
                 requestAnimationFrame(animateCursor);
@@ -866,23 +948,22 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
             });
 
             document.addEventListener('mouseleave', () => {
-                cursor.style.opacity = '0';
-                cursorFollower.style.opacity = '0';
+                if(cursor) cursor.style.opacity = '0';
+                if(cursorFollower) cursorFollower.style.opacity = '0';
             });
 
             document.addEventListener('mouseenter', () => {
-                cursor.style.opacity = '1';
-                cursorFollower.style.opacity = '1';
+                if(cursor) cursor.style.opacity = '1';
+                if(cursorFollower) cursorFollower.style.opacity = '1';
             });
         }
 
         // Navbar scroll effect 
         const navbar = document.getElementById('navbar');
         if (navbar) {
-            let lastScrollTop = 0;
             window.addEventListener('scroll', () => {
                 let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-                if (scrollTop > 100) {
+                if (scrollTop > 50) { // Adjusted threshold
                     navbar.classList.add('scrolled');
                 } else {
                     navbar.classList.remove('scrolled');
@@ -892,17 +973,21 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
 
         // Mobile menu 
         const mobileMenuToggle = document.getElementById('mobileMenu');
-        const navLinks = document.getElementById('navLinks');
+        const navLinksList = document.getElementById('navLinks'); 
        
-        if (mobileMenuToggle && navLinks) {
+        if (mobileMenuToggle && navLinksList) {
             mobileMenuToggle.addEventListener('click', () => {
-                navLinks.classList.toggle('active');
+                const isActive = navLinksList.classList.toggle('active');
                 mobileMenuToggle.classList.toggle('open'); 
+                mobileMenuToggle.setAttribute('aria-expanded', isActive);
             });
-            navLinks.querySelectorAll('a').forEach(link => {
+            navLinksList.querySelectorAll('a').forEach(link => {
                 link.addEventListener('click', () => {
-                    navLinks.classList.remove('active');
-                    mobileMenuToggle.classList.remove('open');
+                    if (navLinksList.classList.contains('active')) {
+                        navLinksList.classList.remove('active');
+                        mobileMenuToggle.classList.remove('open');
+                        mobileMenuToggle.setAttribute('aria-expanded', 'false');
+                    }
                 });
             });
         }
@@ -920,18 +1005,17 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
                 }
             });
         };
-
         window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll(); 
+        setTimeout(revealOnScroll, 100); // Initial check
 
         // Article-specific scripts
-        // View counter
+        // View counter (simple simulation)
         const articleIdentifier = window.location.pathname; 
-        let viewCount = parseInt(localStorage.getItem(`views-${articleIdentifier}`)) || Math.floor(Math.random() * 300) + 1000; 
+        let viewCount = parseInt(localStorage.getItem(`views-${articleIdentifier}`)) || Math.floor(Math.random() * 2500) + 1000; 
         
         const viewCountDisplay = document.getElementById('viewCountDisplay');
         if (viewCountDisplay) {
-            if (!sessionStorage.getItem(`viewed-${articleIdentifier}`)) {
+            if (!sessionStorage.getItem(`viewed-${articleIdentifier}`)) { 
                 viewCount++;
                 localStorage.setItem(`views-${articleIdentifier}`, viewCount);
                 sessionStorage.setItem(`viewed-${articleIdentifier}`, 'true');
@@ -939,10 +1023,12 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
             viewCountDisplay.textContent = viewCount.toLocaleString();
         }
 
-        // Share functionality
+        // Share functionality (These functions are general and can be kept if used by other elements, e.g. footer)
         function shareSocial(platform) {
             const articleUrl = encodeURIComponent(window.location.href);
-            const articleTitle = encodeURIComponent(document.title);
+            let articleTitleText = document.querySelector('.article-main-title')?.textContent || document.title;
+            articleTitleText = articleTitleText.replace('| Lex Root Agency', '').trim();
+            const articleTitle = encodeURIComponent(articleTitleText);
             let shareUrl = '';
 
             if (platform === 'linkedin') {
@@ -954,22 +1040,165 @@ console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
                 window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=450');
             }
         }
-
+        
+        let copyLinkTimeout;
         function copyLink() {
+            // This function might be called by other elements, so it's kept.
+            // If you had a specific "Copy Link" button in the removed section, its UI update logic would be here.
+            // For now, it just copies.
             navigator.clipboard.writeText(window.location.href).then(() => {
-                alert('Link copied to clipboard!'); 
+                // You could add a temporary message elsewhere on the page if needed.
+                // e.g., a small toast notification.
+                console.log('Link copied!');
             }).catch(err => {
                 console.error('Failed to copy link: ', err);
-                alert('Failed to copy. Please copy the link from your browser manually.');
+                prompt("Failed to copy automatically. Please copy this link:", window.location.href);
             });
         }
         
-        // Initialize Lucide icons
-        if (typeof lucide !== 'undefined') {
-            lucide.createIcons();
-        } else {
-            console.warn('Lucide icons script not loaded or failed to initialize.');
+        // AI Takeaways Functionality
+        const aiTakeawaysButton = document.getElementById('aiTakeawaysButton');
+        const aiTakeawaysContent = document.getElementById('aiTakeawaysContent');
+        const aiTakeawaysStatus = document.getElementById('aiTakeawaysStatus');
+        const mainArticleContentElement = document.getElementById('mainArticleContent');
+
+        function sanitizeForPrompt(text) {
+            if (typeof text !== 'string') return '';
+            return text.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
         }
+
+        async function generateAiTakeaways() {
+            if (!mainArticleContentElement || !aiTakeawaysContent || !aiTakeawaysStatus) return;
+
+            aiTakeawaysStatus.textContent = 'AI is generating summary...';
+            aiTakeawaysStatus.className = 'ai-takeaways-status ai-takeaways-loading';
+            aiTakeawaysContent.style.display = 'none';
+            aiTakeawaysButton.disabled = true;
+            const buttonIcon = aiTakeawaysButton.querySelector('i');
+            if (buttonIcon) buttonIcon.dataset.lucide = 'loader-2'; 
+            if (lucide) lucide.createIcons();
+
+
+            let articleText = '';
+            const relevantElements = mainArticleContentElement.querySelectorAll('p, h2, h3, li');
+            relevantElements.forEach(el => {
+                articleText += el.textContent + '\n';
+            });
+            articleText = articleText.replace(/\s\s+/g, ' ').trim(); 
+            const maxChars = 2500; 
+            const truncatedText = sanitizeForPrompt(articleText.substring(0, maxChars));
+
+            const prompt = `Based on the following article content, please provide:
+1. A concise "TL;DR" (Too Long; Didn't Read) summary (1-2 sentences, max 40 words).
+2. 3-4 key takeaways as bullet points (each takeaway max 15-20 words).
+
+Article Content Snippet:
+---
+${truncatedText}
+---
+
+Format the output clearly. Start with "TL;DR:" for the summary. Then start a new section with "Key Takeaways:" followed by the bullet points.
+Example:
+TL;DR: This article explains X and its importance for Y.
+Key Takeaways:
+- Point one about the topic.
+- Another crucial consideration.
+- A final important insight.`;
+
+            try {
+                const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
+                const apiKey = ""; 
+                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
+                
+                const response = await fetch(apiUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(`API request failed: ${response.statusText} - ${errorData?.error?.message || 'Unknown error'}`);
+                }
+
+                const result = await response.json();
+                
+                if (result.candidates && result.candidates[0].content?.parts?.[0]?.text) {
+                    aiTakeawaysStatus.textContent = '';
+                    aiTakeawaysStatus.className = 'ai-takeaways-status';
+                    
+                    let rawText = result.candidates[0].content.parts[0].text;
+                    let tldr = '';
+                    let takeawaysList = [];
+
+                    const tldrMatch = rawText.match(/TL;DR:(.*?)Key Takeaways:/is);
+                    if (tldrMatch && tldrMatch[1]) {
+                        tldr = tldrMatch[1].trim();
+                    } else {
+                        const tldrOnlyMatch = rawText.match(/TL;DR:(.*)/is);
+                        if (tldrOnlyMatch && tldrOnlyMatch[1]) {
+                            tldr = tldrOnlyMatch[1].trim().split('\n')[0]; 
+                        }
+                    }
+                    
+                    const takeawaysMatch = rawText.match(/Key Takeaways:(.*)/is);
+                    if (takeawaysMatch && takeawaysMatch[1]) {
+                        takeawaysList = takeawaysMatch[1].trim().split('\n').map(item => item.replace(/^[\s*-]+/, '').trim()).filter(item => item);
+                    }
+                    
+                    if (!tldr && takeawaysList.length === 0) {
+                        aiTakeawaysContent.innerHTML = `<p>Could not structure summary. AI Raw Output:</p><p>${rawText.replace(/\n/g, '<br>')}</p>`;
+                    } else {
+                        let html = '';
+                        if (tldr) {
+                            html += `<p><strong>TL;DR:</strong> ${tldr}</p>`;
+                        }
+                        if (takeawaysList.length > 0) {
+                            html += `<p style="margin-top:0.75em;"><strong>Key Takeaways:</strong></p><ul>`;
+                            takeawaysList.forEach(item => {
+                                html += `<li>${item}</li>`;
+                            });
+                            html += `</ul>`;
+                        }
+                        aiTakeawaysContent.innerHTML = html || '<p>No summary could be generated at this time.</p>';
+                    }
+                    aiTakeawaysContent.style.display = 'block';
+                } else {
+                    throw new Error('Unexpected API response structure for AI takeaways.');
+                }
+            } catch (error) {
+                console.error('Error generating AI takeaways:', error);
+                aiTakeawaysStatus.textContent = `Error: ${error.message}`;
+                aiTakeawaysStatus.className = 'ai-takeaways-status ai-takeaways-error';
+                aiTakeawaysContent.innerHTML = '<p>Could not generate summary at this time.</p>';
+                aiTakeawaysContent.style.display = 'block';
+            } finally {
+                aiTakeawaysButton.disabled = false;
+                if (buttonIcon) buttonIcon.dataset.lucide = 'sparkles'; 
+                if (lucide) lucide.createIcons();
+            }
+        }
+
+        if (aiTakeawaysButton) {
+            aiTakeawaysButton.addEventListener('click', generateAiTakeaways);
+        }
+        
+        // Initialize Lucide icons on DOMContentLoaded
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded or failed to initialize. Retrying...');
+                setTimeout(() => {
+                     if (typeof lucide !== 'undefined') {
+                        lucide.createIcons();
+                     } else {
+                        console.error('Lucide icons failed to load after retry.');
+                     }
+                }, 500);
+            }
+            revealOnScroll(); 
+        });
     </script>
 </body>
 </html>
