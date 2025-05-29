@@ -1168,7 +1168,7 @@
                 }, 1000);
             });
 
-            // Custom Cursor
+            // Custom Cursor - Ultra Smooth Animation
             const cursor = document.getElementById('cursor');
             const cursorFollower = document.getElementById('cursor-follower');
             let mouseX = 0;
@@ -1182,19 +1182,26 @@
                 mouseY = e.clientY;
             });
 
+            // Initialize follower position
+            followerX = mouseX;
+            followerY = mouseY;
+
             // Smooth animation using requestAnimationFrame
             function animateCursor() {
                 // Main cursor - instant movement
-                cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+                cursor.style.left = mouseX + 'px';
+                cursor.style.top = mouseY + 'px';
 
-                // Follower cursor - smooth trailing effect
+                // Follower cursor - ultra smooth trailing effect
                 const dx = mouseX - followerX;
                 const dy = mouseY - followerY;
 
-                followerX += dx * 0.1;
-                followerY += dy * 0.1;
+                // Increased easing for smoother movement
+                followerX += dx * 0.25;
+                followerY += dy * 0.25;
 
-                cursorFollower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
+                cursorFollower.style.left = followerX + 'px';
+                cursorFollower.style.top = followerY + 'px';
 
                 requestAnimationFrame(animateCursor);
             }
