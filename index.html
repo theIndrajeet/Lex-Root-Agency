@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Lucide Icons CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/lucide@latest/dist/umd/lucide.css" />
     <title>Lex Root Agency - Next-Gen Legal Solutions</title>
+    <!-- Lucide Icons -->
+    <script defer src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     <style>
         * {
             margin: 0;
@@ -46,9 +50,10 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
+            z-index: 10001; /* Higher than nav (1000) */
             transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
         }
 
         .cursor-follower {
@@ -58,9 +63,9 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
+            z-index: 10000; /* Higher than nav */
             transform: translate(-50%, -50%);
+            will-change: transform;
         }
 
         .cursor.hover {
@@ -68,6 +73,7 @@
             height: 40px;
             background: rgba(0, 245, 255, 0.2);
             border-color: var(--accent-alt);
+            transition: width 0.2s ease, height 0.2s ease;
         }
 
         /* Loading Screen */
@@ -1024,6 +1030,7 @@
                 <li><a href="#about">About</a></li>
                 <li><a href="#services">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="articles.html">Articles</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
             <div class="mobile-menu-toggle" id="mobileMenu">
@@ -1047,7 +1054,9 @@
             </h1>
             <p>Expert regulatory research, content strategy, and legal marketing that drives results</p>
             <div class="hero-buttons">
-                <a href="#contact" class="btn-primary">Start Your Project</a>
+                <a href="#contact" class="btn-primary">
+                    📅 Start Your Project
+                </a>
                 <a href="#portfolio" class="btn-secondary">View Case Studies</a>
             </div>
         </div>
@@ -1085,22 +1094,22 @@
                 <p>With experience across healthtech and legaltech sectors, I've helped companies transform regulatory challenges into competitive advantages through strategic content and streamlined compliance processes.</p>
                 <div class="about-highlights">
                     <div class="highlight-item">
-                        <span class="highlight-icon">🎓</span>
+                        <span class="highlight-icon"><i data-lucide="graduation-cap"></i></span>
                         <h4>BBA LLB Graduate</h4>
                         <p>Dual expertise in business and law</p>
                     </div>
                     <div class="highlight-item">
-                        <span class="highlight-icon">⚡</span>
+                        <span class="highlight-icon"><i data-lucide="zap"></i></span>
                         <h4>Tech-Savvy</h4>
                         <p>Notion, AI tools, and automation</p>
                     </div>
                     <div class="highlight-item">
-                        <span class="highlight-icon">🌍</span>
+                        <span class="highlight-icon"><i data-lucide="globe"></i></span>
                         <h4>Global Perspective</h4>
                         <p>Multi-jurisdictional compliance</p>
                     </div>
                     <div class="highlight-item">
-                        <span class="highlight-icon">📈</span>
+                        <span class="highlight-icon"><i data-lucide="trending-up"></i></span>
                         <h4>Results-Driven</h4>
                         <p>Data-backed strategies</p>
                     </div>
@@ -1121,7 +1130,9 @@
             </div>
             <div class="services-grid">
                 <div class="service-card reveal">
-                    <div class="service-icon">📊</div>
+                    <div class="service-icon">
+                        <i data-lucide="bar-chart-2"></i>
+                    </div>
                     <h3>Compliance Research</h3>
                     <p>Navigate complex regulations with confidence through comprehensive research and actionable insights.</p>
                     <ul class="service-features">
@@ -1132,7 +1143,9 @@
                     </ul>
                 </div>
                 <div class="service-card reveal">
-                    <div class="service-icon">✍️</div>
+                    <div class="service-icon">
+                        <i data-lucide="pen-tool"></i>
+                    </div>
                     <h3>Legal Content Strategy</h3>
                     <p>Transform legal expertise into engaging content that drives traffic and establishes authority.</p>
                     <ul class="service-features">
@@ -1143,7 +1156,9 @@
                     </ul>
                 </div>
                 <div class="service-card reveal">
-                    <div class="service-icon">🚀</div>
+                    <div class="service-icon">
+                        <i data-lucide="rocket"></i>
+                    </div>
                     <h3>Legal Marketing</h3>
                     <p>Build your brand and attract ideal clients with strategic marketing designed for legal professionals.</p>
                     <ul class="service-features">
@@ -1158,119 +1173,8 @@
     </section>
 
     <!-- Portfolio Section -->
-    <section id="portfolio">
-        <div class="portfolio-container">
-            <div class="portfolio-header reveal">
-                <span class="section-badge">Portfolio</span>
-                <h2 class="section-title">Success Stories That Speak Volumes</h2>
-            </div>
-            <div class="portfolio-grid">
-                <div class="portfolio-item reveal">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>View Case Study →</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>DPDPA Compliance Tracker</h3>
-                        <p>Developed a comprehensive Notion-based compliance tracking system for an Indian SaaS startup, ensuring 100% DPDPA compliance.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Compliance</span>
-                            <span class="tag">SaaS</span>
-                            <span class="tag">Notion</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>View Case Study →</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>Legal Blog Strategy</h3>
-                        <p>Ghostwrote SEO-optimized legal content that increased a law firm's organic traffic by 40% in just 6 months.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Content</span>
-                            <span class="tag">SEO</span>
-                            <span class="tag">Growth</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="portfolio-item reveal">
-                    <div class="portfolio-image">
-                        <div class="portfolio-overlay">
-                            <h3>View Case Study →</h3>
-                        </div>
-                    </div>
-                    <div class="portfolio-content">
-                        <h3>APAC Market Entry</h3>
-                        <p>Created comprehensive content strategy and regulatory framework for a legaltech company expanding into Southeast Asian markets.</p>
-                        <div class="portfolio-tags">
-                            <span class="tag">Strategy</span>
-                            <span class="tag">International</span>
-                            <span class="tag">LegalTech</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <section id="
     </section>
-
-    <!-- Contact Section -->
-    <section id="contact">
-        <div class="contact-container">
-            <div class="contact-header reveal">
-                <span class="section-badge">Get In Touch</span>
-                <h2 class="section-title">Let's Build Something Amazing Together</h2>
-                <p style="color: var(--text-muted); font-size: 1.2rem; margin-top: 1rem;">Ready to transform your legal challenges into opportunities? I'm here to help.</p>
-            </div>
-            <div class="contact-grid reveal">
-                <div class="contact-item">
-                    <span class="contact-icon">📧</span>
-                    <h4>Email</h4>
-                    <a href="mailto:theindrajeetk@gmail.com">theindrajeetk@gmail.com</a>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">📅</span>
-                    <h4>Schedule</h4>
-                    <a href="#">Book a Call</a>
-                </div>
-                <div class="contact-item">
-                    <span class="contact-icon">💼</span>
-                    <h4>LinkedIn</h4>
-                    <a href="#">Connect with me</a>
-                </div>
-            </div>
-            <form class="contact-form reveal" id="contactForm">
-                <div class="form-group">
-                    <input type="text" id="name" placeholder=" " required>
-                    <label for="name">Your Name</label>
-                </div>
-                <div class="form-group">
-                    <input type="email" id="email" placeholder=" " required>
-                    <label for="email">Email Address</label>
-                </div>
-                <div class="form-group">
-                    <textarea id="message" rows="5" placeholder=" " required></textarea>
-                    <label for="message">Tell me about your project</label>
-                </div>
-                <button type="submit" class="submit-btn">Send Message</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="footer-content">
-            <div class="social-links">
-                <a href="#" aria-label="LinkedIn">💼</a>
-                <a href="#" aria-label="Twitter">🐦</a>
-                <a href="#" aria-label="Email">✉️</a>
-            </div>
-            <p>&copy; 2024 Lex Root Agency. Crafted with precision and purpose.</p>
-        </div>
-    </footer>
 
     <script>
         // Loading Screen
@@ -1283,32 +1187,51 @@
         // Custom Cursor
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursor-follower');
+        let mouseX = 0;
+        let mouseY = 0;
+        let followerX = 0;
+        let followerY = 0;
 
+        // Update mouse position
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
 
+        // Smooth animation using requestAnimationFrame
+        function animateCursor() {
+            // Main cursor - instant movement
+            cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+
+            // Follower cursor - smooth trailing effect
+            const dx = mouseX - followerX;
+            const dy = mouseY - followerY;
+
+            followerX += dx * 0.1;
+            followerY += dy * 0.1;
+
+            cursorFollower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
+
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effects
         document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
         });
 
-        // Particles
-        const particlesContainer = document.getElementById('particles');
-        for (let i = 0; i < 50; i++) {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * 100 + '%';
-            particle.style.animationDelay = Math.random() * 20 + 's';
-            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
-            particlesContainer.appendChild(particle);
-        }
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
+        });
 
         // Navbar scroll effect
         const navbar = document.getElementById('navbar');
@@ -1323,63 +1246,8 @@
         // Mobile menu
         const mobileMenu = document.getElementById('mobileMenu');
         const navLinks = document.getElementById('navLinks');
-        
+
         mobileMenu.addEventListener('click', () => {
             navLinks.classList.toggle('active');
         });
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    navLinks.classList.remove('active');
-                }
-            });
-        });
-
-        // Reveal on scroll
-        const revealElements = document.querySelectorAll('.reveal');
-        const revealOnScroll = () => {
-            revealElements.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 150;
-                
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add('active');
-                }
-            });
-        };
-
-        window.addEventListener('scroll', revealOnScroll);
-        revealOnScroll();
-
-        // Form submission
-        document.getElementById('contactForm').addEventListener('submit', (e) => {
-            e.preventDefault();
-            // Ripple effect
-            const btn = e.target.querySelector('.submit-btn');
-            btn.style.transform = 'scale(0.95)';
-            setTimeout(() => {
-                btn.style.transform = 'scale(1)';
-                alert('Thank you for your message! I\'ll get back to you within 24 hours.');
-                e.target.reset();
-            }, 200);
-        });
-
-        // Parallax effect for floating elements
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallax = document.querySelectorAll('.floating-element');
-            
-            parallax.forEach(el => {
-                const speed = el.dataset.speed || 0.5;
-                el.style.transform = `translateY(${scrolled * speed}px)`;
-            });
-        });
     </script>
-</body>
-</html>

@@ -46,9 +46,11 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 9999;
-            transition: all 0.1s ease;
+            z-index: 10001; /* Higher than nav (1000) */
+            /* Remove transition for pure JS animation */
             transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
         }
 
         .cursor-follower {
@@ -58,9 +60,10 @@
             border-radius: 50%;
             position: fixed;
             pointer-events: none;
-            z-index: 9998;
-            transition: all 0.3s ease;
+            z-index: 10000; /* Higher than nav */
+            /* Remove transition for pure JS animation */
             transform: translate(-50%, -50%);
+            will-change: transform;
         }
 
         .cursor.hover {
@@ -68,7 +71,9 @@
             height: 40px;
             background: rgba(0, 245, 255, 0.2);
             border-color: var(--accent-alt);
+            transition: width 0.2s ease, height 0.2s ease; /* Only transition size */
         }
+
 
         /* Loading Screen */
         .loader {
@@ -1016,6 +1021,7 @@
                 <li><a href="index.html#about">About</a></li>
                 <li><a href="index.html#services">Services</a></li>
                 <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="articles.html">Articles</a></li>
                 <li><a href="index.html#contact">Contact</a></li>
             </ul>
             <div class="mobile-menu-toggle" id="mobileMenu">
@@ -1308,20 +1314,52 @@
         // Custom Cursor
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursor-follower');
+        let mouseX = 0;
+        let mouseY = 0;
+        let cursorX = 0;
+        let cursorY = 0;
+        let followerX = 0;
+        let followerY = 0;
 
+        // Update mouse position
         document.addEventListener('mousemove', (e) => {
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
-            
-            setTimeout(() => {
-                cursorFollower.style.left = e.clientX + 'px';
-                cursorFollower.style.top = e.clientY + 'px';
-            }, 100);
+            mouseX = e.clientX;
+            mouseY = e.clientY;
         });
 
+        // Smooth animation using requestAnimationFrame
+        function animateCursor() {
+            // Main cursor - instant movement
+            cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+            
+            // Follower cursor - smooth trailing effect
+            const dx = mouseX - followerX;
+            const dy = mouseY - followerY;
+            
+            followerX += dx * 0.1;
+            followerY += dy * 0.1;
+            
+            cursorFollower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
+            
+            requestAnimationFrame(animateCursor);
+        }
+        animateCursor();
+
+        // Hover effects
         document.querySelectorAll('a, button').forEach(el => {
             el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
             el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+        });
+
+        // Hide cursor when leaving window
+        document.addEventListener('mouseleave', () => {
+            cursor.style.opacity = '0';
+            cursorFollower.style.opacity = '0';
+        });
+
+        document.addEventListener('mouseenter', () => {
+            cursor.style.opacity = '1';
+            cursorFollower.style.opacity = '1';
         });
 
         // Navbar scroll effect
@@ -1796,6 +1834,9 @@
                 gridLines.style.transform = `translate(${scrolled * parallaxSpeed}px, ${scrolled * parallaxSpeed}px)`;
             }
         });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
 </body>
 </html>
