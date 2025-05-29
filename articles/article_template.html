@@ -4,27 +4,22 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <!-- SEO Meta Tags - UPDATE THESE FOR EACH ARTICLE -->
     <title>Your Article Title Here | Lex Root Agency</title>
     <meta name="description" content="Article description here - 150-160 characters for SEO">
     <meta name="keywords" content="legal compliance, startup law, data privacy">
     <meta name="author" content="Indrajeet K.">
     
-    <!-- Open Graph Tags for Social Sharing -->
     <meta property="og:title" content="Your Article Title Here">
     <meta property="og:description" content="Article description for social media">
-    <meta property="og:image" content="https://yourdomain.com/images/article-image.jpg">
-    <meta property="og:url" content="https://yourdomain.com/articles/article-name.html">
-    <meta property="og:type" content="article">
+    <meta property="og:image" content="https://yourdomain.com/images/article-image.jpg"> <meta property="og:url" content="https://yourdomain.com/articles/article-name.html"> <meta property="og:type" content="article">
     
-    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Your Article Title Here">
     <meta name="twitter:description" content="Article description for Twitter">
-    <meta name="twitter:image" content="https://yourdomain.com/images/article-image.jpg">
+    <meta name="twitter:image" content="https://yourdomain.com/images/article-image.jpg"> <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
     
     <style>
-        /* Copy all the styles from your main site here */
+        /* Styles from main site (index.html) */
         * {
             margin: 0;
             padding: 0;
@@ -47,7 +42,7 @@
 
         html {
             scroll-behavior: smooth;
-            cursor: none;
+            cursor: none; /* Ensure custom cursor is intended for all pages */
         }
 
         body {
@@ -55,28 +50,333 @@
             background: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
-            cursor: none;
+            cursor: none; /* Ensure custom cursor is intended for all pages */
         }
 
-        /* Include all necessary styles from your main site */
-        /* Navigation, cursor, etc. - same as other pages */
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease; /* Added for smoother hover */
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            transition: background-color 0.2s ease; /* Added for smoother hover */
+        }
+
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.2);
+            border-color: var(--accent-alt);
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '™';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        /* Button styles from main site (can be used for back button too) */
+        .btn-primary, .cta-button, .back-button { /* Added .back-button here */
+            padding: 1rem 2.5rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+            display: inline-flex; /* For icon alignment */
+            align-items: center; /* For icon alignment */
+            gap: 0.5rem; /* Space between icon and text */
+        }
+
+        .btn-primary:hover, .cta-button:hover, .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+        
+        /* Footer specific styles from main site */
+        footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a { 
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        /* Mobile Menu Toggle from main site */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px; 
+            z-index: 1001; 
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive styles from main site */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem; /* Adjust padding for smaller screens */
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+                transition: right 0.5s ease-in-out; 
+                z-index: 999; 
+                gap: 2rem; /* Adjust gap for mobile nav links */
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .article-title {
+                 font-size: clamp(2rem, 7vw, 3rem); /* Adjusted clamp for mobile */
+            }
+            .article-hero {
+                margin-top: 70px; /* Adjust for potentially smaller nav height */
+            }
+            .back-button-container {
+                padding: 1.5rem 1rem; /* Adjust padding for mobile */
+            }
+            .back-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+             .related-grid {
+                grid-template-columns: 1fr; /* Stack related articles on mobile */
+            }
+        }
+
+        /* Animations for scroll from main site */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar from main site */
+        ::-webkit-scrollbar {
+            width: 8px; /* Slightly thinner scrollbar */
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
+        }
 
         /* Article Specific Styles */
         .article-hero {
-            min-height: 60vh;
+            min-height: 50vh; /* Slightly reduced height */
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.2) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
-            margin-top: 80px;
+            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.08) 0%, transparent 40%);
+            margin-top: 80px; 
+            padding: 2rem 1rem; /* Add some padding */
         }
 
         .article-hero-content {
             text-align: center;
             max-width: 900px;
-            padding: 2rem;
+            padding: 2rem 1rem; /* Ensure padding */
             position: relative;
             z-index: 2;
         }
@@ -89,17 +389,17 @@
             border-radius: 50px;
             font-size: 0.9rem;
             color: var(--accent);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem; /* Adjusted margin */
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .article-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 6vw, 3.5rem); /* Adjusted clamp */
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            letter-spacing: -2px;
+            line-height: 1.15; /* Slightly increased line height */
+            margin-bottom: 1.5rem; /* Adjusted margin */
+            letter-spacing: -1.5px; /* Adjusted letter spacing */
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -107,23 +407,53 @@
 
         .article-meta {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem; /* Adjusted gap */
             justify-content: center;
             flex-wrap: wrap;
             color: var(--text-muted);
+            font-size: 0.9rem; /* Slightly smaller meta text */
         }
 
         .article-meta span {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem; /* Adjusted gap */
         }
+        .article-meta span i { /* Style for icons in meta if you add them */
+            width: 1em;
+            height: 1em;
+        }
+
 
         .article-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 4rem 2rem 8rem;
+            padding: 0rem 2rem 6rem; /* Reduced top padding as back button is above */
         }
+        
+        /* Back Button Specific Styles */
+        .back-button-container {
+            padding: 2rem 0rem; /* Add some spacing around the button */
+        }
+
+        .back-button {
+            padding: 0.8rem 1.8rem; 
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted);
+        }
+        .back-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .back-button i {
+            width: 1.1em; 
+            height: 1.1em;
+            stroke-width: 2.5;
+        }
+
 
         .article-content {
             font-size: 1.1rem;
@@ -132,119 +462,128 @@
         }
 
         .article-content h2 {
-            font-size: 2.2rem;
-            margin: 3rem 0 1.5rem;
+            font-size: 2rem; 
+            margin: 2.5rem 0 1.2rem;
             color: var(--accent);
             font-weight: 700;
         }
 
         .article-content h3 {
-            font-size: 1.6rem;
-            margin: 2rem 0 1rem;
+            font-size: 1.5rem; 
+            margin: 1.8rem 0 1rem;
             color: var(--text-light);
             font-weight: 600;
         }
 
         .article-content p {
             margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85); 
+        }
+        
+        .article-content p.lead { 
+            font-size: 1.2rem; 
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 2rem;
         }
 
         .article-content ul,
         .article-content ol {
             margin: 1.5rem 0;
-            padding-left: 2rem;
+            padding-left: 1.5rem; 
         }
 
         .article-content li {
-            margin-bottom: 0.8rem;
-            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.7rem; 
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .article-content blockquote {
             margin: 2rem 0;
             padding: 1.5rem;
-            background: rgba(0, 245, 255, 0.05);
-            border-left: 4px solid var(--accent);
-            border-radius: 10px;
+            background: rgba(0, 245, 255, 0.03); 
+            border-left: 3px solid var(--accent); 
+            border-radius: 8px; 
             font-style: italic;
+            color: rgba(255,255,255,0.9);
+        }
+         .article-content blockquote p { 
+            margin-bottom: 0;
         }
 
+
         .article-content code {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.08); 
             padding: 0.2rem 0.5rem;
             border-radius: 4px;
-            font-family: 'Courier New', monospace;
+            font-family: 'SF Mono', 'Courier New', monospace; 
+            font-size: 0.9em;
         }
 
         .article-content pre {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 1.5rem;
-            border-radius: 10px;
+            background: rgba(10, 14, 39, 0.7); 
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.2rem; 
+            border-radius: 8px;
             overflow-x: auto;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
         }
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.9em;
+            color: var(--text-muted); 
+        }
+
 
         .article-content a {
             color: var(--accent);
             text-decoration: none;
-            border-bottom: 1px solid transparent;
+            border-bottom: 1px solid transparent; 
             transition: all 0.3s ease;
         }
 
         .article-content a:hover {
             border-bottom-color: var(--accent);
+            text-shadow: 0 0 5px var(--accent); 
         }
 
         /* Call to Action */
         .article-cta {
-            margin-top: 4rem;
-            padding: 3rem;
-            background: rgba(94, 96, 206, 0.05);
-            border: 1px solid rgba(94, 96, 206, 0.2);
-            border-radius: 20px;
+            margin-top: 3rem; 
+            padding: 2.5rem; 
+            background: rgba(94, 96, 206, 0.08); 
+            border: 1px solid rgba(94, 96, 206, 0.25);
+            border-radius: 15px; 
             text-align: center;
         }
 
         .article-cta h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem; 
+            margin-bottom: 0.8rem;
             color: var(--text-light);
         }
 
         .article-cta p {
             color: var(--text-muted);
-            margin-bottom: 2rem;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+            margin-bottom: 1.5rem; 
+            font-size: 1rem;
         }
 
         /* Share Buttons */
         .share-section {
-            margin-top: 4rem;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 3rem;
+            padding: 2rem 0 1rem; 
+            border-top: 1px solid rgba(255, 255, 255, 0.08); 
             text-align: center;
         }
 
         .share-section h4 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .share-buttons {
@@ -254,9 +593,9 @@
         }
 
         .share-button {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
+            width: 45px; 
+            height: 45px;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
@@ -264,172 +603,373 @@
             justify-content: center;
             text-decoration: none;
             color: var(--text-light);
+            font-size: 1.1rem; 
             transition: all 0.3s ease;
+        }
+        .share-button i { 
+            width: 1.2em;
+            height: 1.2em;
         }
 
         .share-button:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px) scale(1.05); 
             border-color: var(--accent);
             color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+            background: rgba(0, 245, 255, 0.1); 
+            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.2);
         }
 
         /* Related Articles */
         .related-articles {
-            margin-top: 6rem;
-            padding-top: 4rem;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            margin-top: 4rem; 
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
         }
 
         .related-articles h3 {
-            font-size: 2rem;
-            margin-bottom: 3rem;
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
             text-align: center;
             color: var(--text-light);
         }
 
         .related-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem; 
         }
 
         .related-card {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; 
+            padding: 1.2rem;
+            text-decoration: none; 
             transition: all 0.3s ease;
+            display: block; 
         }
 
         .related-card:hover {
             transform: translateY(-5px);
             border-color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+            background: rgba(0, 245, 255, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.15);
         }
 
         .related-card h4 {
             margin-bottom: 0.5rem;
             color: var(--text-light);
+            font-size: 1.1rem; 
+            line-height: 1.4;
         }
 
         .related-card p {
             color: var(--text-muted);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
+            line-height: 1.5; 
         }
     </style>
 </head>
 <body>
-    <!-- Include Navigation from main site -->
+    <div class="loader" id="loader">
+        <div class="loader-text">LEX ROOT</div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo">LEX ROOT</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../portfolio.html">Portfolio</a></li>
+                <li><a href="../articles.html">Articles</a></li> 
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
     
-    <!-- Article Hero -->
     <article class="article-hero">
         <div class="article-hero-content">
-            <span class="article-category">Compliance</span>
-            <h1 class="article-title">Your Article Title Goes Here</h1>
+            <span class="article-category">Compliance</span> <h1 class="article-title">Your Awesome Article Title Goes Here</h1>
             <div class="article-meta">
-                <span>👤 Indrajeet K.</span>
-                <span>📅 May 28, 2024</span>
-                <span>⏱️ 10 min read</span>
-                <span>👁️ 1,234 views</span>
+                <span><i data-lucide="user-circle"></i> Indrajeet K.</span>
+                <span><i data-lucide="calendar-days"></i> May 29, 2024</span>
+                <span><i data-lucide="clock"></i> 10 min read</span>
+                <span><i data-lucide="eye"></i> <span id="viewCountDisplay">1,234</span> views</span>
             </div>
         </div>
     </article>
 
-    <!-- Article Content -->
     <div class="article-container">
+        <div class="back-button-container">
+            <a href="javascript:history.back()" class="back-button">
+                <i data-lucide="arrow-left"></i> Back
+            </a>
+        </div>
+
         <div class="article-content">
-            <!-- Article Introduction -->
             <p class="lead">
-                Start with a compelling introduction that hooks the reader. This paragraph should summarize what the article covers and why it matters to your target audience.
+                This is the compelling introduction that hooks the reader. It summarizes what the article covers and why it's incredibly important for the target audience to read on.
             </p>
 
-            <!-- Section 1 -->
-            <h2>Main Section Heading</h2>
+            <h2>Understanding the Core Concepts</h2>
             <p>
-                Your content goes here. Break up long sections with subheadings, bullet points, and relevant examples. Keep paragraphs short and scannable.
+                Dive deep into the foundational elements of your topic. Use clear language and break down complex ideas into digestible pieces. Remember to keep your paragraphs relatively short and scannable. Visual breaks are your friend.
+            </p>
+            <p>
+                For instance, if discussing legal tech, you might explain the difference between AI-driven contract review and traditional methods. Use analogies if they help clarify.
             </p>
 
-            <h3>Subsection Heading</h3>
+            <h3>Key Definitions and Terminology</h3>
             <p>
-                More detailed information under subsections. You can include:
+                Define any jargon or specific terms that your audience might not be familiar with. This builds trust and ensures everyone is on the same page.
             </p>
             <ul>
-                <li>Bullet points for easy scanning</li>
-                <li>Key takeaways and insights</li>
-                <li>Practical examples and case studies</li>
+                <li><strong>Term 1:</strong> A clear and concise definition.</li>
+                <li><strong>Term 2:</strong> How this term applies in a practical context.</li>
+                <li><strong>Regulatory Framework:</strong> Briefly mention relevant laws or standards.</li>
             </ul>
 
-            <!-- Quote Example -->
             <blockquote>
-                "Include relevant quotes from industry experts or regulations to add authority to your content."
+                <p>"The pace of change in the legal industry demands continuous learning and adaptation. Embracing new technologies is no longer optional, it's essential." - A Fictional Expert</p>
             </blockquote>
 
-            <!-- Section 2 -->
-            <h2>Another Main Section</h2>
+            <h2>Practical Applications and Case Studies</h2>
             <p>
-                Continue building your argument or explanation. Use concrete examples and data where possible.
+                Show, don't just tell. Provide real-world examples or hypothetical case studies to illustrate your points. This makes the information more relatable and actionable.
             </p>
 
-            <!-- Code Example (if needed) -->
-            <pre><code>// Example code or legal text
-if (compliance.required) {
-    implement.measures();
-}</code></pre>
+            <pre><code class="language-javascript">// Example: A snippet of relevant pseudo-code or configuration
+function assessComplianceRisk(data) {
+  if (data.isSensitive && !data.isEncrypted) {
+    return "High Risk: Unencrypted sensitive data.";
+  }
+  // ... more checks
+  return "Low Risk";
+}
+console.log(assessComplianceRisk({isSensitive: true, isEncrypted: false}));
+</code></pre>
+            <p>Make sure to explain any code or technical examples clearly for a broader audience. Not everyone reading will be a developer.</p>
 
-            <!-- Conclusion -->
-            <h2>Conclusion</h2>
+            <h2>Conclusion and Future Outlook</h2>
             <p>
-                Wrap up your article with key takeaways and actionable next steps for the reader.
+                Summarize the main takeaways from your article. Reiterate the importance of the topic and offer some final thoughts or predictions about future trends. What should the reader do next?
             </p>
 
-            <!-- CTA Section -->
             <div class="article-cta">
-                <h3>Need Help with Compliance?</h3>
-                <p>Get expert guidance on implementing these strategies for your startup.</p>
-                <a href="../index.html#contact" class="cta-button">Schedule a Consultation</a>
+                <h3>Ready to Navigate Legal Tech?</h3>
+                <p>Our experts can help you integrate the right solutions for your firm.</p>
+                <a href="../index.html#contact" class="cta-button">Discuss Your Needs</a>
             </div>
 
-            <!-- Share Section -->
             <div class="share-section">
-                <h4>Share this article</h4>
+                <h4>Share this Article</h4>
                 <div class="share-buttons">
-                    <a href="#" class="share-button" title="Share on LinkedIn">💼</a>
-                    <a href="#" class="share-button" title="Share on Twitter">🐦</a>
-                    <a href="#" class="share-button" title="Copy link">🔗</a>
+                    <a href="#" class="share-button" title="Share on LinkedIn" onclick="shareSocial('linkedin'); return false;">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="share-button" title="Share on Twitter (X)" onclick="shareSocial('twitter'); return false;">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="share-button" title="Copy link" onclick="copyLink(); return false;">
+                        <i data-lucide="link-2"></i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Related Articles -->
             <div class="related-articles">
-                <h3>Related Articles</h3>
+                <h3>You Might Also Like</h3>
                 <div class="related-grid">
-                    <a href="#" class="related-card">
-                        <h4>Related Article Title 1</h4>
-                        <p>Brief description of the related article...</p>
+                    <a href="digital_personal_data_protection_act_2023.html" class="related-card"> 
+                        <h4>Understanding India's Digital Personal Data Protection Act 2023: A Comprehensive Guide</h4>
+                        <p>The DPDPA 2023 marks a watershed moment in India's data protection landscape. This comprehensive guide breaks down what startups need to know...</p>
                     </a>
-                    <a href="#" class="related-card">
-                        <h4>Related Article Title 2</h4>
-                        <p>Brief description of the related article...</p>
+                    <a href="gdpr-vs-ccpa-saas.html" class="related-card"> <h4>GDPR vs CCPA: Key Differences Every SaaS Startup Should Know</h4>
+                        <p>Navigate the complexities of international data privacy laws with this detailed comparison of GDPR and CCPA requirements...</p>
                     </a>
-                    <a href="#" class="related-card">
-                        <h4>Related Article Title 3</h4>
-                        <p>Brief description of the related article...</p>
+                    <a href="ai-legal-compliance-tools.html" class="related-card"> <h4>AI in Legal Compliance: Tools That Are Transforming the Industry</h4>
+                        <p>Explore how artificial intelligence is revolutionizing compliance management, from automated contract review to predictive risk assessment...</p>
                     </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Include Footer from main site -->
+    <footer>
+       <div class="footer-content">
+           <div class="social-links">
+               <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:theindrajeetk@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+           </div>
+           <p>&copy; <script>document.write(new Date().getFullYear())</script> Lex Root Agency. All Rights Reserved. Built with purpose.</p>
+       </div>
+   </footer>
     
     <script>
-        // Include all JavaScript from your main site
-        // Add any article-specific scripts here
+        // Loading Screen 
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader) {
+                    loader.classList.add('hidden');
+                }
+            }, 300); 
+        });
+
+        // Custom Cursor 
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            const KFS = 0.25; // Follower speed factor
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            followerX = mouseX;
+            followerY = mouseY;
+
+            function animateCursor() {
+                if (cursor && cursorFollower) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            document.querySelectorAll('a, button, .share-button, .cta-button, .related-card, .back-button, input[type="text"], input[type="email"], textarea').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorFollower.style.opacity = '0';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorFollower.style.opacity = '1';
+            });
+        }
+
+        // Navbar scroll effect 
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            let lastScrollTop = 0;
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }, false);
+        }
+
+        // Mobile menu 
+        const mobileMenuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+       
+        if (mobileMenuToggle && navLinks) {
+            mobileMenuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('open'); 
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.classList.remove('open');
+                });
+            });
+        }
+
+        // Reveal on scroll 
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            const windowHeight = window.innerHeight;
+            revealElements.forEach(el => {
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 50; 
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll(); 
+
+        // Article-specific scripts
+        // View counter
+        const articleIdentifier = window.location.pathname; 
+        let viewCount = parseInt(localStorage.getItem(`views-${articleIdentifier}`)) || Math.floor(Math.random() * 300) + 1000; 
         
-        // Simple view counter (would need backend for real implementation)
-        const viewCount = localStorage.getItem('article-views') || 1234;
-        localStorage.setItem('article-views', parseInt(viewCount) + 1);
+        const viewCountDisplay = document.getElementById('viewCountDisplay');
+        if (viewCountDisplay) {
+            if (!sessionStorage.getItem(`viewed-${articleIdentifier}`)) {
+                viewCount++;
+                localStorage.setItem(`views-${articleIdentifier}`, viewCount);
+                sessionStorage.setItem(`viewed-${articleIdentifier}`, 'true');
+            }
+            viewCountDisplay.textContent = viewCount.toLocaleString();
+        }
+
+        // Share functionality
+        function shareSocial(platform) {
+            const articleUrl = encodeURIComponent(window.location.href);
+            const articleTitle = encodeURIComponent(document.title);
+            let shareUrl = '';
+
+            if (platform === 'linkedin') {
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`;
+            } else if (platform === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?url=${articleUrl}&text=${articleTitle}`;
+            }
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=450');
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied to clipboard!'); 
+            }).catch(err => {
+                console.error('Failed to copy link: ', err);
+                alert('Failed to copy. Please copy the link from your browser manually.');
+            });
+        }
+        
+        // Initialize Lucide icons
+        if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+        } else {
+            console.warn('Lucide icons script not loaded or failed to initialize.');
+        }
     </script>
 </body>
 </html>

@@ -4,27 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- SEO Meta Tags -->
     <title>Smart Contracts and Legal Validity: Where We Stand in 2024 | Lex Root Agency</title>
     <meta name="description" content="Explore the current legal status of smart contracts, regulatory milestones, and practical guidance for businesses and developers in 2024." />
     <meta name="keywords" content="smart contracts, legal validity, blockchain, enforceability, regulation, 2024, EU MiCA, US law, UK law" />
     <meta name="author" content="Indrajeet K." />
     
-    <!-- Open Graph Tags for Social Sharing -->
     <meta property="og:title" content="Smart Contracts and Legal Validity: Where We Stand in 2024" />
     <meta property="og:description" content="Explore the current legal status of smart contracts, regulatory milestones, and practical guidance for businesses and developers in 2024." />
-    <meta property="og:image" content="https://yourdomain.com/images/article-image.jpg" />
-    <meta property="og:url" content="https://yourdomain.com/articles/smart_contracts_legal_validity_2024.html" />
-    <meta property="og:type" content="article" />
+    <meta property="og:image" content="https://yourdomain.com/images/smart-contracts-legal.jpg" /> <meta property="og:url" content="https://yourdomain.com/articles/smart_contracts_legal_validity_2024.html" /> <meta property="og:type" content="article" />
     
-    <!-- Twitter Card Tags -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Smart Contracts and Legal Validity: Where We Stand in 2024" />
     <meta name="twitter:description" content="Explore the current legal status of smart contracts, regulatory milestones, and practical guidance for businesses and developers in 2024." />
-    <meta name="twitter:image" content="https://yourdomain.com/images/article-image.jpg" />
-    
+    <meta name="twitter:image" content="https://yourdomain.com/images/smart-contracts-legal.jpg" /> <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
     <style>
-        /* Copy all the styles from your main site here */
+        /* Global Resets and Base Styles */
         * {
             margin: 0;
             padding: 0;
@@ -47,7 +42,7 @@
 
         html {
             scroll-behavior: smooth;
-            cursor: none;
+            cursor: none; 
         }
 
         body {
@@ -55,25 +50,334 @@
             background: var(--bg-dark);
             color: var(--text-light);
             overflow-x: hidden;
-            cursor: none;
+            cursor: none; 
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--accent);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10001;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            mix-blend-mode: difference;
+            transition: width 0.2s ease, height 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+        }
+
+        .cursor-follower {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.1);
+            border-radius: 50%;
+            position: fixed;
+            pointer-events: none;
+            z-index: 10000;
+            transform: translate(-50%, -50%);
+            will-change: transform;
+            transition: background-color 0.2s ease;
+        }
+
+        .cursor.hover {
+            width: 40px;
+            height: 40px;
+            background: rgba(0, 245, 255, 0.2);
+            border-color: var(--accent-alt);
+        }
+
+        /* Loading Screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-dark);
+            z-index: 10000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loader-text {
+            font-size: 3rem;
+            font-weight: bold;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 0.4; }
+            50% { opacity: 1; }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 3rem;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 39, 0.8);
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 1rem 3rem;
+            background: rgba(10, 14, 39, 0.95);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 900;
+            background: var(--gradient-3);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-decoration: none;
+            letter-spacing: -1px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: '™';
+            font-size: 0.6rem;
+            position: absolute;
+            top: 0;
+            right: -15px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            position: relative;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a::before {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+            box-shadow: var(--neon-glow);
+        }
+
+        .nav-links a:hover::before {
+            width: 100%;
+        }
+        
+        /* Button styles */
+        .btn-primary, .cta-button, .back-button {
+            padding: 1rem 2.5rem;
+            background: var(--gradient-3);
+            color: var(--bg-dark);
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
+            display: inline-flex; 
+            align-items: center; 
+            gap: 0.5rem; 
+        }
+
+        .btn-primary:hover, .cta-button:hover, .back-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
+        }
+        
+        /* Footer */
+        footer {
+            padding: 4rem 2rem 2rem;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+
+        .social-links a { 
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            color: var(--text-muted);
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            color: var(--accent);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 4px;
+            cursor: pointer;
+            padding: 10px; 
+            z-index: 1001; 
+        }
+
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 2px;
+            background: var(--text-light);
+            transition: all 0.3s ease;
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%; 
+                width: 100%;
+                height: 100vh;
+                background: var(--bg-dark);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center; 
+                transition: right 0.5s ease-in-out; 
+                z-index: 999; 
+                gap: 2rem;
+            }
+
+            .nav-links.active {
+                right: 0;
+            }
+
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .article-title {
+                 font-size: clamp(2rem, 7vw, 3rem); 
+            }
+            .article-hero {
+                margin-top: 70px; 
+                min-height: 40vh; 
+            }
+            .back-button-container {
+                padding: 1.5rem 1rem; 
+            }
+            .back-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
+             .related-grid {
+                grid-template-columns: 1fr; 
+            }
+        }
+
+        /* Scroll Animations */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px; 
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--bg-dark);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent);
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary);
         }
 
         /* Article Specific Styles */
         .article-hero {
-            min-height: 60vh;
+            min-height: 50vh; 
             display: flex;
             align-items: center;
             justify-content: center;
             position: relative;
-            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.2) 0%, transparent 50%),
-                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.1) 0%, transparent 50%);
-            margin-top: 80px;
+            background: radial-gradient(circle at 20% 50%, rgba(94, 96, 206, 0.15) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 80%, rgba(0, 245, 255, 0.08) 0%, transparent 40%);
+            margin-top: 80px; 
+            padding: 2rem 1rem; 
         }
 
         .article-hero-content {
             text-align: center;
             max-width: 900px;
-            padding: 2rem;
+            padding: 2rem 1rem; 
             position: relative;
             z-index: 2;
         }
@@ -86,17 +390,17 @@
             border-radius: 50px;
             font-size: 0.9rem;
             color: var(--accent);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem; 
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
         .article-title {
-            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-size: clamp(2.2rem, 6vw, 3.5rem); 
             font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: 2rem;
-            letter-spacing: -2px;
+            line-height: 1.15; 
+            margin-bottom: 1.5rem; 
+            letter-spacing: -1.5px; 
             background: var(--gradient-3);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -104,106 +408,175 @@
 
         .article-meta {
             display: flex;
-            gap: 2rem;
+            gap: 1.5rem; 
             justify-content: center;
             flex-wrap: wrap;
             color: var(--text-muted);
+            font-size: 0.9rem; 
         }
 
         .article-meta span {
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 0.4rem; 
+        }
+        .article-meta span i { 
+            width: 1em;
+            height: 1em;
         }
 
         .article-container {
             max-width: 800px;
             margin: 0 auto;
-            padding: 4rem 2rem 8rem;
+            padding: 0rem 2rem 6rem; 
+        }
+        
+        .back-button-container {
+            padding: 2rem 0rem; 
         }
 
+        .back-button {
+            padding: 0.8rem 1.8rem; 
+            font-size: 0.95rem;
+            background: rgba(255, 255, 255, 0.05); 
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-muted);
+        }
+        .back-button:hover {
+            background: rgba(0, 245, 255, 0.1);
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+        .back-button i {
+            width: 1.1em; 
+            height: 1.1em;
+            stroke-width: 2.5;
+        }
+        
         .article-content {
             font-size: 1.1rem;
             line-height: 1.8;
             color: var(--text-light);
         }
+        
+        .article-content p.lead {
+            font-size: 1.25rem; 
+            color: var(--text-muted); 
+            font-weight: 300;
+            margin-bottom: 2.5rem;
+        }
 
         .article-content h2 {
-            font-size: 2.2rem;
-            margin: 3rem 0 1.5rem;
+            font-size: 2rem; 
+            margin: 2.5rem 0 1.2rem;
             color: var(--accent);
             font-weight: 700;
         }
 
         .article-content h3 {
-            font-size: 1.6rem;
-            margin: 2rem 0 1rem;
-            color: var(--text-light);
+            font-size: 1.5rem; 
+            margin: 1.8rem 0 1rem;
+            color: var(--text-light); 
             font-weight: 600;
         }
 
         .article-content p {
             margin-bottom: 1.5rem;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.85); 
         }
-
-        .article-content ul {
+        
+        .article-content ul, .article-content ol {
             margin: 1.5rem 0;
-            padding-left: 2rem;
+            padding-left: 1.5rem; 
         }
 
         .article-content li {
-            margin-bottom: 0.8rem;
-            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 0.7rem; 
+            color: rgba(255, 255, 255, 0.85);
+        }
+
+        .article-content blockquote {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: rgba(0, 245, 255, 0.03); 
+            border-left: 3px solid var(--accent); 
+            border-radius: 8px; 
+            font-style: italic;
+            color: rgba(255,255,255,0.9);
+        }
+         .article-content blockquote p {
+            margin-bottom: 0;
+        }
+
+        .article-content code {
+            background: rgba(255, 255, 255, 0.08); 
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'SF Mono', 'Courier New', monospace; 
+            font-size: 0.9em;
+        }
+
+        .article-content pre {
+            background: rgba(10, 14, 39, 0.7); 
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 1.2rem; 
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        .article-content pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.9em;
+            color: var(--text-muted); 
+        }
+
+        .article-content a {
+            color: var(--accent);
+            text-decoration: none;
+            border-bottom: 1px solid transparent; 
+            transition: all 0.3s ease;
+        }
+
+        .article-content a:hover {
+            border-bottom-color: var(--accent);
+            text-shadow: 0 0 5px var(--accent); 
         }
 
         .article-cta {
-            margin-top: 4rem;
-            padding: 3rem;
-            background: rgba(94, 96, 206, 0.05);
-            border: 1px solid rgba(94, 96, 206, 0.2);
-            border-radius: 20px;
+            margin-top: 3rem; 
+            padding: 2.5rem; 
+            background: rgba(94, 96, 206, 0.08); 
+            border: 1px solid rgba(94, 96, 206, 0.25);
+            border-radius: 15px; 
             text-align: center;
         }
 
         .article-cta h3 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+            font-size: 1.8rem; 
+            margin-bottom: 0.8rem;
             color: var(--text-light);
         }
 
         .article-cta p {
             color: var(--text-muted);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem; 
+            font-size: 1rem;
         }
 
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: var(--gradient-3);
-            color: var(--bg-dark);
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 245, 255, 0.3);
-        }
-
-        .cta-button:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 245, 255, 0.5);
-        }
-
-        .share-section {
-            margin-top: 4rem;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        .share-section { 
+            margin-top: 3rem;
+            padding: 2rem 0 1rem; 
+            border-top: 1px solid rgba(255, 255, 255, 0.08); 
             text-align: center;
         }
 
         .share-section h4 {
-            margin-bottom: 1.5rem;
+            margin-bottom: 1.2rem;
             color: var(--text-muted);
+            font-size: 1rem;
+            font-weight: 500;
         }
 
         .share-buttons {
@@ -212,10 +585,10 @@
             justify-content: center;
         }
 
-        .share-button {
-            width: 50px;
-            height: 50px;
-            background: rgba(255, 255, 255, 0.05);
+        .share-button { 
+            width: 45px; 
+            height: 45px;
+            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             display: flex;
@@ -223,36 +596,115 @@
             justify-content: center;
             text-decoration: none;
             color: var(--text-light);
+            font-size: 1.1rem; 
             transition: all 0.3s ease;
+        }
+        .share-button i { 
+            width: 1.2em;
+            height: 1.2em;
         }
 
         .share-button:hover {
-            transform: translateY(-5px);
+            transform: translateY(-3px) scale(1.05); 
             border-color: var(--accent);
             color: var(--accent);
-            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.3);
+            background: rgba(0, 245, 255, 0.1); 
+            box-shadow: 0 8px 20px rgba(0, 245, 255, 0.2);
+        }
+
+        /* Related Articles Section */
+        .related-articles {
+            margin-top: 4rem; 
+            padding-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .related-articles h3 { 
+            font-size: 1.8rem;
+            margin-bottom: 2.5rem;
+            text-align: center;
+            color: var(--text-light);
+        }
+
+        .related-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 1.5rem; 
+        }
+
+        .related-card {
+            background: rgba(255, 255, 255, 0.02); 
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px; 
+            padding: 1.2rem;
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            display: block; 
+        }
+
+        .related-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent);
+            background: rgba(0, 245, 255, 0.05);
+            box-shadow: 0 10px 25px rgba(0, 245, 255, 0.15);
+        }
+
+        .related-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--text-light);
+            font-size: 1.1rem; 
+            line-height: 1.4;
+        }
+
+        .related-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5; 
         }
     </style>
 </head>
 <body>
-    <!-- Include Navigation from main site -->
+    <div class="loader" id="loader">
+        <div class="loader-text">LEX ROOT</div>
+    </div>
+
+    <div class="cursor" id="cursor"></div>
+    <div class="cursor-follower" id="cursor-follower"></div>
+
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="../index.html#home" class="logo">LEX ROOT</a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#services">Services</a></li>
+                <li><a href="../portfolio.html">Portfolio</a></li>
+                <li><a href="../articles.html">Articles</a></li> 
+                <li><a href="../index.html#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu-toggle" id="mobileMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
     
-    <!-- Article Hero -->
     <article class="article-hero">
         <div class="article-hero-content">
-            <span class="article-category">Legal Tech</span>
-            <h1 class="article-title">Smart Contracts and Legal Validity: Where We Stand in 2024</h1>
-            <div class="article-meta">
-                <span>👤 Indrajeet K.</span>
-                <span>📅 May 28, 2024</span>
-                <span>⏱️ 12 min read</span>
-                <span>👁️ 1,234 views</span>
-            </div>
+            <span class="article-category">Legal Tech</span> <h1 class="article-title">Smart Contracts and Legal Validity: Where We Stand in 2024</h1> <div class="article-meta">
+                <span><i data-lucide="user-circle"></i> Indrajeet K.</span>
+                <span><i data-lucide="calendar-days"></i> May 28, 2024</span> <span><i data-lucide="clock"></i> 12 min read</span> <span><i data-lucide="eye"></i> <span id="viewCountDisplay">1,234</span> views</span> </div>
         </div>
     </article>
 
-    <!-- Article Content -->
     <div class="article-container">
+        <div class="back-button-container">
+            <a href="javascript:history.back()" class="back-button">
+                <i data-lucide="arrow-left"></i> Back
+            </a>
+        </div>
+
         <div class="article-content">
             <p class="lead">
                 Smart contracts promised to replace traditional legal agreements with self‑executing code, but the journey from concept to courtroom acceptance has been uneven. By 2024, the technology has matured, regulators have weighed in, and a patchwork of judicial opinions offers clearer—if still evolving—guidance on their enforceability. This article traces that trajectory, examining where the law now stands and what it means for businesses and developers relying on blockchain‑based agreements.
@@ -321,31 +773,217 @@
             </p>
 
             <div class="article-cta">
-                <h3>Need Help with Compliance?</h3>
-                <p>Get expert guidance on implementing these strategies for your startup.</p>
+                <h3>Need Help with Smart Contract Legalities?</h3> <p>Get expert guidance on ensuring your smart contracts are legally sound and enforceable.</p>
                 <a href="../index.html#contact" class="cta-button">Schedule a Consultation</a>
             </div>
 
             <div class="share-section">
                 <h4>Share this article</h4>
                 <div class="share-buttons">
-                    <a href="#" class="share-button" title="Share on LinkedIn">💼</a>
-                    <a href="#" class="share-button" title="Share on Twitter">🐦</a>
-                    <a href="#" class="share-button" title="Copy link">🔗</a>
+                    <a href="#" class="share-button" title="Share on LinkedIn" onclick="shareSocial('linkedin'); return false;">
+                        <i data-lucide="linkedin"></i>
+                    </a>
+                    <a href="#" class="share-button" title="Share on Twitter (X)" onclick="shareSocial('twitter'); return false;">
+                        <i data-lucide="twitter"></i>
+                    </a>
+                    <a href="#" class="share-button" title="Copy link" onclick="copyLink(); return false;">
+                        <i data-lucide="link-2"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="related-articles">
+                <h3>You Might Also Like</h3>
+                <div class="related-grid">
+                    <a href="ai_in_legal_compliance_tools.html" class="related-card">
+                        <h4>AI in Legal Compliance: Tools That Are Transforming the Industry</h4>
+                        <p>Explore how AI-driven tools are revolutionizing legal compliance by enhancing efficiency...</p>
+                    </a>
+                    <a href="digital_personal_data_protection_act_2023.html" class="related-card">
+                        <h4>Understanding India's Digital Personal Data Protection Act 2023</h4>
+                        <p>Explore the key provisions and implications of India's DPDP Act 2023...</p>
+                    </a>
+                    <a href="gdpr_vs_ccpa_key_differences.html" class="related-card">
+                        <h4>GDPR vs CCPA: Key Differences Every SaaS Startup Should Know</h4>
+                        <p>A comprehensive comparison of GDPR and CCPA highlighting key differences for SaaS startups...</p>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Include Footer from main site -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+               <a href="https://www.linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+               <a href="https://twitter.com/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+               <a href="mailto:theindrajeetk@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+            </div>
+            <p>&copy; <script>document.write(new Date().getFullYear())</script> Lex Root Agency. All Rights Reserved. Built with purpose.</p>
+        </div>
+    </footer>
     
     <script>
-        // Include all JavaScript from your main site
-        // Add any article-specific scripts here
+        // Loading Screen 
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const loader = document.getElementById('loader');
+                if(loader) {
+                    loader.classList.add('hidden');
+                }
+            }, 300); 
+        });
+
+        // Custom Cursor 
+        const cursor = document.getElementById('cursor');
+        const cursorFollower = document.getElementById('cursor-follower');
+        if (cursor && cursorFollower) {
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+            const KFS = 0.25; // Follower speed factor
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+            
+            mouseX = window.innerWidth / 2; 
+            mouseY = window.innerHeight / 2;
+            followerX = mouseX;
+            followerY = mouseY;
+
+            function animateCursor() {
+                if (cursor && cursorFollower) {
+                    cursor.style.transform = `translate(${mouseX}px, ${mouseY}px) translate(-50%, -50%)`;
+                    
+                    const dx = mouseX - followerX;
+                    const dy = mouseY - followerY;
+                    
+                    followerX += dx * KFS;
+                    followerY += dy * KFS;
+                    
+                    cursorFollower.style.transform = `translate(${followerX}px, ${followerY}px) translate(-50%, -50%)`;
+                }
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            document.querySelectorAll('a, button, .share-button, .cta-button, .related-card, .back-button, input[type="text"], input[type="email"], textarea').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorFollower.style.opacity = '0';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorFollower.style.opacity = '1';
+            });
+        }
+
+        // Navbar scroll effect 
+        const navbar = document.getElementById('navbar');
+        if (navbar) {
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            }, false);
+        }
+
+        // Mobile menu 
+        const mobileMenuToggle = document.getElementById('mobileMenu');
+        const navLinks = document.getElementById('navLinks');
+       
+        if (mobileMenuToggle && navLinks) {
+            mobileMenuToggle.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+                mobileMenuToggle.classList.toggle('open'); 
+            });
+            navLinks.querySelectorAll('a').forEach(link => {
+                link.addEventListener('click', () => {
+                    navLinks.classList.remove('active');
+                    mobileMenuToggle.classList.remove('open');
+                });
+            });
+        }
+
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal'); 
+        if (revealElements.length > 0) {
+            const revealOnScroll = () => {
+                const windowHeight = window.innerHeight;
+                revealElements.forEach(el => {
+                    const elementTop = el.getBoundingClientRect().top;
+                    const elementVisible = 50; 
+                    
+                    if (elementTop < windowHeight - elementVisible) {
+                        el.classList.add('active');
+                    }
+                });
+            };
+            window.addEventListener('scroll', revealOnScroll);
+            revealOnScroll(); 
+        }
+
+        // Article-specific scripts
+        // View counter
+        const articleIdentifier = window.location.pathname; 
+        let viewCount = parseInt(localStorage.getItem(`views-${articleIdentifier}`)) || Math.floor(Math.random() * 350) + 900; // Adjusted random base
         
-        // Simple view counter (would need backend for real implementation)
-        const viewCount = localStorage.getItem('article-views') || 1234;
-        localStorage.setItem('article-views', parseInt(viewCount) + 1);
+        const viewCountDisplay = document.getElementById('viewCountDisplay');
+        if (viewCountDisplay) {
+            if (!sessionStorage.getItem(`viewed-${articleIdentifier}`)) {
+                viewCount++;
+                localStorage.setItem(`views-${articleIdentifier}`, viewCount);
+                sessionStorage.setItem(`viewed-${articleIdentifier}`, 'true');
+            }
+            viewCountDisplay.textContent = viewCount.toLocaleString(); 
+        }
+
+        // Share functionality
+        function shareSocial(platform) {
+            const articleUrl = encodeURIComponent(window.location.href);
+            const articleTitleElement = document.querySelector('.article-title');
+            const articleTitleText = articleTitleElement ? articleTitleElement.textContent : document.title;
+            const encodedArticleTitle = encodeURIComponent(articleTitleText.trim());
+            let shareUrl = '';
+
+            if (platform === 'linkedin') {
+                shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${articleUrl}`;
+            } else if (platform === 'twitter') {
+                shareUrl = `https://twitter.com/intent/tweet?url=${articleUrl}&text=${encodedArticleTitle}`;
+            }
+            if (shareUrl) {
+                window.open(shareUrl, '_blank', 'noopener,noreferrer,width=600,height=450');
+            }
+        }
+
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('Link copied to clipboard!'); 
+            }).catch(err => {
+                console.error('Failed to copy link: ', err);
+                alert('Failed to copy. Please copy the link from your browser manually.');
+            });
+        }
+        
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof lucide !== 'undefined') {
+                lucide.createIcons();
+            } else {
+                console.warn('Lucide icons script not loaded or failed to initialize.');
+            }
+        });
     </script>
 </body>
 </html>
