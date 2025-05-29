@@ -1043,7 +1043,7 @@
                 Transforming <span class="gradient-text">Legal Challenges</span><br>
                 Into Growth Opportunities
             </h1>
-            <p>Explore how I've helped startups navigate compliance and scale with confidence</p>
+            <p>Explore how Lex Root empowers businesses to navigate compliance and scale with clarity</p>
         </div>
     </section>
 
@@ -1250,7 +1250,7 @@
             </div>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <p class="testimonial-text">"Indrajeet transformed our compliance chaos into a streamlined system. His expertise in both legal and tech is rare and invaluable."</p>
+                <p class="testimonial-text">"Lex Root transformed our compliance chaos into a streamlined system. Their expertise in both legal and tech is rare and invaluable."</p>
                     <div class="testimonial-author">
                         <div class="author-avatar"></div>
                         <div class="author-info">
@@ -1311,13 +1311,11 @@
             }, 1000);
         });
 
-        // Custom Cursor
+        // Custom Cursor - Ultra Smooth Animation
         const cursor = document.getElementById('cursor');
         const cursorFollower = document.getElementById('cursor-follower');
         let mouseX = 0;
         let mouseY = 0;
-        let cursorX = 0;
-        let cursorY = 0;
         let followerX = 0;
         let followerY = 0;
 
@@ -1327,19 +1325,26 @@
             mouseY = e.clientY;
         });
 
+        // Initialize follower position
+        followerX = mouseX;
+        followerY = mouseY;
+
         // Smooth animation using requestAnimationFrame
         function animateCursor() {
             // Main cursor - instant movement
-            cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+            cursor.style.left = mouseX + 'px';
+            cursor.style.top = mouseY + 'px';
             
-            // Follower cursor - smooth trailing effect
+            // Follower cursor - ultra smooth trailing effect
             const dx = mouseX - followerX;
             const dy = mouseY - followerY;
             
-            followerX += dx * 0.1;
-            followerY += dy * 0.1;
+            // Increased easing for smoother movement
+            followerX += dx * 0.25;
+            followerY += dy * 0.25;
             
-            cursorFollower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
+            cursorFollower.style.left = followerX + 'px';
+            cursorFollower.style.top = followerY + 'px';
             
             requestAnimationFrame(animateCursor);
         }
@@ -1428,7 +1433,7 @@
                 `,
                 solution: `
                     <h3>The Solution</h3>
-                    <p>I developed a comprehensive Notion-based compliance management system that included:</p>
+                    <p>Lex Root developed a comprehensive Notion-based compliance management system that included:</p>
                     <ul>
                         <li><strong>Data Mapping Dashboard:</strong> Complete visualization of data flows across all systems</li>
                         <li><strong>Policy Templates:</strong> Customized privacy policies, consent forms, and data processing agreements</li>
@@ -1478,7 +1483,7 @@
                 `,
                 solution: `
                     <h3>The Solution</h3>
-                    <p>I implemented a comprehensive content strategy that included:</p>
+                    <p>Our team implemented a comprehensive content strategy that included:</p>
                     <ul>
                         <li><strong>SEO Audit & Optimization:</strong> Identified high-value keywords and optimized existing content</li>
                         <li><strong>Content Calendar:</strong> Developed 6-month editorial calendar targeting buyer journey stages</li>
@@ -1528,7 +1533,7 @@
                 `,
                 solution: `
                     <h3>The Solution</h3>
-                    <p>I delivered a comprehensive market entry package:</p>
+                    <p>Lex Root delivered a comprehensive market entry package:</p>
                     <ul>
                         <li><strong>Regulatory Mapping:</strong> Detailed analysis of legal tech regulations in Singapore, Malaysia, Thailand, Indonesia, and Philippines</li>
                         <li><strong>Market Analysis:</strong> Competitor landscape, pricing strategies, and market opportunities</li>
@@ -1578,7 +1583,7 @@
                 `,
                 solution: `
                     <h3>The Solution</h3>
-                    <p>I led a complete digital transformation initiative:</p>
+                    <p>Lex Root led a complete digital transformation initiative:</p>
                     <ul>
                         <li><strong>Website Redesign:</strong> Modern, responsive design with client portal integration</li>
                         <li><strong>Content Overhaul:</strong> Rewrote all website copy for clarity and SEO</li>
@@ -1628,7 +1633,7 @@
                 `,
                 solution: `
                     <h3>The Solution</h3>
-                    <p>I designed and implemented an automated compliance system:</p>
+                    <p>Lex Root designed and implemented an automated compliance system:</p>
                     <ul>
                         <li><strong>Unified Dashboard:</strong> Single view for all compliance requirements</li>
                         <li><strong>Automated Audits:</strong> Weekly compliance checks with alerts</li>
@@ -1678,7 +1683,7 @@
                 `,
                 solution: `
                     <h3>The Solution</h3>
-                    <p>I created and managed a comprehensive newsletter strategy:</p>
+                    <p>Lex Root created and managed a comprehensive newsletter strategy:</p>
                     <ul>
                         <li><strong>Content Framework:</strong> Weekly themes covering regulations, case studies, and trends</li>
                         <li><strong>Lead Magnets:</strong> Compliance checklists and regulatory guides</li>
