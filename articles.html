@@ -1115,3 +1115,137 @@
                 </div>
                 <div class="article-content">
                     <h3 class="article-title">Smart Contracts and Legal Validity: Where We Stand in 2024</h3>
+                    <!-- Complete the last article -->
+                    <p class="article-excerpt">Examine the current legal status of smart contracts across jurisdictions, including enforceability challenges, regulatory developments, and practical applications.</p>
+                    <div class="article-meta">
+                        <div class="article-author">
+                            <div class="author-avatar"></div>
+                            <span>Indrajeet K.</span>
+                        </div>
+                        <div class="article-stats">
+                            <span><i data-lucide="eye"></i> 2.2k</span>
+                            <span><i data-lucide="clock"></i> 11 min</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Add missing sections and complete scripts -->
+            <div class="load-more-container">
+                <button class="load-more-btn">Load More Articles</button>
+            </div>
+        </section>
+
+        <!-- Add the missing newsletter section, footer, and complete scripts -->
+        <section class="newsletter-section">
+            <div class="newsletter-container">
+                <span class="newsletter-badge">Stay Updated</span>
+                <h2 class="newsletter-title">Subscribe to Our Newsletter</h2>
+                <p class="newsletter-description">Get the latest legal insights and compliance updates delivered straight to your inbox.</p>
+                <form class="newsletter-form" onsubmit="handleNewsletterSubmit(event)">
+                    <input type="email" class="newsletter-input" placeholder="Enter your email" required />
+                    <button type="submit" class="newsletter-submit">Subscribe</button>
+                </form>
+            </div>
+        </section>
+
+        <footer>
+            <div class="footer-content">
+                <div class="social-links">
+                    <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                    <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                    <a href="mailto:theindrajeetk@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+                </div>
+                <p>&copy; 2024 Lex Root Agency. Crafted with precision and purpose.</p>
+            </div>
+        </footer>
+
+        <script>
+            // Loading Screen
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    document.getElementById('loader').classList.add('hidden');
+                }, 1000);
+            });
+
+            // Custom Cursor
+            const cursor = document.getElementById('cursor');
+            const cursorFollower = document.getElementById('cursor-follower');
+            let mouseX = 0;
+            let mouseY = 0;
+            let followerX = 0;
+            let followerY = 0;
+
+            // Update mouse position
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+            });
+
+            // Smooth animation using requestAnimationFrame
+            function animateCursor() {
+                // Main cursor - instant movement
+                cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
+
+                // Follower cursor - smooth trailing effect
+                const dx = mouseX - followerX;
+                const dy = mouseY - followerY;
+
+                followerX += dx * 0.1;
+                followerY += dy * 0.1;
+
+                cursorFollower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
+
+                requestAnimationFrame(animateCursor);
+            }
+            animateCursor();
+
+            // Hover effects
+            document.querySelectorAll('a, button').forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
+
+            // Hide cursor when leaving window
+            document.addEventListener('mouseleave', () => {
+                cursor.style.opacity = '0';
+                cursorFollower.style.opacity = '0';
+            });
+
+            document.addEventListener('mouseenter', () => {
+                cursor.style.opacity = '1';
+                cursorFollower.style.opacity = '1';
+            });
+
+            // Navbar scroll effect
+            const navbar = document.getElementById('navbar');
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+
+            // Mobile menu
+            const mobileMenu = document.getElementById('mobileMenu');
+            const navLinks = document.getElementById('navLinks');
+
+            mobileMenu.addEventListener('click', () => {
+                navLinks.classList.toggle('active');
+            });
+
+            // Newsletter form submission
+            function handleNewsletterSubmit(e) {
+                e.preventDefault();
+                alert('Thank you for subscribing to our newsletter!');
+                e.target.reset();
+            }
+
+            // Initialize Lucide icons
+            document.addEventListener('DOMContentLoaded', function() {
+                lucide.createIcons();
+            });
+        </script>
+    </body>
+</html>

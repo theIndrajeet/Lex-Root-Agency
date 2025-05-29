@@ -1172,82 +1172,105 @@
         </div>
     </section>
 
-    <!-- Portfolio Section -->
-    <section id="
+    <!-- Complete the Portfolio Section -->
+    <section id="portfolio">
+        <div class="portfolio-container">
+            <div class="portfolio-header reveal">
+                <span class="section-badge">Portfolio</span>
+                <h2 class="section-title">Success Stories That Speak Volumes</h2>
+            </div>
+            <div class="portfolio-grid">
+                <!-- Add portfolio items here or link to portfolio page -->
+                <a href="portfolio.html" class="btn-primary">View All Case Studies</a>
+            </div>
+        </div>
     </section>
 
+    <!-- Complete the Contact Section -->
+    <section id="contact">
+        <div class="contact-container">
+            <div class="contact-header reveal">
+                <span class="section-badge">Get In Touch</span>
+                <h2 class="section-title">Let's Build Something Amazing Together</h2>
+            </div>
+            <div class="contact-info">
+                <p><i data-lucide="mail"></i> Email: <a href="mailto:theindrajeetk@gmail.com">theindrajeetk@gmail.com</a></p>
+            </div>
+            <form class="contact-form" onsubmit="handleSubmit(event)">
+                <div class="form-group">
+                    <input type="text" id="name" placeholder=" " required>
+                    <label for="name">Your Name</label>
+                </div>
+                <div class="form-group">
+                    <input type="email" id="email" placeholder=" " required>
+                    <label for="email">Email Address</label>
+                </div>
+                <div class="form-group">
+                    <textarea id="message" rows="5" placeholder=" " required></textarea>
+                    <label for="message">Tell me about your project</label>
+                </div>
+                <button type="submit" class="submit-btn">Send Message</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="LinkedIn"><i data-lucide="linkedin"></i></a>
+                <a href="#" aria-label="Twitter"><i data-lucide="twitter"></i></a>
+                <a href="mailto:theindrajeetk@gmail.com" aria-label="Email"><i data-lucide="mail"></i></a>
+            </div>
+            <p>&copy; 2024 Lex Root Agency. Crafted with precision and purpose.</p>
+        </div>
+    </footer>
+
+    <!-- Complete the Script section -->
     <script>
-        // Loading Screen
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                document.getElementById('loader').classList.add('hidden');
-            }, 1000);
-        });
-
-        // Custom Cursor
-        const cursor = document.getElementById('cursor');
-        const cursorFollower = document.getElementById('cursor-follower');
-        let mouseX = 0;
-        let mouseY = 0;
-        let followerX = 0;
-        let followerY = 0;
-
-        // Update mouse position
-        document.addEventListener('mousemove', (e) => {
-            mouseX = e.clientX;
-            mouseY = e.clientY;
-        });
-
-        // Smooth animation using requestAnimationFrame
-        function animateCursor() {
-            // Main cursor - instant movement
-            cursor.style.transform = `translate(${mouseX - 10}px, ${mouseY - 10}px)`;
-
-            // Follower cursor - smooth trailing effect
-            const dx = mouseX - followerX;
-            const dy = mouseY - followerY;
-
-            followerX += dx * 0.1;
-            followerY += dy * 0.1;
-
-            cursorFollower.style.transform = `translate(${followerX - 20}px, ${followerY - 20}px)`;
-
-            requestAnimationFrame(animateCursor);
+        // ... (keep your existing scripts)
+        
+        // Add the missing parts:
+        
+        // Particles
+        const particlesContainer = document.getElementById('particles');
+        for (let i = 0; i < 50; i++) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 20 + 's';
+            particle.style.animationDuration = (Math.random() * 20 + 10) + 's';
+            particlesContainer.appendChild(particle);
         }
-        animateCursor();
 
-        // Hover effects
-        document.querySelectorAll('a, button').forEach(el => {
-            el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
-            el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
-        });
+        // Reveal on scroll
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealOnScroll = () => {
+            revealElements.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
+                }
+            });
+        };
 
-        // Hide cursor when leaving window
-        document.addEventListener('mouseleave', () => {
-            cursor.style.opacity = '0';
-            cursorFollower.style.opacity = '0';
-        });
+        window.addEventListener('scroll', revealOnScroll);
+        revealOnScroll();
 
-        document.addEventListener('mouseenter', () => {
-            cursor.style.opacity = '1';
-            cursorFollower.style.opacity = '1';
-        });
+        // Form submission
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you within 24 hours.');
+            e.target.reset();
+        }
 
-        // Navbar scroll effect
-        const navbar = document.getElementById('navbar');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                navbar.classList.add('scrolled');
-            } else {
-                navbar.classList.remove('scrolled');
-            }
-        });
-
-        // Mobile menu
-        const mobileMenu = document.getElementById('mobileMenu');
-        const navLinks = document.getElementById('navLinks');
-
-        mobileMenu.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', function() {
+            lucide.createIcons();
         });
     </script>
+</body>
+</html>
