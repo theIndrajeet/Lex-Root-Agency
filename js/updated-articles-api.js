@@ -2,7 +2,7 @@
 // This file handles fetching articles from the CMS backend
 
 // Configuration
-const API_BASE_URL = 'http://localhost:3000'; // Change this to your production URL when deploying
+const API_BASE_URL = 'https://lex-root-agency-production.up.railway.app'; // Change this to your production URL when deploying
 
 // Article management class
 class ArticlesManager {
