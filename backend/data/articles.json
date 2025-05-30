@@ -1,0 +1,40 @@
+{
+  "articles": [
+    {
+      "id": "7f67b2cf-8f9c-46f1-8145-3c02ecbad7ad",
+      "title": "test head",
+      "category": "compliance",
+      "author": "admin",
+      "readTime": "5 min",
+      "excerpt": "test ex",
+      "content": "test content",
+      "published": true,
+      "featured": false,
+      "imageUrl": "/uploads/optimized-article-1748577639649-461440221.jpg",
+      "publishDate": "2025-05-30T04:00:39.759Z",
+      "tags": [],
+      "views": 1,
+      "likes": 0,
+      "createdAt": "2025-05-30T04:00:39.759Z",
+      "updatedAt": "2025-05-30T04:00:39.759Z"
+    },
+    {
+      "id": "article-1748590503720",
+      "title": "cxzc",
+      "excerpt": "zxc",
+      "content": "zxc",
+      "category": "data-privacy",
+      "author": "admin",
+      "publishDate": "2025-05-30T07:35:03.720Z",
+      "readTime": "5 min",
+      "imageUrl": "",
+      "featured": true,
+      "published": true,
+      "tags": [],
+      "views": 0,
+      "likes": 0,
+      "createdAt": "2025-05-30T07:35:03.720Z",
+      "updatedAt": "2025-05-30T07:35:03.720Z"
+    }
+  ]
+}
