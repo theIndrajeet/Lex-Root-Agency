@@ -1576,7 +1576,7 @@
 
             try {
                 const payload = { contents: [{ role: "user", parts: [{ text: prompt }] }] };
-                const apiKey = ""; // Provided by Canvas environment
+                const apiKey = "AIzaSyC60o2BgwWdsF_ifYy1y-OPaypCxG9ZzLo"; // Provided by Canvas environment
                 const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash-latest:generateContent?key=${apiKey}`;
                 
                 const fetchResponse = await fetch(apiUrl, {
