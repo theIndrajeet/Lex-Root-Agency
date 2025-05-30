@@ -11,7 +11,7 @@ const JWT_SECRET = 'your-secret-key-change-in-production';
 
 // Enhanced CORS configuration
 app.use(cors({
-    origin: ['http://localhost:3000', 'http://127.0.0.1:5501', 'http://localhost:5501', 'http://127.0.0.1:3000'],
+    origin: ['http://localhost:3000', 'http://127.0.0.1:5501','https://lexroot.netlify.app', 'http://localhost:5501', 'http://127.0.0.1:3000'],  
     credentials: true,
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
     allowedHeaders: ['Content-Type', 'Authorization']
